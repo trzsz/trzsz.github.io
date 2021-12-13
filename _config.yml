@@ -1,0 +1,5 @@
+theme: jekyll-theme-cayman
+google_ad_client: ca-pub-5588329234018540
+google_measurement_id: G-9ZVEKX6BBN
+plugins:
+  - jekyll-seo-tag
