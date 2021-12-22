@@ -24,12 +24,24 @@ GitHub: [https://github.com/trzsz/trzsz](https://github.com/trzsz/trzsz)
 ```
 sudo python3 -m pip install --upgrade trzsz-libs trzsz-svr
 ```
+* 同样也支持 Python2:
+  ```
+  sudo pip install --upgrade trzsz-libs trzsz-svr
+  ```
 
 
 ### 本地 macOS 安装 [trzsz-iterm2](https://pypi.org/project/trzsz-iterm2)
 ```
 sudo python3 -m pip install --upgrade trzsz-libs trzsz-iterm2
 ```
+* 同样也支持 Python2:
+  ```
+  sudo pip install --upgrade trzsz-libs trzsz-iterm2
+  ```
+* 安装后执行 `which trzsz-iterm2` 应该输出 `/usr/local/bin/trzsz-iterm2`，如果不是：
+  * 执行 `which trzsz-iterm2` 没有输出，检查前面安装的输出是不是有错误。
+  * 执行 `which trzsz-iterm2` 输出另一个路径，可以建一个软链接：\
+    `sudo ln -sv $(which trzsz-iterm2) /usr/local/bin/trzsz-iterm2`
 
 
 ### [iTerm2](https://iterm2.com/index.html) 配置触发器
@@ -40,7 +52,8 @@ sudo python3 -m pip install --upgrade trzsz-libs trzsz-iterm2
 | Regular Expression | `:(:TRZSZ:TRANSFER:[SR]:\d+\.\d+\.\d+)` |
 | Action | `Run Silent Coprocess` |
 | Parameters | `/usr/local/bin/trzsz-iterm2 \1` |
-| Enabled | ✅ |
+| Enabled | ✅ 勾上 |
+| Use interpolated strings for parameters | ❎ 别勾 |
 
 ![iTerm2触发器配置](https://trzsz.github.io/images/config.png)
 
@@ -52,18 +65,22 @@ sudo python3 -m pip install --upgrade trzsz-libs trzsz-iterm2
 ```
 brew install ncruces/tap/zenity
 ```
+* 安装后执行 `which zenity` 应该输出 `/usr/local/bin/zenity`，如果不是：
+  * 执行 `which zenity` 没有输出，检查前面安装的输出是不是有错误。
+  * 执行 `which zenity` 输出另一个路径，可以建一个软链接：\
+    `sudo ln -sv $(which zenity) /usr/local/bin/zenity`
 
 
 ## 使用指南
 
-### `trz` 上传文件
+#### `trz` 上传文件
 
 `trz` 命令可以不带任何参数，将上传文件到当前目录。也可以带一个目录参数，指定上传到哪个目录。
 ```
 trz /tmp/
 ```
 
-### `tsz` 下载文件
+#### `tsz` 下载文件
 
 `tsz` 可以带一个或多个文件名（可使用相对路径或绝对路径，也可使用通配符），将下载指定的文件。
 
@@ -71,15 +88,19 @@ trz /tmp/
 tsz file1 file2 file3
 ```
 
+#### `-q` 静默模式
+
+`trz -q` 或 `tsz -q` ( 加上 `-q` 选项 )，则在传输文件时不显示进度条。
+
 
 ## 屏幕截图
 
-### 上传文件示例
+#### 上传文件示例
 
 ![上传文件示例](https://trzsz.github.io/images/upload.gif)
 
 
-### 下载文件示例
+#### 下载文件示例
 
 ![下载文件示例](https://trzsz.github.io/images/download.gif)
 

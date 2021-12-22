@@ -38,77 +38,94 @@ Additionally, [iTerm2-zmodem](https://github.com/RobberPhex/iTerm2-zmodem) is no
 
 ### Server side
 
-* Install [trzsz-svr](https://pypi.org/project/trzsz-svr)
+#### Install [trzsz-svr](https://pypi.org/project/trzsz-svr)
   ```
   sudo python3 -m pip install --upgrade trzsz-libs trzsz-svr
   ```
+  * Also supports Python2:
+    ```
+    sudo pip install --upgrade trzsz-libs trzsz-svr
+    ```
 
 
 ### Client side
 
-* Install [trzsz-iterm2](https://pypi.org/project/trzsz-iterm2)
+#### Install [trzsz-iterm2](https://pypi.org/project/trzsz-iterm2)
   ```
   sudo python3 -m pip install --upgrade trzsz-libs trzsz-iterm2
   ```
+  * Also supports Python2:
+    ```
+    sudo pip install --upgrade trzsz-libs trzsz-iterm2
+    ```
+  * After installation, `which trzsz-iterm2` should output `/usr/local/bin/trzsz-iterm2`, if not:
+    * `which trzsz-iterm2` shows nothing, check the output of the previous installation.
+    * `which trzsz-iterm2` shows another path, create a soft link:\
+      `sudo ln -sv $(which trzsz-iterm2) /usr/local/bin/trzsz-iterm2`
 
 
-* Install [iTerm2](https://iterm2.com/index.html) and create a [Trigger](https://iterm2.com/documentation-triggers.html) as follows.
+#### Install [iTerm2](https://iterm2.com/index.html) and create a [Trigger](https://iterm2.com/documentation-triggers.html) as follows.
 
   | Name | Value |
   | ---- | ---- |
   | Regular Expression | `:(:TRZSZ:TRANSFER:[SR]:\d+\.\d+\.\d+)` |
   | Action | `Run Silent Coprocess` |
   | Parameters | `/usr/local/bin/trzsz-iterm2 \1` |
-  | Enabled | ✅ |
+  | Enabled | ✅ Checked |
+  | Use interpolated strings for parameters | ❎ Unchecked |
 
   ![iTerm2 Trigger configuration](https://trzsz.github.io/images/config.png)
 
 
-* `Optional` install [zenity](https://github.com/ncruces/zenity) for a nice progress bar.
-  * should be placed at `/usr/local/bin/zenity`
-
+#### `Optional` install [zenity](https://github.com/ncruces/zenity) for a nice progress bar.
   ```
   brew install ncruces/tap/zenity
   ```
+  * After installation, `which zenity` should output `/usr/local/bin/zenity`, if not:
+    * `which zenity` shows nothing, check the output of the previous installation.
+    * `which zenity` shows another path, create a soft link:\
+      `sudo ln -sv $(which zenity) /usr/local/bin/zenity`
 
 
 ## Manual
 
-* `trz` upload files to remote server
+#### `trz` upload files to remote server
   ```
-  usage: trz [-h] [-v] [path]
+  usage: trz [-h] [-v] [-q] [path]
 
   Receive file(s), similar to rz but compatible with tmux.
 
   positional arguments:
-    path           Path to save file(s). (default: current directory)
+    path           path to save file(s). (default: current directory)
 
   optional arguments:
     -h, --help     show this help message and exit
     -v, --version  show program's version number and exit
+    -q, --quiet    quiet (hide progress bar)
   ```
 
-* `tsz` download files from remote server
+#### `tsz` download files from remote server
   ```
-  usage: tsz [-h] [-v] file [file ...]
+  usage: tsz [-h] [-v] [-q] file [file ...]
 
   Send file(s), similar to sz but compatible with tmux.
 
   positional arguments:
-    file           File(s) to be sent.
+    file           file(s) to be sent
 
   optional arguments:
     -h, --help     show this help message and exit
     -v, --version  show program's version number and exit
+    -q, --quiet    quiet (hide progress bar)
   ```
 
 ## Screenshot
 
-* Upload files to remote server.
+#### Upload files to remote server
 
   ![Upload files looks good](https://trzsz.github.io/images/upload.gif)
 
-* Download files from remote server.
+#### Download files from remote server
 
   ![Download files looks good](https://trzsz.github.io/images/download.gif)
 
