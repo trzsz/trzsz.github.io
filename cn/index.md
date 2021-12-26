@@ -65,6 +65,12 @@ sudo python3 -m pip install --upgrade trzsz-libs trzsz-iterm2
 ```
 brew install ncruces/tap/zenity
 ```
+* 如果 `Mac M1` 安装失败，可以试试用 `go` 进行编译安装：
+  ```
+  brew install go
+  go install 'github.com/ncruces/zenity/cmd/zenity@latest'
+  sudo cp ~/go/bin/zenity /usr/local/bin/zenity
+  ```
 * 安装后执行 `which zenity` 应该输出 `/usr/local/bin/zenity`，如果不是：
   * 执行 `which zenity` 没有输出，检查前面安装的输出是不是有错误。
   * 执行 `which zenity` 输出另一个路径，可以建一个软链接：\
@@ -97,6 +103,12 @@ tsz file1 file2 file3
 #### `-y` 覆盖模式
 
 `trz -y` 或 `tsz -y xxx` ( 加上 `-y` 选项 )，如果存在相同文件名的文件就直接覆盖。
+
+
+#### 异常处理方法
+* 如果出现了错误，且 `trzsz` 挂住不能动了：
+  1. 按组合键 `Command + Option + Shift + R` 停止 [iTerm2 Coprocesses](https://iterm2.com/documentation-coprocesses.html)。
+  2. 按组合键 `Control + j` 停止服务器上的 `trz` 或 `tsz` 进程。
 
 
 ## 屏幕截图
