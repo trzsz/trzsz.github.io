@@ -1,8 +1,6 @@
 # trzsz
 
-[trzsz](https://trzsz.github.io) 是一个简单的文件传输工具，和 lrzsz ( rz / sz ) 类似但支持 tmux，
-
-和 iTerm2 一起使用，并且有一个不错的进度条。
+[trzsz](https://trzsz.github.io) 是一个简单的文件传输工具，和 lrzsz ( rz / sz ) 类似但支持 tmux，和 iTerm2 一起使用，并且有一个不错的进度条。
 
 GitHub: [https://github.com/trzsz/trzsz](https://github.com/trzsz/trzsz)
 
@@ -28,6 +26,8 @@ sudo python3 -m pip install --upgrade trzsz-libs trzsz-svr
   ```
   sudo pip install --upgrade trzsz-libs trzsz-svr
   ```
+* 没有 `sudo` 权限也可以安装，但是要将安装路径 ( 可能是 `~/.local/bin` ) 添加到 PATH 环境变量中。
+* 安装后执行 `trz -v` 或 `tsz -v`，如果输出 trzsz 的版本号就是安装成功了，否则检查前面安装的输出是不是有错误。
 
 
 ### 本地 macOS 安装 [trzsz-iterm2](https://pypi.org/project/trzsz-iterm2)
@@ -38,7 +38,7 @@ sudo python3 -m pip install --upgrade trzsz-libs trzsz-iterm2
   ```
   sudo pip install --upgrade trzsz-libs trzsz-iterm2
   ```
-* 安装后执行 `which trzsz-iterm2` 应该输出 `/usr/local/bin/trzsz-iterm2`，如果不是：
+* 安装后执行 `which trzsz-iterm2`，如果输出 `/usr/local/bin/trzsz-iterm2` 就是安装成功了，如果不是：
   * 执行 `which trzsz-iterm2` 没有输出，检查前面安装的输出是不是有错误。
   * 执行 `which trzsz-iterm2` 输出另一个路径，可以建一个软链接：\
     `sudo ln -sv $(which trzsz-iterm2) /usr/local/bin/trzsz-iterm2`
@@ -47,13 +47,15 @@ sudo python3 -m pip install --upgrade trzsz-libs trzsz-iterm2
 ### [iTerm2](https://iterm2.com/index.html) 配置触发器
 打开 `Preferences -> Profiles -> Advanced -> Triggers -> Edit`，如下配置：
 
-| Name | Value |
-| ---- | ---- |
-| Regular Expression | `:(:TRZSZ:TRANSFER:[SR]:\d+\.\d+\.\d+)` |
-| Action | `Run Silent Coprocess` |
-| Parameters | `/usr/local/bin/trzsz-iterm2 \1` |
-| Enabled | ✅ 勾上 |
-| Use interpolated strings for parameters | ❎ 别勾 |
+| Name | Value | Note |
+| ---- | ----- | ---- |
+| Regular Expression | <span style="white-space: nowrap;">`:(:TRZSZ:TRANSFER:[SR]:\d+\.\d+\.\d+)`</span> | <!-- avoid triple click copy a newline --> 前后无空格 |
+| Action | `Run Silent Coprocess` | |
+| Parameters | <span style="white-space: nowrap;">`/usr/local/bin/trzsz-iterm2 \1`</span> | <!-- avoid triple click copy a newline --> 前后无空格 |
+| Enabled | ✅ | 选中 |
+| Use interpolated strings for parameters | ❎ | 不选中 |
+
+* iTerm2 Trigger 的配置允许输入多行，但只显示一行，注意不要复制了一个换行符进去。
 
 ![iTerm2触发器配置](https://trzsz.github.io/images/config.png)
 
@@ -71,7 +73,7 @@ brew install ncruces/tap/zenity
   go install 'github.com/ncruces/zenity/cmd/zenity@latest'
   sudo cp ~/go/bin/zenity /usr/local/bin/zenity
   ```
-* 安装后执行 `which zenity` 应该输出 `/usr/local/bin/zenity`，如果不是：
+* 安装后执行 `which zenity`，如果输出 `/usr/local/bin/zenity` 就是安装成功了，如果不是：
   * 执行 `which zenity` 没有输出，检查前面安装的输出是不是有错误。
   * 执行 `which zenity` 输出另一个路径，可以建一个软链接：\
     `sudo ln -sv $(which zenity) /usr/local/bin/zenity`

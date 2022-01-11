@@ -46,6 +46,8 @@ Additionally, [iTerm2-zmodem](https://github.com/RobberPhex/iTerm2-zmodem) is no
     ```
     sudo pip install --upgrade trzsz-libs trzsz-svr
     ```
+  * Can be installed without `sudo`, but need to add the installation path ( may be `~/.local/bin` ) to the PATH environment.
+  * `trz -v` or `tsz -v` output the version of trzsz means successfully installed. Otherwise, check the output of the previous installation.
 
 
 ### Client side
@@ -58,7 +60,7 @@ Additionally, [iTerm2-zmodem](https://github.com/RobberPhex/iTerm2-zmodem) is no
     ```
     sudo pip install --upgrade trzsz-libs trzsz-iterm2
     ```
-  * After installation, `which trzsz-iterm2` should output `/usr/local/bin/trzsz-iterm2`, if not:
+  * `which trzsz-iterm2` output `/usr/local/bin/trzsz-iterm2` means successfully installed. if not:
     * `which trzsz-iterm2` shows nothing, check the output of the previous installation.
     * `which trzsz-iterm2` shows another path, create a soft link:\
       `sudo ln -sv $(which trzsz-iterm2) /usr/local/bin/trzsz-iterm2`
@@ -66,13 +68,15 @@ Additionally, [iTerm2-zmodem](https://github.com/RobberPhex/iTerm2-zmodem) is no
 
 #### Install [iTerm2](https://iterm2.com/index.html) and create a [Trigger](https://iterm2.com/documentation-triggers.html) as follows.
 
-  | Name | Value |
-  | ---- | ---- |
-  | Regular Expression | `:(:TRZSZ:TRANSFER:[SR]:\d+\.\d+\.\d+)` |
-  | Action | `Run Silent Coprocess` |
-  | Parameters | `/usr/local/bin/trzsz-iterm2 \1` |
-  | Enabled | ✅ Checked |
-  | Use interpolated strings for parameters | ❎ Unchecked |
+  | Name | Value | Note |
+  | ---- | ----- | ---- |
+  | Regular Expression | <span style="white-space: nowrap;">`:(:TRZSZ:TRANSFER:[SR]:\d+\.\d+\.\d+)`</span> | <!-- avoid triple click copy a newline --> No space at the end |
+  | Action | `Run Silent Coprocess` | |
+  | Parameters | <span style="white-space: nowrap;">`/usr/local/bin/trzsz-iterm2 \1`</span> | <!-- avoid triple click copy a newline --> No space at the end |
+  | Enabled | ✅ | Checked |
+  | Use interpolated strings for parameters | ❎ | Unchecked |
+
+  * iTerm2 Trigger configuration allows input multiple lines, but only shows one line. Make sure don't copy a newline into it.
 
   ![iTerm2 Trigger configuration](https://trzsz.github.io/images/config.png)
 
@@ -87,7 +91,7 @@ Additionally, [iTerm2-zmodem](https://github.com/RobberPhex/iTerm2-zmodem) is no
     go install 'github.com/ncruces/zenity/cmd/zenity@latest'
     sudo cp ~/go/bin/zenity /usr/local/bin/zenity
     ```
-  * After installation, `which zenity` should output `/usr/local/bin/zenity`, if not:
+  * `which zenity` output `/usr/local/bin/zenity` means successfully installed. if not:
     * `which zenity` shows nothing, check the output of the previous installation.
     * `which zenity` shows another path, create a soft link:\
       `sudo ln -sv $(which zenity) /usr/local/bin/zenity`
