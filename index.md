@@ -70,15 +70,15 @@ Additionally, [iTerm2-zmodem](https://github.com/RobberPhex/iTerm2-zmodem) is no
 
   | Name | Value | Note |
   | ---- | ----- | ---- |
-  | Regular Expression | <span style="white-space: nowrap;">`:(:TRZSZ:TRANSFER:[SR]:\d+\.\d+\.\d+)`</span> | <!-- avoid triple click copy a newline --> No space at the end |
+  | Regular Expression | <span style="white-space: nowrap;">`:(:TRZSZ:TRANSFER:[SR]:\d+\.\d+\.\d+:\d+)`</span> | <!-- avoid triple click copy a newline --> One line and no space at the end |
   | Action | `Run Silent Coprocess` | |
-  | Parameters | <span style="white-space: nowrap;">`/usr/local/bin/trzsz-iterm2 \1`</span> | <!-- avoid triple click copy a newline --> No space at the end |
+  | Parameters | <span style="white-space: nowrap;">`/usr/local/bin/trzsz-iterm2 \1`</span> | <!-- avoid triple click copy a newline --> One line and no space at the end |
   | Enabled | ✅ | Checked |
   | Use interpolated strings for parameters | ❎ | Unchecked |
 
   * iTerm2 Trigger configuration allows input multiple lines, but only shows one line. Make sure don't copy a newline into it.
 
-  ![iTerm2 Trigger configuration](https://trzsz.github.io/images/config.png)
+  ![iTerm2 Trigger configuration](https://trzsz.github.io/images/config.jpg)
 
 
 #### `Optional` install [zenity](https://github.com/ncruces/zenity) for a nice progress bar.
@@ -101,40 +101,70 @@ Additionally, [iTerm2-zmodem](https://github.com/RobberPhex/iTerm2-zmodem) is no
 
 #### `trz` upload files to remote server
   ```
-  usage: trz [-h] [-v] [-q] [-y] [path]
+  usage: trz [-h] [-v] [-q] [-y] [-b] [-e] [-B N] [-t N] [path]
 
   Receive file(s), similar to rz but compatible with tmux.
 
   positional arguments:
-    path             path to save file(s). (default: current directory)
+    path               path to save file(s). (default: current directory)
 
   optional arguments:
-    -h, --help       show this help message and exit
-    -v, --version    show program's version number and exit
-    -q, --quiet      quiet (hide progress bar)
-    -y, --overwrite  overwrite existing file(s)
+    -h, --help         show this help message and exit
+    -v, --version      show program's version number and exit
+    -q, --quiet        quiet (hide progress bar)
+    -y, --overwrite    yes, overwrite existing file(s)
+    -b, --binary       binary transfer mode, faster for binary files
+    -e, --escape       escape all known control characters
+    -B N, --bufsize N  buffer chunk size ( 1K <= N <= 100M ). (default: 1M)
+    -t N, --timeout N  timeout ( N seconds ) for each buffer chunk.
+                       N <= 0 means never timeout. (default: 100)
   ```
 
 #### `tsz` download files from remote server
   ```
-  usage: tsz [-h] [-v] [-q] [-y] file [file ...]
+  usage: tsz [-h] [-v] [-q] [-y] [-b] [-e] [-B N] [-t N] file [file ...]
 
   Send file(s), similar to sz but compatible with tmux.
 
   positional arguments:
-    file             file(s) to be sent
+    file               file(s) to be sent
 
   optional arguments:
-    -h, --help       show this help message and exit
-    -v, --version    show program's version number and exit
-    -q, --quiet      quiet (hide progress bar)
-    -y, --overwrite  overwrite existing file(s)
+    -h, --help         show this help message and exit
+    -v, --version      show program's version number and exit
+    -q, --quiet        quiet (hide progress bar)
+    -y, --overwrite    yes, overwrite existing file(s)
+    -b, --binary       binary transfer mode, faster for binary files
+    -e, --escape       escape all known control characters
+    -B N, --bufsize N  buffer chunk size ( 1K <= N <= 100M ). (default: 1M)
+    -t N, --timeout N  timeout ( N seconds ) for each buffer chunk.
+                       N <= 0 means never timeout. (default: 100)
   ```
 
-#### Trouble handling
+#### Trouble shooting
 * If an error occurs, and `trzsz` is hanging up.
   1. Press `Command + Option + Shift + R` to stop [iTerm2 Coprocesses](https://iterm2.com/documentation-coprocesses.html).
   2. Press `Control + j` to stop `trz` or `tsz` process on the server.
+
+* If `trz -b` binary upload fails, and login to server using `telnet` or `docker exec`.
+  1. Try to escape all known control characters, e.g., `trz -eb`.
+
+* If `trz -b` binary upload fails, and the server is using `Python3 < 3.7`.
+  1. `Python3 < 3.7` supports base64 mode, just don't use `trz -b`, use `trz` instead.
+  2. If you want to use `trz -b` binary upload, upgrade Python3 to above 3.7, or use Python2.
+
+* If `trz -b` or `tsz -b` binary transfer fails, and login to server using `expect`.
+  1. Try to `export LC_CTYPE=C` before the `expect` script. e.g.:
+  ```
+  #!/bin/sh
+  export LC_CTYPE=C
+  expect -c '
+    spawn ssh xxx
+    expect "xxx: "
+    send "xxx\n"
+    interact
+  '
+  ```
 
 ## Screenshot
 

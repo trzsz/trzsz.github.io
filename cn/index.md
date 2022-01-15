@@ -49,15 +49,15 @@ sudo python3 -m pip install --upgrade trzsz-libs trzsz-iterm2
 
 | Name | Value | Note |
 | ---- | ----- | ---- |
-| Regular Expression | <span style="white-space: nowrap;">`:(:TRZSZ:TRANSFER:[SR]:\d+\.\d+\.\d+)`</span> | <!-- avoid triple click copy a newline --> 前后无空格 |
+| Regular Expression | <span style="white-space: nowrap;">`:(:TRZSZ:TRANSFER:[SR]:\d+\.\d+\.\d+:\d+)`</span> | <!-- avoid triple click copy a newline --> 一行且前后无空格 |
 | Action | `Run Silent Coprocess` | |
-| Parameters | <span style="white-space: nowrap;">`/usr/local/bin/trzsz-iterm2 \1`</span> | <!-- avoid triple click copy a newline --> 前后无空格 |
+| Parameters | <span style="white-space: nowrap;">`/usr/local/bin/trzsz-iterm2 \1`</span> | <!-- avoid triple click copy a newline --> 一行且前后无空格 |
 | Enabled | ✅ | 选中 |
 | Use interpolated strings for parameters | ❎ | 不选中 |
 
 * iTerm2 Trigger 的配置允许输入多行，但只显示一行，注意不要复制了一个换行符进去。
 
-![iTerm2触发器配置](https://trzsz.github.io/images/config.png)
+![iTerm2触发器配置](https://trzsz.github.io/images/config.jpg)
 
 
 ### 本地 macOS 安装 [zenity](https://github.com/ncruces/zenity)
@@ -107,10 +107,46 @@ tsz file1 file2 file3
 `trz -y` 或 `tsz -y xxx` ( 加上 `-y` 选项 )，如果存在相同文件名的文件就直接覆盖。
 
 
+#### `-b` 二进制模式
+`trz -b` 或 `tsz -b xxx` ( 加上 `-b` 选项 )，二进制传输模式，对于压缩包、图片、影音等较快。
+
+
+#### `-e` 转义控制字符
+二进制传输模式时，控制字符可能会导致传输失败，`trz -eb` 或 `tsz -eb xxx` ( 加上 `-e` 选项 ) 转义所有已知的控制字符。
+
+
+#### `-B` 缓冲区大小
+`trz -B 10k` 或 `tsz -B 2M xxx` 等，设置缓存区大小 ( 默认 1M )。太小会导致传输速度慢，太大会导致进度条更新不及时。
+
+
+#### `-t` 超时时间
+`trz -t 10` 或 `tsz -t 30 xxx` 等，设置超时秒数 ( 默认 100 秒 )。在超时时间内，如果无法传完一个缓冲区大小的数据则会报错并退出。设置为 0 或负数，则永不超时。
+
+
 #### 异常处理方法
 * 如果出现了错误，且 `trzsz` 挂住不能动了：
   1. 按组合键 `Command + Option + Shift + R` 停止 [iTerm2 Coprocesses](https://iterm2.com/documentation-coprocesses.html)。
   2. 按组合键 `Control + j` 停止服务器上的 `trz` 或 `tsz` 进程。
+
+* 如果 `trz -b` 二进制上传失败，并且登录远程服务器时使用了 `telnet` 或 `docker exec`：
+  1. 可以试试转义所有控制字符，例如 `trz -eb`。
+
+* 如果 `trz -b` 二进制上传失败，并且远程服务器使用 Python3 ( 版本小于 3.7 )：
+  1. Python3 ( 版本小于 3.7 ) 支持 base64 模式，不使用 `-b` 选项即可，使用 `trz` 代替。
+  2. 如果想用 `trz -b` 二进制上传，则需要升级 Python3 到 3.7 以上的版本，或者使用 Python2。
+
+* 如果 `trz -b` 或 `tsz -b` 二进制传输失败，并且登录远程服务器时使用了 `expect`：
+  1. 可以试试在 `expect` 脚本前设置环境变量 `export LC_CTYPE=C`，例如：
+  ```
+  #!/bin/sh
+  export LC_CTYPE=C
+  expect -c '
+    spawn ssh xxx
+    expect "xxx: "
+    send "xxx\n"
+    interact
+  '
+  ```
 
 
 ## 屏幕截图
