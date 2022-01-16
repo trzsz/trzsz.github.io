@@ -1,0 +1,10 @@
+docs_list_title: Trzsz
+docs:
+  - title: Trzsz Documentation
+    url: /
+  - title: iTerm2 tmux Integration
+    url: /tmuxcc
+  - title: Trzsz 中文文档
+    url: /cn/
+  - title: iTerm2 与 tmux -CC 集成
+    url: /cn/tmuxcc

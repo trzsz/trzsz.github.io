@@ -5,10 +5,10 @@
 
 .main-content {
   @include large {
-    max-width: 72rem;
+    max-width: 68rem;
   }
 }
 
 li {
-  margin-top: 5px;
+  margin-top: 10px !important;
 }
