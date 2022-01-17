@@ -1,4 +1,8 @@
-# trzsz
+---
+layout: default
+---
+
+# Trzsz 中文文档
 
 [trzsz](https://trzsz.github.io) 是一个简单的文件传输工具，和 lrzsz ( rz / sz ) 类似但支持 tmux，和 iTerm2 一起使用，并且有一个不错的进度条。
 
@@ -55,6 +59,8 @@ sudo python3 -m pip install --upgrade trzsz-libs trzsz-iterm2
 | Enabled | ✅ | 选中 |
 
 * 不要选中最下面的 `Use interpolated strings for parameters`。
+
+* 不同 Profile 的 Trigger 是互相独立的，也就是每个用到的 Profile 都要进行配置。
 
 * iTerm2 Trigger 的配置允许输入多行，但只显示一行，注意不要复制了一个换行符进去。
 

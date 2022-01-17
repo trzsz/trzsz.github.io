@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 # iTerm2 与 tmux -CC 集成
 
 `iTerm2` 支持与 `tmux -CC` 控制模式集成，只要在 `iTerm2` 中使用 `tmux` 时加上 `-CC` 参数即可。

@@ -1,0 +1,11 @@
+title: Trzsz
+url: https://github.com/trzsz/trzsz
+menus:
+  - name: Trzsz Document
+    url: /
+  - name: iTerm2 tmux Integration
+    url: /tmuxcc
+  - name: Trzsz 中文文档
+    url: /cn/
+  - name: iTerm2 与 tmux -CC 集成
+    url: /cn/tmuxcc

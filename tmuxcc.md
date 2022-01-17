@@ -1,4 +1,8 @@
-# iTerm2 integration with tmux -CC
+---
+layout: default
+---
+
+# iTerm2 tmux Integration
 
 `iTerm2` supports integration with the `tmux -CC` control mode, just add `-CC` while using `tmux` in `iTerm2`.
 * e.g., change `tmux` to `tmux -CC`

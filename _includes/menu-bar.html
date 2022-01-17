@@ -1,0 +1,8 @@
+<nav class="menu">
+  <h2><a href="{{ site.data.menu.url }}"><span>{{ site.data.menu.title }}</span></a></h2>
+  <div class="icon-list">
+  {% for item in site.data.menu.menus %}
+    <a href="{{ item.url }}"><span>{{ item.name }}</span></a>
+  {% endfor %}
+  </div>
+</nav>

@@ -1,4 +1,8 @@
-# trzsz
+---
+layout: default
+---
+
+# Trzsz Document
 
 trzsz is a simple file transfer tools, similar to lrzsz ( rz / sz ) but compatible with tmux.
 
@@ -77,6 +81,8 @@ Additionally, [iTerm2-zmodem](https://github.com/RobberPhex/iTerm2-zmodem) is no
 
   * Don't check the `Use interpolated strings for parameters` at the bottom.
 
+  * Note that the `Trigger` should be configured for each `Profile` in use.
+
   * iTerm2 Trigger configuration allows input multiple lines, but only shows one line. Make sure don't copy a newline into it.
 
   ![iTerm2 Trigger configuration](https://trzsz.github.io/images/config.jpg)
@@ -145,7 +151,7 @@ Additionally, [iTerm2-zmodem](https://github.com/RobberPhex/iTerm2-zmodem) is no
 #### Trouble shooting
 * If `tmux` is not running on the remote server, but on the local mac, or on a middle server.
   * Since `trzsz` can't find the `tmux` process on the server, have to use the `tmux -CC` control mode.
-  * About how to use the `tmux -CC` control mode, please refer to [iTerm2 integration with tmux -CC](https://trzsz.github.io/tmuxcc).
+  * About how to use the `tmux -CC` control mode, please refer to [iTerm2 tmux Integration](https://trzsz.github.io/tmuxcc).
 
 * If an error occurs, and `trzsz` is hanging up.
   * Press `Command + Option + Shift + R` to stop [iTerm2 Coprocesses](https://iterm2.com/documentation-coprocesses.html).
