@@ -136,8 +136,8 @@ tsz file1 file2 file3
   * 关于 `tmux -CC` 控制模式的用法，请参考 [iTerm2 与 tmux -CC 集成](https://trzsz.github.io/cn/tmuxcc)。
 
 * 如果出现了错误，且 `trzsz` 挂住不能动了：
-  * 按组合键 `Command + Option + Shift + R` 停止 [iTerm2 Coprocesses](https://iterm2.com/documentation-coprocesses.html)。
-  * 按组合键 `Control + j` 停止服务器上的 `trz` 或 `tsz` 进程。
+  * 按组合键 `command + option + shift + r` 停止 [iTerm2 Coprocesses](https://iterm2.com/documentation-coprocesses.html)。
+  * 按组合键 `control + c` 停止服务器上的 `trz` 或 `tsz` 进程。
 
 * 如果 `trz -b` 二进制上传失败，并且登录远程服务器时使用了 `telnet` 或 `docker exec`：
   * 可以试试转义所有控制字符，例如 `trz -eb`。
