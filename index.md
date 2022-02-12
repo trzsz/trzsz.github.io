@@ -4,11 +4,13 @@ layout: default
 
 # Trzsz Document
 
-trzsz is a simple file transfer tools, similar to lrzsz ( rz / sz ) but compatible with tmux.
+trzsz is a simple file transfer tools, similar to lrzsz ( rz / sz ), and compatible with tmux.
 
-which works with iTerm2 and has a nice progress bar.
+trzsz works with iTerm2, and has a nice progress bar.
 
-GitHub: [https://github.com/trzsz/trzsz](https://github.com/trzsz/trzsz)
+trzsz is going to support webshell and electron terminal.
+
+GitHub: [https://github.com/trzsz/trzsz](https://github.com/trzsz/trzsz), [https://github.com/trzsz/trzsz.js](https://github.com/trzsz/trzsz.js)
 
 [![MIT License](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://choosealicense.com/licenses/mit/)
 [![PyPI trzsz](https://img.shields.io/pypi/v/trzsz?style=flat)](https://pypi.python.org/pypi/trzsz/)
@@ -110,7 +112,7 @@ Additionally, [iTerm2-zmodem](https://github.com/RobberPhex/iTerm2-zmodem) is no
   ```
   usage: trz [-h] [-v] [-q] [-y] [-b] [-e] [-B N] [-t N] [path]
 
-  Receive file(s), similar to rz but compatible with tmux.
+  Receive file(s), similar to rz and compatible with tmux.
 
   positional arguments:
     path               path to save file(s). (default: current directory)
@@ -131,7 +133,7 @@ Additionally, [iTerm2-zmodem](https://github.com/RobberPhex/iTerm2-zmodem) is no
   ```
   usage: tsz [-h] [-v] [-q] [-y] [-b] [-e] [-B N] [-t N] file [file ...]
 
-  Send file(s), similar to sz but compatible with tmux.
+  Send file(s), similar to sz and compatible with tmux.
 
   positional arguments:
     file               file(s) to be sent

@@ -4,9 +4,13 @@ layout: default
 
 # Trzsz 中文文档
 
-[trzsz](https://trzsz.github.io) 是一个简单的文件传输工具，和 lrzsz ( rz / sz ) 类似但支持 tmux，和 iTerm2 一起使用，并且有一个不错的进度条。
+trzsz 是一个简单的文件传输工具，和 lrzsz ( rz / sz ) 类似，并且支持 tmux。
 
-GitHub: [https://github.com/trzsz/trzsz](https://github.com/trzsz/trzsz)
+trzsz 和 iTerm2 一起使用，并且有一个不错的进度条。
+
+trzsz 正在准备支持集成 webshell 和 electron 终端。
+
+GitHub: [https://github.com/trzsz/trzsz](https://github.com/trzsz/trzsz), [https://github.com/trzsz/trzsz.js](https://github.com/trzsz/trzsz.js)
 
 [![MIT License](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://choosealicense.com/licenses/mit/)
 [![PyPI trzsz](https://img.shields.io/pypi/v/trzsz?style=flat)](https://pypi.python.org/pypi/trzsz/)

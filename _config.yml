@@ -1,3 +1,4 @@
+description: <span>trzsz is a simple file transfer tools,</span> <span>which similar to lrzsz ( rz / sz ),</span> <span>and compatible with tmux.</span>
 theme: jekyll-theme-cayman
 plugins:
   - jekyll-seo-tag
