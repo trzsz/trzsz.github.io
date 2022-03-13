@@ -3,6 +3,8 @@ url: https://github.com/trzsz/trzsz
 menus:
   - name: Trzsz Document
     url: /
+  - name: Trzsz.js Document
+    url: /js/
   - name: iTerm2 tmux Integration
     url: /tmuxcc
   - name: Trzsz 中文文档

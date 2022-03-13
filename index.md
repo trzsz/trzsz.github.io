@@ -8,12 +8,13 @@ trzsz is a simple file transfer tools, similar to lrzsz ( rz / sz ), and compati
 
 trzsz works with iTerm2, and has a nice progress bar.
 
-trzsz is going to support webshell and electron terminal.
+trzsz supports webshell and electron terminal by [trzsz.js](https://github.com/trzsz/trzsz.js).
 
-GitHub: [https://github.com/trzsz/trzsz](https://github.com/trzsz/trzsz), [https://github.com/trzsz/trzsz.js](https://github.com/trzsz/trzsz.js)
+GitHub: [https://github.com/trzsz/trzsz](https://github.com/trzsz/trzsz)
 
 [![MIT License](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://choosealicense.com/licenses/mit/)
 [![PyPI trzsz](https://img.shields.io/pypi/v/trzsz?style=flat)](https://pypi.python.org/pypi/trzsz/)
+[![npmjs trzsz](https://img.shields.io/npm/v/trzsz.svg?style=flat)](https://www.npmjs.com/package/trzsz)
 [![中文网站](https://img.shields.io/badge/%E4%B8%AD%E6%96%87-%E7%BD%91%E7%AB%99-blue?style=flat)](https://trzsz.github.io/cn/)
 
 
