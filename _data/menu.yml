@@ -5,9 +5,13 @@ menus:
     url: /
   - name: Trzsz.js Document
     url: /js/
+  - name: Trzsz-iTerm2 Document
+    url: /iterm2
   - name: iTerm2 tmux Integration
     url: /tmuxcc
   - name: Trzsz 中文文档
     url: /cn/
+  - name: Trzsz-iTerm2 安装文档
+    url: /cn/iterm2
   - name: iTerm2 与 tmux -CC 集成
     url: /cn/tmuxcc

@@ -4,90 +4,63 @@ layout: default
 
 # Trzsz 中文文档
 
-trzsz 是一个简单的文件传输工具，和 lrzsz ( rz / sz ) 类似，并且支持 tmux。
+`trzsz` ( trz / tsz ) 是一个简单的文件传输工具，和 lrzsz ( rz / sz ) 类似，并且支持 tmux。
 
-trzsz 和 iTerm2 一起使用，并且有一个不错的进度条。
-
-trzsz 正在准备支持集成 webshell 和 electron 终端。
-
-GitHub: [https://github.com/trzsz/trzsz](https://github.com/trzsz/trzsz), [https://github.com/trzsz/trzsz.js](https://github.com/trzsz/trzsz.js)
+GitHub: [https://github.com/trzsz/trzsz](https://github.com/trzsz/trzsz)
 
 [![MIT License](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://choosealicense.com/licenses/mit/)
 [![PyPI trzsz](https://img.shields.io/pypi/v/trzsz?style=flat)](https://pypi.python.org/pypi/trzsz/)
 [![中文网站](https://img.shields.io/badge/%E4%B8%AD%E6%96%87-%E7%BD%91%E7%AB%99-blue?style=flat)](https://trzsz.github.io/cn/)
 
 
-## 为什么开发 trzsz ?
+## 为什么?
 
-登录远程电脑时用 tmux 保持会话，但 tmux 不支持用 rz / sz 上传和下载文件，这就很不方便了。
+考虑 `laptop -> hostA -> hostB -> docker -> tmux` 这种场景，使用 `scp` 或 `sftp` 是不方便的。
 
-重新造一个 rz / sz 比修改 tmux 相对简单很多，并且可以加个进度条，体验上会好很多。
+在这种场景下，使用 `lrzsz` ( rz / sz ) 是很方便的，但是很可惜它与 `tmux` 不兼容。
+
+`tmux` 不愿意支持 rz / sz ( [906](https://github.com/tmux/tmux/issues/906), [1439](https://github.com/tmux/tmux/issues/1439) )，而重新造一个工具比修改 `tmux` 简单很多。
 
 
 ## 安装指南
 
-### 远程服务器安装 [trzsz-svr](https://pypi.org/project/trzsz-svr)
-```
-sudo python3 -m pip install --upgrade trzsz-libs trzsz-svr
-```
-* 同样也支持 Python2:
+### 在远程服务器上安装
+
+* 用 Python3 安装
   ```
-  sudo pip install --upgrade trzsz-libs trzsz-svr
+  sudo python3 -m pip install trzsz
   ```
-* 没有 `sudo` 权限也可以安装，但是要将安装路径 ( 可能是 `~/.local/bin` ) 添加到 PATH 环境变量中。
-* 安装后执行 `trz -v` 或 `tsz -v`，如果输出 trzsz 的版本号就是安装成功了，否则检查前面安装的输出是不是有错误。
 
-
-### 本地 macOS 安装 [trzsz-iterm2](https://pypi.org/project/trzsz-iterm2)
-```
-sudo python3 -m pip install --upgrade trzsz-libs trzsz-iterm2
-```
-* 同样也支持 Python2:
+* 用 Python2 安装
   ```
-  sudo pip install --upgrade trzsz-libs trzsz-iterm2
+  sudo python2 -m pip install trzsz
   ```
-* 安装后执行 `which trzsz-iterm2`，如果输出 `/usr/local/bin/trzsz-iterm2` 就是安装成功了，如果不是：
-  * 执行 `which trzsz-iterm2` 没有输出，检查前面安装的输出是不是有错误。
-  * 执行 `which trzsz-iterm2` 输出另一个路径，可以建一个软链接：\
-    `sudo ln -sv $(which trzsz-iterm2) /usr/local/bin/trzsz-iterm2`
 
-
-### [iTerm2](https://iterm2.com/index.html) 配置触发器
-打开 `Preferences -> Profiles -> Advanced -> Triggers -> Edit`，如下配置：
-
-| Name | Value | Note |
-| ---- | ----- | ---- |
-| Regular Expression | `:(:TRZSZ:TRANSFER:[SR]:\d+\.\d+\.\d+:\d+)` | <!-- avoid triple click copy a newline --> 前后无空格 |
-| Action | `Run Silent Coprocess` | |
-| Parameters | `/usr/local/bin/trzsz-iterm2 \1` | <!-- avoid triple click copy a newline --> 前后无空格 |
-| Enabled | ✅ | 选中 |
-
-* 不要选中最下面的 `Use interpolated strings for parameters`。
-
-* 不同 Profile 的 Trigger 是互相独立的，也就是每个用到的 Profile 都要进行配置。
-
-* iTerm2 Trigger 的配置允许输入多行，但只显示一行，注意不要复制了一个换行符进去。
-
-![iTerm2触发器配置](https://trzsz.github.io/images/config.jpg)
-
-
-### 本地 macOS 安装 [zenity](https://github.com/ncruces/zenity)
-
-安装在 `/usr/local/bin/zenity` 就可以显示进度条，不安装也可以正常使用。
-
-```
-brew install ncruces/tap/zenity
-```
-* 如果 `Mac M1` 安装失败，可以试试用 `go` 进行编译安装：
+* 用 Homebrew 安装
   ```
-  brew install go
-  go install 'github.com/ncruces/zenity/cmd/zenity@latest'
-  sudo cp ~/go/bin/zenity /usr/local/bin/zenity
+  brew install trzsz
   ```
-* 安装后执行 `which zenity`，如果输出 `/usr/local/bin/zenity` 就是安装成功了，如果不是：
-  * 执行 `which zenity` 没有输出，检查前面安装的输出是不是有错误。
-  * 执行 `which zenity` 输出另一个路径，可以建一个软链接：\
-    `sudo ln -sv $(which zenity) /usr/local/bin/zenity`
+
+<!--
+* 用 Node.js 安装
+  *Under development ...*
+
+* 用 APT 安装
+  *Under development ...*
+-->
+
+&nbsp;&nbsp;没有 `sudo` 权限也可以安装，只要将安装路径 ( 可能是 `~/.local/bin` ) 添加到 `PATH` 环境变量中即可。
+
+
+### 支持的终端
+
+* [iTerm2](https://iterm2.com/) -- 参考 [Trzsz-iTerm2 安装文档](https://trzsz.github.io/cn/iterm2)。
+
+* [electerm](https://electerm.github.io/electerm/) -- 升级到 `1.19.0` 以上的版本即可。
+
+* [trzsz.js](https://github.com/trzsz/trzsz.js) -- 让运行在浏览器中的 webshell 和用 electron 开发的终端支持 `trzsz`。
+
+&nbsp;&nbsp;*如果你的终端也支持 `trzsz`，请告诉我，我很乐意将它加到此列表中。*
 
 
 ## 使用指南
@@ -123,11 +96,11 @@ tsz file1 file2 file3
 
 
 #### `-e` 转义控制字符
-二进制传输模式时，控制字符可能会导致传输失败，`trz -eb` 或 `tsz -eb xxx` ( 加上 `-e` 选项 ) 转义所有已知的控制字符。
+二进制模式时，控制字符可能会导致失败，`trz -eb` 或 `tsz -eb xxx` ( 加上 `-e` 选项 ) 转义所有已知的控制字符。
 
 
 #### `-B` 缓冲区大小
-`trz -B 10k` 或 `tsz -B 2M xxx` 等，设置缓存区大小 ( 默认 1M )。太小会导致传输速度慢，太大会导致进度条更新不及时。
+`trz -B 10k` 或 `tsz -B 2M xxx` 等，设置缓存区大小 ( 默认 1M )。太小可能会导致传输速度慢，太大可能会导致进度条更新不及时。
 
 
 #### `-t` 超时时间
@@ -135,13 +108,13 @@ tsz file1 file2 file3
 
 
 #### 异常处理方法
-* 如果 `tmux` 不是运行在远程服务器上，而是运行在本地 mac 上，或者运行在中间的跳板机上。
-  * 因为 `trzsz` 在远程服务器上找不到 `tmux` 进程，需要使用 `tmux -CC` 控制模式才可以。
+* 如果 `tmux` 不是运行在远程服务器上，而是运行在本地电脑上，或者运行在中间的跳板机上。
+  * 因为 `trzsz` 在远程服务器上找不到 `tmux` 进程，所以只支持 `tmux -CC` 控制模式。
   * 关于 `tmux -CC` 控制模式的用法，请参考 [iTerm2 与 tmux -CC 集成](https://trzsz.github.io/cn/tmuxcc)。
 
 * 如果出现了错误，且 `trzsz` 挂住不能动了：
-  * 按组合键 `command + option + shift + r` 停止 [iTerm2 Coprocesses](https://iterm2.com/documentation-coprocesses.html)。
-  * 按组合键 `control + c` 停止服务器上的 `trz` 或 `tsz` 进程。
+  * 按组合键 `control + c` 可以停止服务器上的 `trz` 或 `tsz` 进程。
+  * 对于 iTerm2 用户，按组合键 `command + option + shift + r` 可以停止 [iTerm2 Coprocesses](https://iterm2.com/documentation-coprocesses.html)。
 
 * 如果 `trz -b` 二进制上传失败，并且登录远程服务器时使用了 `telnet` 或 `docker exec`：
   * 可以试试转义所有控制字符，例如 `trz -eb`。

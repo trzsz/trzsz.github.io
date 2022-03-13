@@ -13,6 +13,10 @@ li {
   margin-top: 10px !important;
 }
 
+li > div:first-of-type {
+  margin-top: 5px !important;
+}
+
 .project-tagline span {
   display: inline-block;
 }
@@ -114,7 +118,7 @@ li {
 
 .icon-list a {
   display: block;
-  padding: 0.8em;
+  padding: 5px;
   -webkit-transform: translate3d(0,500px,0);
   transform: translate3d(0,500px,0);
 }
