@@ -28,16 +28,17 @@ GitHub: [https://github.com/trzsz/trzsz](https://github.com/trzsz/trzsz)
 
 * 用 Python3 安装
   ```
-  sudo python3 -m pip install trzsz
+  sudo python3 -m pip install --upgrade trzsz
   ```
 
 * 用 Python2 安装
   ```
-  sudo python2 -m pip install trzsz
+  sudo python2 -m pip install --upgrade trzsz
   ```
 
 * 用 Homebrew 安装
   ```
+  brew update
   brew install trzsz
   ```
 
@@ -55,6 +56,8 @@ GitHub: [https://github.com/trzsz/trzsz](https://github.com/trzsz/trzsz)
 ### 支持的终端
 
 * [iTerm2](https://iterm2.com/) -- 参考 [Trzsz-iTerm2 安装文档](https://trzsz.github.io/cn/iterm2)。
+
+* [tabby](https://tabby.sh/) -- 安装 [tabby-trzsz](https://github.com/trzsz/tabby-trzsz) 插件即可。
 
 * [electerm](https://electerm.github.io/electerm/) -- 升级到 `1.19.0` 以上的版本即可。
 
@@ -139,14 +142,19 @@ tsz file1 file2 file3
 
 ## 屏幕截图
 
-#### 上传文件示例
+#### trzsz 在 iTerm2 中 text 进度条示例
 
-![上传文件示例](https://trzsz.github.io/images/upload.gif)
+  ![using trzsz in iTerm2 with text progress bar](https://trzsz.github.io/images/iterm2_text.gif)
 
 
-#### 下载文件示例
+#### trzsz 在 iTerm2 中 zenity 进度条示例
 
-![下载文件示例](https://trzsz.github.io/images/download.gif)
+  ![using trzsz in iTerm2 with zenity progress bar](https://trzsz.github.io/images/iterm2_zenity.gif)
+
+
+#### trzsz 在 tabby 中 tabby-trzsz 插件示例
+
+  ![using trzsz in tabby with tabby-trzsz plugin](https://trzsz.github.io/images/tabby_trzsz.gif)
 
 
 ## 联系方式

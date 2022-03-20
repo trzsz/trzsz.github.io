@@ -19,11 +19,12 @@ GitHub: [https://github.com/trzsz/trzsz](https://github.com/trzsz/trzsz)
 
 * 用 Python3 安装
   ```
-  sudo python3 -m pip install trzsz-iterm2
+  sudo python3 -m pip install --upgrade trzsz-iterm2
   ```
 
 * 用 Homebrew 安装
   ```
+  brew update
   brew install trzsz
   ```
 
@@ -59,6 +60,9 @@ GitHub: [https://github.com/trzsz/trzsz](https://github.com/trzsz/trzsz)
 
 ### 可选1：使用 [zenity](https://github.com/ncruces/zenity) 进度条
 
+* zenity 进度条示例
+  ![using trzsz in iTerm2 with zenity progress bar](https://trzsz.github.io/images/iterm2_zenity.gif)
+
 * 安装 `zenity`
   ```sh
   brew install ncruces/tap/zenity
@@ -77,9 +81,12 @@ GitHub: [https://github.com/trzsz/trzsz](https://github.com/trzsz/trzsz)
   ```
 
 ### 可选2：使用更帅的文本进度条
-*此功能正在开发中...*
+*此功能未发布...*
 
-* 更新 iTerm2 到 `Build 3.4.16` ( *未发布* ) 以上的版本。
+* text 进度条示例
+  ![using trzsz in iTerm2 with text progress bar](https://trzsz.github.io/images/iterm2_text.gif)
+
+* 升级 iTerm2 到 `Build 3.5.20220319-nightly` 以上的版本。
 
 * `Trigger` 的 `Parameters` 配置增加 `-p text` 参数。
   ```

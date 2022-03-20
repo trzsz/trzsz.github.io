@@ -19,11 +19,12 @@ GitHub: [https://github.com/trzsz/trzsz](https://github.com/trzsz/trzsz)
 
 * With Python3
   ```
-  sudo python3 -m pip install trzsz-iterm2
+  sudo python3 -m pip install --upgrade trzsz-iterm2
   ```
 
 * With Homebrew
   ```
+  brew update
   brew install trzsz
   ```
 
@@ -59,6 +60,9 @@ GitHub: [https://github.com/trzsz/trzsz](https://github.com/trzsz/trzsz)
 
 ### Option 1: The [zenity](https://github.com/ncruces/zenity) progress bar
 
+* Screenshot of zenity progress bar
+  ![using trzsz in iTerm2 with zenity progress bar](https://trzsz.github.io/images/iterm2_zenity.gif)
+
 * Install `zenity`
   ```sh
   brew install ncruces/tap/zenity
@@ -77,9 +81,12 @@ GitHub: [https://github.com/trzsz/trzsz](https://github.com/trzsz/trzsz)
   ```
 
 ### Option 2: The cooler text progress bar
-*Under development...*
+*Not release yet...*
 
-* Upgrade iTerm2 to `Build 3.4.16` ( *not release yet* ) or higher
+* Screenshot of text progress bar
+  ![using trzsz in iTerm2 with text progress bar](https://trzsz.github.io/images/iterm2_text.gif)
+
+* Upgrade iTerm2 to `Build 3.5.20220319-nightly` or higher.
 
 * Add `-p text` to the parameters of iTerm2 `Trigger`.
   ```
