@@ -55,10 +55,28 @@ GitHub: [https://github.com/trzsz/trzsz](https://github.com/trzsz/trzsz)
 
   ![iTerm2触发器配置](https://trzsz.github.io/images/config.jpg)
 
+* 打开 `iTerm2 -> Preferences... -> General -> Magic`，选中 `Enabel Python API`。
+
+  ![iTerm2 Enabel Python API](https://trzsz.github.io/images/PythonAPI.png)
+
 
 ## 进度条配置
 
-### 可选1：使用 [zenity](https://github.com/ncruces/zenity) 进度条
+### 可选1：使用文本进度条
+
+* text 进度条示例
+  ![using trzsz in iTerm2 with text progress bar](https://trzsz.github.io/images/iterm2_text.gif)
+
+* 升级 iTerm2 到 `Build 3.5.20220319-nightly` 以上的版本。
+
+* `Trigger` 的 `Parameters` 配置增加 `-p text` 参数。
+  ```
+  /usr/local/bin/trzsz-iterm2 -p text \1
+  ```
+  注意 `/usr/local/bin/trzsz-iterm2` 要替换成真实的 `trzsz-iterm2` 绝对路径。
+
+
+### 可选2：使用 [zenity](https://github.com/ncruces/zenity) 进度条
 
 * zenity 进度条示例
   ![using trzsz in iTerm2 with zenity progress bar](https://trzsz.github.io/images/iterm2_zenity.gif)
@@ -80,21 +98,20 @@ GitHub: [https://github.com/trzsz/trzsz](https://github.com/trzsz/trzsz)
   sudo ln -sv $(which zenity) /usr/local/bin/zenity
   ```
 
-### 可选2：使用更帅的文本进度条
-*此功能未发布...*
+## 默认保存路径
 
-* text 进度条示例
-  ![using trzsz in iTerm2 with text progress bar](https://trzsz.github.io/images/iterm2_text.gif)
+如果你想自动下载文件到指定目录，而不是每次都弹窗询问。
 
-* 升级 iTerm2 到 `Build 3.5.20220319-nightly` 以上的版本。
+例如，自动下载文件到 `/Users/xxxxx/Downloads`
 
-* `Trigger` 的 `Parameters` 配置增加 `-p text` 参数。
+* 使用文本进度条，将 `/usr/local/bin/trzsz-iterm2 -p text \1` 改为：
   ```
-  /usr/local/bin/trzsz-iterm2 -p text \1
+  /usr/local/bin/trzsz-iterm2 -p text -d '/Users/xxxxx/Downloads' \1
   ```
-  注意 `/usr/local/bin/trzsz-iterm2` 要替换成真实的 `trzsz-iterm2` 绝对路径。
 
-* 打开 `iTerm2 -> Preferences... -> General -> Magic`，选中 `Enabel Python API`。
+* 使用 zenity 进度条，将 `/usr/local/bin/trzsz-iterm2 \1` 改为：
+  ```
+  /usr/local/bin/trzsz-iterm2 -p zenity -d '/Users/xxxxx/Downloads' \1
+  ```
 
-  ![iTerm2 Enabel Python API](https://trzsz.github.io/images/PythonAPI.png)
-
+注意 `/usr/local/bin/trzsz-iterm2` 要替换成真实的 `trzsz-iterm2` 绝对路径。
