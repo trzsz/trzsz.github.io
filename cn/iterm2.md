@@ -55,9 +55,15 @@ GitHub: [https://github.com/trzsz/trzsz](https://github.com/trzsz/trzsz)
 
   ![iTerm2触发器配置](https://trzsz.github.io/images/config.jpg)
 
-* 打开 `iTerm2 -> Preferences... -> General -> Magic`，选中 `Enabel Python API`。
+* 打开 `iTerm2 -> Preferences... -> General -> Magic`，选中 `Enable Python API`。
 
-  ![iTerm2 Enabel Python API](https://trzsz.github.io/images/PythonAPI.png)
+  ![iTerm2 Enable Python API](https://trzsz.github.io/images/PythonAPI.png)
+
+* 设置 `ITERM2_COOKIE` 环境变量可以使启动速度更快。
+
+  打开 `iTerm2 -> Preferences... -> Advanced`，筛选 `COOKIE`，选择 `Yes`。
+
+  ![iTerm2 Enable ITERM2_COOKIE](https://trzsz.github.io/images/iterm2_cookie.png)
 
 
 ## 进度条配置
@@ -67,7 +73,7 @@ GitHub: [https://github.com/trzsz/trzsz](https://github.com/trzsz/trzsz)
 * text 进度条示例
   ![using trzsz in iTerm2 with text progress bar](https://trzsz.github.io/images/iterm2_text.gif)
 
-* 升级 iTerm2 到 `Build 3.5.20220319-nightly` 以上的版本。
+* 升级 iTerm2 到 `Build 3.5.20220327-nightly` 以上的版本。
 
 * `Trigger` 的 `Parameters` 配置增加 `-p text` 参数。
   ```

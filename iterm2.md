@@ -55,9 +55,15 @@ GitHub: [https://github.com/trzsz/trzsz](https://github.com/trzsz/trzsz)
 
   ![iTerm2 Trigger configuration](https://trzsz.github.io/images/config.jpg)
 
-* Open `iTerm2 -> Preferences... -> General -> Magic`, check `Enabel Python API`.
+* Open `iTerm2 -> Preferences... -> General -> Magic`, check `Enable Python API`.
 
-  ![iTerm2 Enabel Python API](https://trzsz.github.io/images/PythonAPI.png)
+  ![iTerm2 Enable Python API](https://trzsz.github.io/images/PythonAPI.png)
+
+* Set `ITERM2_COOKIE` environment variable for faster startup.
+
+  Open `iTerm2 -> Preferences... -> Advanced`, filter by `COOKIE`, select `Yes`.
+
+  ![iTerm2 Enable ITERM2_COOKIE](https://trzsz.github.io/images/iterm2_cookie.png)
 
 
 ## Progress Bar
@@ -67,7 +73,7 @@ GitHub: [https://github.com/trzsz/trzsz](https://github.com/trzsz/trzsz)
 * Screenshot of text progress bar
   ![using trzsz in iTerm2 with text progress bar](https://trzsz.github.io/images/iterm2_text.gif)
 
-* Upgrade iTerm2 to `Build 3.5.20220319-nightly` or higher.
+* Upgrade iTerm2 to `Build 3.5.20220327-nightly` or higher.
 
 * Add `-p text` to the parameters of iTerm2 `Trigger`.
   ```
