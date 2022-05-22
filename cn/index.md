@@ -61,6 +61,8 @@ GitHub: [https://github.com/trzsz/trzsz](https://github.com/trzsz/trzsz)
 
 * [electerm](https://electerm.github.io/electerm/) -- 升级到 `1.19.0` 以上的版本即可。
 
+* [trzsz-go](https://github.com/trzsz/trzsz-go) -- 只要是支持本地 shell 的终端就可以用。
+
 * [trzsz.js](https://github.com/trzsz/trzsz.js) -- 让运行在浏览器中的 webshell 和用 electron 开发的终端支持 `trzsz`。
 
 &nbsp;&nbsp;*如果你的终端也支持 `trzsz`，请告诉我，我很乐意将它加到此列表中。*
@@ -102,8 +104,8 @@ tsz file1 file2 file3
 二进制模式时，控制字符可能会导致失败，`trz -eb` 或 `tsz -eb xxx` ( 加上 `-e` 选项 ) 转义所有已知的控制字符。
 
 
-#### `-B` 缓冲区大小
-`trz -B 10k` 或 `tsz -B 2M xxx` 等，设置缓存区大小 ( 默认 1M )。太小可能会导致传输速度慢，太大可能会导致进度条更新不及时。
+#### `-B` 缓冲区上限
+`trz -B 20m` 或 `tsz -B 2M xxx` 等，设置最大缓冲区上限 ( 默认 10M )。会自动根据网速选择合适的缓冲区大小，但不会超过此上限。
 
 
 #### `-t` 超时时间
@@ -112,8 +114,8 @@ tsz file1 file2 file3
 
 #### 异常处理方法
 * 如果 `tmux` 不是运行在远程服务器上，而是运行在本地电脑上，或者运行在中间的跳板机上。
-  * 因为 `trzsz` 在远程服务器上找不到 `tmux` 进程，所以只支持 `tmux -CC` 控制模式。
-  * 关于 `tmux -CC` 控制模式的用法，请参考 [iTerm2 与 tmux -CC 集成](https://trzsz.github.io/cn/tmuxcc)。
+  * 方案1：使用 `tmux -CC` 与 iTerm2 集成，请参考 [iTerm2 与 tmux -CC 集成](https://trzsz.github.io/cn/tmuxcc)。
+  * 方案2：在本地电脑上安装 [trzsz-go](https://github.com/trzsz/trzsz-go)，设置 `alias ssh="trzsz ssh"` 可以方便使用。
 
 * 如果出现了错误，且 `trzsz` 挂住不能动了：
   * 按组合键 `control + c` 可以停止服务器上的 `trz` 或 `tsz` 进程。

@@ -73,7 +73,7 @@ GitHub: [https://github.com/trzsz/trzsz](https://github.com/trzsz/trzsz)
 * Screenshot of text progress bar
   ![using trzsz in iTerm2 with text progress bar](https://trzsz.github.io/images/iterm2_text.gif)
 
-* Upgrade iTerm2 to `Build 3.5.20220327-nightly` or higher.
+* Upgrade iTerm2 to `Build 3.5.20220503-nightly` or higher.
 
 * Add `-p text` to the parameters of iTerm2 `Trigger`.
   ```

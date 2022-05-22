@@ -73,7 +73,7 @@ GitHub: [https://github.com/trzsz/trzsz](https://github.com/trzsz/trzsz)
 * text 进度条示例
   ![using trzsz in iTerm2 with text progress bar](https://trzsz.github.io/images/iterm2_text.gif)
 
-* 升级 iTerm2 到 `Build 3.5.20220327-nightly` 以上的版本。
+* 升级 iTerm2 到 `Build 3.5.20220503-nightly` 以上的版本。
 
 * `Trigger` 的 `Parameters` 配置增加 `-p text` 参数。
   ```
