@@ -40,7 +40,7 @@ GitHub: [https://github.com/trzsz/trzsz](https://github.com/trzsz/trzsz)
 
   | Name | Value | Note |
   | ---- | ----- | ---- |
-  | Regular Expression | `:(:TRZSZ:TRANSFER:[SR]:\d+\.\d+\.\d+:\d+)` | <!-- avoid triple click copy a newline --> 前后无空格 |
+  | Regular Expression | `:(:TRZSZ:TRANSFER:[SRD]:\d+\.\d+\.\d+:\d+)` | <!-- avoid triple click copy a newline --> 前后无空格 |
   | Action | `Run Silent Coprocess...` | |
   | Parameters | `/usr/local/bin/trzsz-iterm2 \1` | <!-- avoid triple click copy a newline --> 前后无空格 |
   | Enabled | ✅ | 选中 |
