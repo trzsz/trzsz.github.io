@@ -4,7 +4,7 @@ layout: default
 
 # Trzsz 中文文档
 
-`trzsz` ( trz / tsz ) 是一个简单的文件传输工具，和 lrzsz ( rz / sz ) 类似，并且支持 tmux。
+`trzsz` ( trz / tsz ) 是一个兼容 tmux 的文件传输工具，和 lrzsz ( rz / sz ) 类似，并且有进度条和支持目录传输。
 
 GitHub: [https://github.com/trzsz/trzsz](https://github.com/trzsz/trzsz)
 
