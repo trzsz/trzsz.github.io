@@ -104,6 +104,7 @@ GitHub: [https://github.com/trzsz/trzsz](https://github.com/trzsz/trzsz)
   sudo ln -sv $(which zenity) /usr/local/bin/zenity
   ```
 
+
 ## 默认保存路径
 
 如果你想自动下载文件到指定目录，而不是每次都弹窗询问。
@@ -119,5 +120,19 @@ GitHub: [https://github.com/trzsz/trzsz](https://github.com/trzsz/trzsz)
   ```
   /usr/local/bin/trzsz-iterm2 -p zenity -d '/Users/xxxxx/Downloads' \1
   ```
+
+注意 `/usr/local/bin/trzsz-iterm2` 要替换成真实的 `trzsz-iterm2` 绝对路径。
+
+
+## 拖文件和目录上传
+
+* 升级 iTerm2 到 `Build 3.5.20220806-nightly` 以上的版本。
+
+* 打开 `iTerm2 -> Preferences... -> Advanced`，筛选 `files are dropped into`，配置如下：
+  ```
+  /usr/local/bin/trzsz-iterm2 -p text dragfiles \(filenames)
+  ```
+
+  ![iTerm2 enable drag files](https://trzsz.github.io/images/drag_config.png)
 
 注意 `/usr/local/bin/trzsz-iterm2` 要替换成真实的 `trzsz-iterm2` 绝对路径。

@@ -103,6 +103,7 @@ GitHub: [https://github.com/trzsz/trzsz](https://github.com/trzsz/trzsz)
   sudo ln -sv $(which zenity) /usr/local/bin/zenity
   ```
 
+
 ## Default save path
 
 If you want to automatically download files to the specified directory instead of asking each time.
@@ -118,5 +119,19 @@ e.g.: Automatically download files to `/Users/xxxxx/Downloads`
   ```
   /usr/local/bin/trzsz-iterm2 -p zenity -d '/Users/xxxxx/Downloads' \1
   ```
+
+Don't forget to change `/usr/local/bin/trzsz-iterm2` to the real absolute path of `trzsz-iterm2`.
+
+
+## Dragging files and directories to upload
+
+* Upgrade iTerm2 to `Build 3.5.20220806-nightly` or higher.
+
+* Open `iTerm2 -> Preferences... -> Advanced`, filter by `files are dropped into`, configure as:
+  ```
+  /usr/local/bin/trzsz-iterm2 -p text dragfiles \(filenames)
+  ```
+
+  ![iTerm2 enable drag files](https://trzsz.github.io/images/drag_config.png)
 
 Don't forget to change `/usr/local/bin/trzsz-iterm2` to the real absolute path of `trzsz-iterm2`.
