@@ -42,13 +42,14 @@ GitHub: [https://github.com/trzsz/trzsz](https://github.com/trzsz/trzsz)
   brew install trzsz
   ```
 
-<!--
 * 用 Node.js 安装
-  *Under development ...*
+  ```
+  sudo npm install -g trzsz
+  ```
 
-* 用 APT 安装
-  *Under development ...*
--->
+* 或者安装用 Go 写的 trzsz
+
+  查看 [https://github.com/trzsz/trzsz-go](https://github.com/trzsz/trzsz-go)
 
 &nbsp;&nbsp;没有 `sudo` 权限也可以安装，只要将安装路径 ( 可能是 `~/.local/bin` ) 添加到 `PATH` 环境变量中即可。
 
@@ -113,7 +114,7 @@ tsz file1 file2 file3
 
 
 #### `-t` 超时时间
-`trz -t 30` 或 `tsz -t 30 xxx` 等，设置超时秒数 ( 默认 10 秒 )。在超时时间内，如果无法传完一个缓冲区大小的数据则会报错并退出。设置为 0 或负数，则永不超时。
+`trz -t 30` 或 `tsz -t 30 xxx` 等，设置超时秒数 ( 默认 20 秒 )。在超时时间内，如果无法传完一个缓冲区大小的数据则会报错并退出。设置为 0 或负数，则永不超时。
 
 
 #### 异常处理方法
