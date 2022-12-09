@@ -21,13 +21,13 @@ esc    Detach cleanly.
   L    Toggle logging.
   C    Run tmux command.
 ```
-可以通过设置将此窗口隐藏起来，`iTerm2 -> Preferences -> General -> tmux`：
+可以通过设置将此窗口隐藏起来，`iTerm2 -> Preferences... / Settings... -> General -> tmux`：
 
 选中 `Automatically bury the tmux client session after connecting` 即可。
 
 
 ## 新窗口打开方式
-可以按自己的喜好，设置打开新窗口的方式，`iTerm2 -> Preferences -> General -> tmux`：
+可以按自己的喜好，设置打开新窗口的方式，`iTerm2 -> Preferences... / Settings... -> General -> tmux`：
 
 在 `When attaching, restore windows as:` 中选择自己喜欢的方式即可。
 
@@ -44,7 +44,7 @@ esc    Detach cleanly.
 ## 隐藏分屏标题栏
 在默认情况下，使用 `tmux -CC` 分屏的窗口会显示一行标题栏，非常丑。
 
-可以通过设置将分屏标题栏隐藏起来，`iTerm2 -> Preferences -> Appearance -> Panes`：
+可以通过设置将分屏标题栏隐藏起来，`iTerm2 -> Preferences... / Settings... -> Appearance -> Panes`：
 
 不要选中 `Show per-pane title bar with split panes` 即可。
 
@@ -52,7 +52,7 @@ esc    Detach cleanly.
 ## 非活动窗口样式
 在默认情况下，使用 `tmux -CC` 分屏的窗口在不活动时是灰色的，非常丑。
 
-可以通过设置优化不活动窗口的样式，`iTerm2 -> Preferences -> Appearance -> Dimming`：
+可以通过设置优化不活动窗口的样式，`iTerm2 -> Preferences... / Settings... -> Appearance -> Dimming`：
 
 选中 `Dimming affects only text, not background.` 即可。
 

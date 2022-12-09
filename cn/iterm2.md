@@ -36,7 +36,7 @@ GitHub: [https://github.com/trzsz/trzsz](https://github.com/trzsz/trzsz)
   ```
   下文中的 `/usr/local/bin/trzsz-iterm2` 请自行替换成真实的 `trzsz-iterm2` 绝对路径。
 
-* 打开 `iTerm2 -> Preferences... -> Profiles -> ( 在左边选中一个 Profile ) -> Advanced -> Triggers -> Edit -> [+]`，如下配置：
+* 打开 `iTerm2 -> Preferences... / Settings... -> Profiles -> ( 在左边选中一个 Profile ) -> Advanced -> Triggers -> Edit -> [+]`，如下配置：
 
   | Name | Value | Note |
   | ---- | ----- | ---- |
@@ -55,13 +55,13 @@ GitHub: [https://github.com/trzsz/trzsz](https://github.com/trzsz/trzsz)
 
   ![iTerm2触发器配置](https://trzsz.github.io/images/config.jpg)
 
-* 打开 `iTerm2 -> Preferences... -> General -> Magic`，选中 `Enable Python API`。
+* 打开 `iTerm2 -> Preferences... / Settings... -> General -> Magic`，选中 `Enable Python API`。
 
   ![iTerm2 Enable Python API](https://trzsz.github.io/images/PythonAPI.png)
 
 * 设置 `ITERM2_COOKIE` 环境变量可以使启动速度更快。
 
-  打开 `iTerm2 -> Preferences... -> Advanced`，筛选 `COOKIE`，选择 `Yes`。
+  打开 `iTerm2 -> Preferences... / Settings... -> Advanced`，筛选 `COOKIE`，选择 `Yes`。
 
   ![iTerm2 Enable ITERM2_COOKIE](https://trzsz.github.io/images/iterm2_cookie.png)
 
@@ -104,6 +104,8 @@ GitHub: [https://github.com/trzsz/trzsz](https://github.com/trzsz/trzsz)
   sudo ln -sv $(which zenity) /usr/local/bin/zenity
   ```
 
+* 如果进度条不是在前面弹出，可以尝试升级 [zenity](https://github.com/ncruces/zenity), 并且不要选中 `iTerm2 -> Secure Keyboard Entry`。
+
 
 ## 默认保存路径
 
@@ -128,7 +130,7 @@ GitHub: [https://github.com/trzsz/trzsz](https://github.com/trzsz/trzsz)
 
 * 升级 iTerm2 到 `Build 3.5.20220806-nightly` 以上的版本。
 
-* 打开 `iTerm2 -> Preferences... -> Advanced`，筛选 `files are dropped into`，配置如下：
+* 打开 `iTerm2 -> Preferences... / Settings... -> Advanced`，筛选 `files are dropped into`，配置如下：
   ```
   /usr/local/bin/trzsz-iterm2 -p text dragfiles \(filenames)
   ```

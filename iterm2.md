@@ -36,7 +36,7 @@ GitHub: [https://github.com/trzsz/trzsz](https://github.com/trzsz/trzsz)
   ```
   Change the `/usr/local/bin/trzsz-iterm2` below to the real absolute path of `trzsz-iterm2`.
 
-* Open `iTerm2 -> Preferences... -> Profiles -> (select a profile on the left) -> Advanced -> Triggers -> Edit -> [+]`
+* Open `iTerm2 -> Preferences... / Settings... -> Profiles -> (select a profile on the left) -> Advanced -> Triggers -> Edit -> [+]`
 
   | Name | Value | Note |
   | ---- | ----- | ---- |
@@ -55,13 +55,13 @@ GitHub: [https://github.com/trzsz/trzsz](https://github.com/trzsz/trzsz)
 
   ![iTerm2 Trigger configuration](https://trzsz.github.io/images/config.jpg)
 
-* Open `iTerm2 -> Preferences... -> General -> Magic`, check `Enable Python API`.
+* Open `iTerm2 -> Preferences... / Settings... -> General -> Magic`, check `Enable Python API`.
 
   ![iTerm2 Enable Python API](https://trzsz.github.io/images/PythonAPI.png)
 
 * Set `ITERM2_COOKIE` environment variable for faster startup.
 
-  Open `iTerm2 -> Preferences... -> Advanced`, filter by `COOKIE`, select `Yes`.
+  Open `iTerm2 -> Preferences... / Settings... -> Advanced`, filter by `COOKIE`, select `Yes`.
 
   ![iTerm2 Enable ITERM2_COOKIE](https://trzsz.github.io/images/iterm2_cookie.png)
 
@@ -103,6 +103,8 @@ GitHub: [https://github.com/trzsz/trzsz](https://github.com/trzsz/trzsz)
   sudo ln -sv $(which zenity) /usr/local/bin/zenity
   ```
 
+* If the progress dialog doesn't pop up in front, try upgrade [zenity](https://github.com/ncruces/zenity), and don't check `iTerm2 -> Secure Keyboard Entry`.
+
 
 ## Default save path
 
@@ -127,7 +129,7 @@ Don't forget to change `/usr/local/bin/trzsz-iterm2` to the real absolute path o
 
 * Upgrade iTerm2 to `Build 3.5.20220806-nightly` or higher.
 
-* Open `iTerm2 -> Preferences... -> Advanced`, filter by `files are dropped into`, configure as:
+* Open `iTerm2 -> Preferences... / Settings... -> Advanced`, filter by `files are dropped into`, configure as:
   ```
   /usr/local/bin/trzsz-iterm2 -p text dragfiles \(filenames)
   ```

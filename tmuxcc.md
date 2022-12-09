@@ -21,13 +21,13 @@ esc    Detach cleanly.
   L    Toggle logging.
   C    Run tmux command.
 ```
-This window can be hidden by setting `iTerm2 -> Preferences -> General -> tmux`:
+This window can be hidden by setting `iTerm2 -> Preferences... / Settings... -> General -> tmux`:
 
 Checked `Automatically bury the tmux client session after connecting`.
 
 
 ## How to open new window
-Choose your favorite way to open new window by setting `iTerm2 -> Preferences -> General -> tmux`:
+Choose your favorite way to open new window by setting `iTerm2 -> Preferences... / Settings... -> General -> tmux`:
 
 Choose a item in `When attaching, restore windows as`, then try `tmux -CC` to find your favorite way.
 
@@ -42,7 +42,7 @@ Choose a item in `When attaching, restore windows as`, then try `tmux -CC` to fi
 ## Hide title bar of panes
 By default, `iTerm2` will show a title bar for each split panes, which looks ugly.
 
-The title bar of panes can be hidden by setting `iTerm2 -> Preferences -> Appearance -> Panes`:
+The title bar of panes can be hidden by setting `iTerm2 -> Preferences... / Settings... -> Appearance -> Panes`:
 
 Unchecked `Show per-pane title bar with split panes`.
 
@@ -50,7 +50,7 @@ Unchecked `Show per-pane title bar with split panes`.
 ## Inactive window style
 By default, `iTerm2` will dimming the whole inactive windows, which looks ugly.
 
-The dimming style can be changed by setting `iTerm2 -> Preferences -> Appearance -> Dimming`:
+The dimming style can be changed by setting `iTerm2 -> Preferences... / Settings... -> Appearance -> Dimming`:
 
 Checked `Dimming affects only text, not background`.
 
