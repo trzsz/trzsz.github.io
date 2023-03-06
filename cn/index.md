@@ -62,6 +62,8 @@ GitHub: [https://github.com/trzsz/trzsz](https://github.com/trzsz/trzsz)
 
 * [electerm](https://electerm.github.io/electerm/) -- 升级到 `1.19.0` 以上的版本即可。
 
+* [ttyd](https://github.com/tsl0922/ttyd) -- 升级到 `1.7.3` 以上的版本，并且启动时加上 `-t enableTrzsz=true`。
+
 * [trzsz-go](https://github.com/trzsz/trzsz-go) -- 只要是支持本地 shell 的终端就可以用。
 
 * [trzsz.js](https://github.com/trzsz/trzsz.js) -- 让运行在浏览器中的 webshell 和用 electron 开发的终端支持 `trzsz`。
