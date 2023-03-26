@@ -4,23 +4,16 @@ layout: default
 
 # Trzsz.js Document
 
-Making webshell and terminal supports [trzsz](https://trzsz.github.io/) ( trz / tsz ), which similar to ( rz / sz ) , and compatible with tmux.
+Making webshell and terminal supports [trzsz](https://trzsz.github.io/) ( trz / tsz ), which similar to ( rz / sz ), and compatible with tmux.
 
 GitHub: [https://github.com/trzsz/trzsz.js](https://github.com/trzsz/trzsz.js)
 
 [![MIT License](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://choosealicense.com/licenses/mit/)
 [![npmjs trzsz](https://img.shields.io/npm/v/trzsz.svg?style=flat)](https://www.npmjs.com/package/trzsz)
 
+***Please check [https://github.com/trzsz/trzsz](https://github.com/trzsz/trzsz) for more information of `trzsz`.***
 
-## Why?
-
-Considering `laptop -> hostA -> hostB -> docker -> tmux`, using `scp` or `sftp` is inconvenience.
-
-In this case, `lrzsz` ( rz / sz ) is convenient to use, but unfortunately it's not compatible with `tmux`.
-
-`tmux` is not going to support rz / sz ( [906](https://github.com/tmux/tmux/issues/906), [1439](https://github.com/tmux/tmux/issues/1439) ), and creating a new tools is much easier than patching `tmux`.
-
-[trzsz.js](https://github.com/trzsz/trzsz.js) is a `js` version of [trzsz](https://github.com/trzsz/trzsz), which supports webshell running in browser, terminal built with electron, etc.
+`trzsz.js` is the `js` version of `trzsz`, which supports webshell running in browser, terminal built with electron, etc.
 
 
 ## Getting Started
@@ -90,14 +83,24 @@ In this case, `lrzsz` ( rz / sz ) is convenient to use, but unfortunately it's n
   terminal.onResize((size) => trzszFilter.setTerminalColumns(size.cols));
   ```
 
+* If there is a windows shell, such as `cmd` and `PowerShell`.
+  ```js
+  const trzszFilter = new TrzszFilter({
+    // There is a windows shell
+    isWindowsShell: true,
+  });
+  ```
+
 * If running in `Node.js` and `TrzszFilter` can `require('fs')`, `chooseSendFiles` and `chooseSaveDirectory` are required. If running in web browser, they will be ignored. Note that they are `async` functions.
   ```js
   const trzszFilter = new TrzszFilter({
     // call on the user runs trz ( upload files ) on the server and no error on require('fs').
-    chooseSendFiles: async () => {
+    chooseSendFiles: async (directory) => {
+      // if `directory` is `true`, allow to choose multiple directories and files.
+      // otherwise, only allow to choose multiple files.
       // return `undefined` if the user cancels.
       // return an array of file paths choosed by the user.
-      return ["/path/to/file1", "/path/to/file2"];
+      return ["/path/to/file1", "/path/to/file2", "/path/to/directory3"];
     },
     // call on the user runs tsz ( download files ) on the server and no error on require('fs').
     chooseSaveDirectory: async () => {
@@ -105,6 +108,18 @@ In this case, `lrzsz` ( rz / sz ) is convenient to use, but unfortunately it's n
       // return a directory path choosed by the user.
       return "/path/to/directory";
     },
+  });
+  ```
+
+* Support dragging files or directories to upload.
+  ```js
+  terminalHtmlElement.addEventListener("dragover", (event) => event.preventDefault());
+  terminalHtmlElement.addEventListener("drop", (event) => {
+    event.preventDefault();
+    trzszFilter
+      .uploadFiles(event.dataTransfer.items)
+      .then(() => console.log("upload success"))
+      .catch((err) => console.log(err));
   });
   ```
 

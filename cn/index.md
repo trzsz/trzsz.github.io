@@ -22,6 +22,18 @@ GitHub: [https://github.com/trzsz/trzsz](https://github.com/trzsz/trzsz)
 `tmux` 不愿意支持 rz / sz ( [906](https://github.com/tmux/tmux/issues/906), [1439](https://github.com/tmux/tmux/issues/1439) )，而重新造一个工具比修改 `tmux` 简单很多。
 
 
+## 优点介绍
+
+* 支持 **tmux**，包括 tmux 普通模式，以及与 iTerm2 集成的 tmux 命令模式。
+* 支持 **传输目录**，`trz -d` 命令上传目录，`tsz -d xxx` 命令下载 xxx 目录。
+* 支持 **Windows**，不仅可在 Windows 客户端使用，也可在 Windows ssh 服务器使用。
+* 支持 **原生终端**，不需要原生终端做支持，只要使用 `trzsz ssh x.x.x.x` 登录即可。
+* 支持 **web 终端**，通过 web 浏览器在本地与服务器之间传输目录和文件。
+* 支持 **拖动上传**，将文件和目录拖到终端窗口即可上传到远程服务器。
+* 支持 **进度条**，显示当前正在传输的文件名、进度、大小、速度和剩余时间等。
+* 更好的 **交互体验**，传输成功或出错时显示友好的结果，`ctrl + c` 优雅中止。
+
+
 ## 安装指南
 
 ### 在远程服务器上安装
@@ -62,7 +74,7 @@ GitHub: [https://github.com/trzsz/trzsz](https://github.com/trzsz/trzsz)
 
 * [electerm](https://electerm.github.io/electerm/) -- 升级到 `1.19.0` 以上的版本即可。
 
-* [ttyd](https://github.com/tsl0922/ttyd) -- 升级到 `1.7.3` 以上的版本，并且启动时加上 `-t enableTrzsz=true`。
+* [ttyd](https://github.com/tsl0922/ttyd) -- 升级到 `1.7.3` 以上的版本，并且启动时加上 `-t enableTrzsz=true`，非 localhost 要用 `https`。
 
 * [trzsz-go](https://github.com/trzsz/trzsz-go) -- 只要是支持本地 shell 的终端就可以用。
 
@@ -130,10 +142,6 @@ tsz file1 file2 file3
 
 * 如果 `trz -b` 二进制上传失败，并且登录远程服务器时使用了 `telnet` 或 `docker exec`：
   * 可以试试转义所有控制字符，例如 `trz -eb`。
-
-* 如果 `trz -b` 二进制上传失败，并且远程服务器使用 Python3 ( 版本小于 3.7 )：
-  * Python3 ( 版本小于 3.7 ) 支持 base64 模式，不使用 `-b` 选项即可，使用 `trz` 代替。
-  * 如果想用 `trz -b` 二进制上传，则需要升级 Python3 到 3.7 以上的版本，或者使用 Python2。
 
 * 如果 `trz -b` 或 `tsz -b` 二进制传输失败，并且登录远程服务器时使用了 `expect`：
   * 可以试试在 `expect` 脚本前设置环境变量 `export LC_CTYPE=C`，例如：
