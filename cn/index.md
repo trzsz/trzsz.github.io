@@ -132,9 +132,13 @@ tsz file1 file2 file3
 
 
 #### 异常处理方法
-* 如果 `tmux` 不是运行在远程服务器上，而是运行在本地电脑上，或者运行在中间的跳板机上。
+* 如果 `tmux` 是运行在本地电脑上。
   * 方案1：使用 `tmux -CC` 与 iTerm2 集成，请参考 [iTerm2 与 tmux -CC 集成](https://trzsz.github.io/cn/tmuxcc)。
-  * 方案2：在本地电脑上安装 [trzsz-go](https://github.com/trzsz/trzsz-go)，设置 `alias ssh="trzsz ssh"` 可以方便使用。
+  * 方案2：在本地电脑上安装 [trzsz-go](https://github.com/trzsz/trzsz-go)，在 `tmux` 之后用 `trzsz ssh` 登录。
+
+* 如果 `tmux` 是运行在跳板机上。
+  * 方案1：使用 `tmux -CC` 与 iTerm2 集成，请参考 [iTerm2 与 tmux -CC 集成](https://trzsz.github.io/cn/tmuxcc)。
+  * 方案2：在跳板机上安装 [trzsz-go](https://github.com/trzsz/trzsz-go)，在 `tmux` 之后用 `trzsz -r ssh` 登录。
 
 * 如果出现了错误，且 `trzsz` 挂住不能动了：
   * 按组合键 `control + c` 可以停止服务器上的 `trz` 或 `tsz` 进程。
@@ -176,4 +180,4 @@ tsz file1 file2 file3
 
 ## 联系方式
 
-有什么问题可以发邮件给我 <lonnywong@qq.com>，也可以直接提 [Issues](https://github.com/trzsz/trzsz/issues) 。
+有什么问题可以发邮件给我 <lonnywong@qq.com>，也可以提 [Issues](https://github.com/trzsz/trzsz/issues) 。欢迎加入 QQ 群：318578930。
