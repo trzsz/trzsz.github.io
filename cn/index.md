@@ -180,4 +180,9 @@ tsz file1 file2 file3
 
 ## 联系方式
 
-有什么问题可以发邮件给我 <lonnywong@qq.com>，也可以提 [Issues](https://github.com/trzsz/trzsz/issues) 。欢迎加入 QQ 群：318578930。
+有什么问题可以发邮件给作者 <lonnywong@qq.com>，也可以提 [Issues](https://github.com/trzsz/trzsz/issues) 。欢迎加入 QQ 群：318578930。
+
+请作者喝一杯咖啡☕?
+
+![sponsor wechat qrcode](https://trzsz.github.io/images/sponsor_wechat.jpg)
+![sponsor alipay qrcode](https://trzsz.github.io/images/sponsor_alipay.jpg)

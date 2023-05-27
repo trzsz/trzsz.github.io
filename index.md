@@ -178,4 +178,9 @@ In this case, `lrzsz` ( rz / sz ) is convenient to use, but unfortunately it's n
 
 ## Contact
 
-Feel free to email me <lonnywong@qq.com>. Welcome to join the QQ group: 318578930.
+Feel free to email the author <lonnywong@qq.com>. Welcome to join the QQ group: 318578930.
+
+Want to buy the author a drink🍺?
+
+![sponsor wechat qrcode](https://trzsz.github.io/images/sponsor_wechat.jpg)
+![sponsor alipay qrcode](https://trzsz.github.io/images/sponsor_alipay.jpg)
