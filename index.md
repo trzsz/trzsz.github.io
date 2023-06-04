@@ -77,6 +77,8 @@ In this case, `lrzsz` ( rz / sz ) is convenient to use, but unfortunately it's n
 
 * [ttyd](https://github.com/tsl0922/ttyd) -- upgrade to `1.7.3` or higher, and start with `-t enableTrzsz=true`, use `https` unless localhost.
 
+* [trzsz-ssh](https://github.com/trzsz/trzsz-ssh) ( tssh ) -- simple ssh client with trzsz support.
+
 * [trzsz-go](https://github.com/trzsz/trzsz-go) -- supports all terminals that support a local shell.
 
 * [trzsz.js](https://github.com/trzsz/trzsz.js) -- making webshell in browser and electron terminal supports `trzsz`.
@@ -180,7 +182,7 @@ In this case, `lrzsz` ( rz / sz ) is convenient to use, but unfortunately it's n
 
 Feel free to email the author <lonnywong@qq.com>. Welcome to join the QQ group: 318578930.
 
-Want to buy the author a drink🍺?
+Want to buy the author a drink 🍺 ?
 
 ![sponsor wechat qrcode](https://trzsz.github.io/images/sponsor_wechat.jpg)
 ![sponsor alipay qrcode](https://trzsz.github.io/images/sponsor_alipay.jpg)
