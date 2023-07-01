@@ -38,36 +38,37 @@ In this case, `lrzsz` ( rz / sz ) is convenient to use, but unfortunately it's n
 
 ### On the server
 
-* with Python3
+* Install [the Go version](https://github.com/trzsz/trzsz-go) ( ⭐ Recommended )
+
+  Please check the Go version installation guide: [https://github.com/trzsz/trzsz-go#installation](https://github.com/trzsz/trzsz-go#installation)
+
+* Or install with Python3
   ```
   sudo python3 -m pip install --upgrade trzsz
   ```
 
-* with Python2
+* Or install with Python2
   ```
   sudo python2 -m pip install --upgrade trzsz
   ```
 
-* with Homebrew
+* Or install with Homebrew
   ```
   brew update
   brew install trzsz
   ```
 
-* with Node.js
+* Or install with Node.js
   ```
   sudo npm install -g trzsz
   ```
-
-* or install trzsz written in Go
-
-  Check [https://github.com/trzsz/trzsz-go](https://github.com/trzsz/trzsz-go)
-
 
 &nbsp;&nbsp;Can be installed without `sudo`, just add the installation path ( e.g. `~/.local/bin` ) to the `PATH` environment.
 
 
 ### Supported Terminals
+
+* [trzsz-ssh](https://github.com/trzsz/trzsz-ssh) ( tssh ) -- simple ssh client with trzsz support ( ⭐ Recommended ).
 
 * [iTerm2](https://iterm2.com/) -- check [the trzsz-iterm2 installation](https://trzsz.github.io/iterm2).
 
@@ -76,8 +77,6 @@ In this case, `lrzsz` ( rz / sz ) is convenient to use, but unfortunately it's n
 * [electerm](https://electerm.github.io/electerm/) -- upgrade to `1.19.0` or higher.
 
 * [ttyd](https://github.com/tsl0922/ttyd) -- upgrade to `1.7.3` or higher, and start with `-t enableTrzsz=true`, use `https` unless localhost.
-
-* [trzsz-ssh](https://github.com/trzsz/trzsz-ssh) ( tssh ) -- simple ssh client with trzsz support.
 
 * [trzsz-go](https://github.com/trzsz/trzsz-go) -- supports all terminals that support a local shell.
 
@@ -105,6 +104,7 @@ In this case, `lrzsz` ( rz / sz ) is convenient to use, but unfortunately it's n
     -b, --binary       binary transfer mode, faster for binary files
     -e, --escape       escape all known control characters
     -d, --directory    transfer directories and files
+    -r, --recursive    transfer directories and files, same as -d
     -B N, --bufsize N  max buffer chunk size (1K<=N<=1G). (default: 10M)
     -t N, --timeout N  timeout ( N seconds ) for each buffer chunk.
                        N <= 0 means never timeout. (default: 20)
@@ -127,6 +127,7 @@ In this case, `lrzsz` ( rz / sz ) is convenient to use, but unfortunately it's n
     -b, --binary       binary transfer mode, faster for binary files
     -e, --escape       escape all known control characters
     -d, --directory    transfer directories and files
+    -r, --recursive    transfer directories and files, same as -d
     -B N, --bufsize N  max buffer chunk size (1K<=N<=1G). (default: 10M)
     -t N, --timeout N  timeout ( N seconds ) for each buffer chunk.
                        N <= 0 means never timeout. (default: 20)

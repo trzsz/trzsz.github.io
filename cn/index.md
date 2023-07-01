@@ -38,35 +38,37 @@ GitHub: [https://github.com/trzsz/trzsz](https://github.com/trzsz/trzsz)
 
 ### 在远程服务器上安装
 
-* 用 Python3 安装
+* 安装 [用 Go 实现的版本](https://github.com/trzsz/trzsz-go)（ ⭐ 推荐 ）
+
+  请查看 Go 版安装指引：[https://github.com/trzsz/trzsz-go#installation](https://github.com/trzsz/trzsz-go#installation)
+
+* 或者用 Python3 安装
   ```
   sudo python3 -m pip install --upgrade trzsz
   ```
 
-* 用 Python2 安装
+* 或者用 Python2 安装
   ```
   sudo python2 -m pip install --upgrade trzsz
   ```
 
-* 用 Homebrew 安装
+* 或者用 Homebrew 安装
   ```
   brew update
   brew install trzsz
   ```
 
-* 用 Node.js 安装
+* 或者用 Node.js 安装
   ```
   sudo npm install -g trzsz
   ```
-
-* 或者安装用 Go 写的 trzsz
-
-  查看 [https://github.com/trzsz/trzsz-go](https://github.com/trzsz/trzsz-go)
 
 &nbsp;&nbsp;没有 `sudo` 权限也可以安装，只要将安装路径 ( 可能是 `~/.local/bin` ) 添加到 `PATH` 环境变量中即可。
 
 
 ### 支持的终端
+
+* [trzsz-ssh](https://github.com/trzsz/trzsz-ssh) ( tssh ) -- 内置支持 trzsz 的 ssh 客户端（ ⭐ 推荐 ）。
 
 * [iTerm2](https://iterm2.com/) -- 参考 [Trzsz-iTerm2 安装文档](https://trzsz.github.io/cn/iterm2)。
 
@@ -75,8 +77,6 @@ GitHub: [https://github.com/trzsz/trzsz](https://github.com/trzsz/trzsz)
 * [electerm](https://electerm.github.io/electerm/) -- 升级到 `1.19.0` 以上的版本即可。
 
 * [ttyd](https://github.com/tsl0922/ttyd) -- 升级到 `1.7.3` 以上的版本，并且启动时加上 `-t enableTrzsz=true`，非 localhost 要用 `https`。
-
-* [trzsz-ssh](https://github.com/trzsz/trzsz-ssh) ( tssh ) -- 内置支持 trzsz 的 ssh 客户端。
 
 * [trzsz-go](https://github.com/trzsz/trzsz-go) -- 只要是支持本地 shell 的终端就可以用。
 
@@ -121,8 +121,8 @@ tsz file1 file2 file3
 二进制模式时，控制字符可能会导致失败，`trz -eb` 或 `tsz -eb xxx` ( 加上 `-e` 选项 ) 转义所有已知的控制字符。
 
 
-#### `-d` 传输文件夹
-`trz -d` 或 `tsz -d xxx` ( 加上 `-d` 选项 )，则可以上传或下载指定文件夹和文件。
+#### `-d` / `-r` 传输文件夹
+`trz -d` 或 `tsz -r xxx` ( 加上 `-d` 或 `-r` 选项 )，则可以上传或下载指定文件夹和文件。
 
 
 #### `-B` 缓冲区上限
