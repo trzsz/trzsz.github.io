@@ -10,7 +10,6 @@ GitHub: [https://github.com/trzsz/trzsz](https://github.com/trzsz/trzsz)
 
 [![MIT License](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://choosealicense.com/licenses/mit/)
 [![PyPI trzsz](https://img.shields.io/pypi/v/trzsz?style=flat)](https://pypi.python.org/pypi/trzsz/)
-[![中文网站](https://img.shields.io/badge/%E4%B8%AD%E6%96%87-%E7%BD%91%E7%AB%99-blue?style=flat)](https://trzsz.github.io/cn/)
 
 ## 为什么?
 
@@ -37,7 +36,7 @@ GitHub: [https://github.com/trzsz/trzsz](https://github.com/trzsz/trzsz)
 
 - 安装 [用 Go 实现的版本](https://github.com/trzsz/trzsz-go)（ ⭐ 推荐 ）
 
-  请查看 Go 版安装指引：[https://github.com/trzsz/trzsz-go#installation](https://github.com/trzsz/trzsz-go#installation)
+  请查看 Go 版安装指引：[https://trzsz.github.io/cn/go](https://trzsz.github.io/cn/go)
 
 - 或者用 Python3 安装
 
@@ -59,6 +58,7 @@ GitHub: [https://github.com/trzsz/trzsz](https://github.com/trzsz/trzsz)
   ```
 
 - 或者用 Node.js 安装
+
   ```
   sudo npm install -g trzsz
   ```
@@ -67,7 +67,7 @@ GitHub: [https://github.com/trzsz/trzsz](https://github.com/trzsz/trzsz)
 
 ### 支持的终端
 
-- [trzsz-ssh](https://github.com/trzsz/trzsz-ssh) ( tssh ) -- 内置支持 trzsz 的 ssh 客户端（ ⭐ 推荐 ）。
+- [trzsz-ssh](https://trzsz.github.io/cn/ssh) ( tssh ) -- 内置支持 trzsz 的 ssh 客户端（ ⭐ 推荐 ）。
 
 - [iTerm2](https://iterm2.com/) -- 参考 [Trzsz-iTerm2 安装文档](https://trzsz.github.io/cn/iterm2)。
 
@@ -77,9 +77,9 @@ GitHub: [https://github.com/trzsz/trzsz](https://github.com/trzsz/trzsz)
 
 - [ttyd](https://github.com/tsl0922/ttyd) -- 升级到 `1.7.3` 以上的版本，并且启动时加上 `-t enableTrzsz=true`，非 localhost 要用 `https`。
 
-- [trzsz-go](https://github.com/trzsz/trzsz-go) -- 只要是支持本地 shell 的终端就可以用。
+- [trzsz-go](https://trzsz.github.io/cn/go) -- 只要是支持本地 shell 的终端就可以用。
 
-- [trzsz.js](https://github.com/trzsz/trzsz.js) -- 让运行在浏览器中的 webshell 和用 electron 开发的终端支持 `trzsz`。
+- [trzsz.js](https://trzsz.github.io/cn/js) -- 让运行在浏览器中的 webshell 和用 electron 开发的终端支持 `trzsz`。
 
 &nbsp;&nbsp;_如果你的终端也支持 `trzsz`，请告诉我，我很乐意将它加到此列表中。_
 
@@ -107,7 +107,7 @@ tsz file1 file2 file3
 
 #### `-y` 覆盖模式
 
-`trz -y` 或 `tsz -y xxx` ( 加上 `-y` 选项 )，如果存在相同文件名的文件就直接覆盖。
+`trz -y` 或 `tsz -y xxx` ( 加上 `-y` 选项 )，如果存在相同文件名的文件就直接覆盖，并支持断点续传。
 
 #### `-b` 二进制模式
 

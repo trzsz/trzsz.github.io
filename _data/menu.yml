@@ -3,14 +3,24 @@ url: https://github.com/trzsz/trzsz
 menus:
   - name: Trzsz Document
     url: /
-  - name: Trzsz.js Document
-    url: /js/
+  - name: Trzsz ( go ) Document
+    url: /go
+  - name: Trzsz ( js ) Document
+    url: /js
+  - name: Trzsz ( ssh ) Document
+    url: /ssh
   - name: Trzsz-iTerm2 Document
     url: /iterm2
   - name: iTerm2 tmux Integration
     url: /tmuxcc
   - name: Trzsz 中文文档
     url: /cn/
+  - name: Trzsz ( go ) 中文文档
+    url: /cn/go
+  - name: Trzsz ( js ) 中文文档
+    url: /cn/js
+  - name: Trzsz ( ssh ) 中文文档
+    url: /cn/ssh
   - name: Trzsz-iTerm2 安装文档
     url: /cn/iterm2
   - name: iTerm2 与 tmux -CC 集成
