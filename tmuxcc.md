@@ -56,11 +56,3 @@ By default, `iTerm2` will dimming the whole inactive windows, which looks ugly.
 The dimming style can be changed by setting `iTerm2 -> Preferences... / Settings... -> Appearance -> Dimming`:
 
 Checked `Dimming affects only text, not background`.
-
-## About transfer files
-
-`tmux` doesn't support `rz / sz` to transfer files, and neither does `tmux -CC` control mode support `rz / sz`.
-
-If `tmux` is running on the remote server, then [trzsz](https://github.com/trzsz/trzsz) `( trz / tsz )` supports both `tmux` normal mode and `tmux -CC` control mode.
-
-If `tmux` is not running on the remote server, but on the local mac, or on a middler server, [trzsz](https://github.com/trzsz/trzsz) can't find the `tmux` process. So, we can't support `tmux` in normal mode, but can support `tmux -CC` in control mode.

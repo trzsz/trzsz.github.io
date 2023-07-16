@@ -58,11 +58,3 @@ esc    Detach cleanly.
 可以通过设置优化不活动窗口的样式，`iTerm2 -> Preferences... / Settings... -> Appearance -> Dimming`：
 
 选中 `Dimming affects only text, not background.` 即可。
-
-## 用 rz / sz 传文件
-
-`tmux` 不支持 `rz / sz` 传输文件，并且 `tmux -CC` 控制模式也不支持 `rz / sz`。
-
-如果 `tmux` 运行在远程服务器上，那么 [trzsz](https://github.com/trzsz/trzsz) `( trz / tsz )` 既支持 `tmux` 普通模式，也支持 `tmux -CC` 控制模式。
-
-如果 `tmux` 不是运行在远程服务器上，而是运行在本地 mac 上，或者运行在中间的某台跳板机上， [trzsz](https://github.com/trzsz/trzsz) 在远程服务器上找不到 `tmux` 进程，因此不能支持普通模式的 `tmux`，不过可以支持控制模式的 `tmux -CC`。
