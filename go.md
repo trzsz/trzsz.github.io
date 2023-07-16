@@ -173,7 +173,7 @@ GitHub: [https://github.com/trzsz/trzsz-go](https://github.com/trzsz/trzsz-go) ã
 
 ## Suggestion
 
-- It is recommended to set `alias ssh="trzsz ssh"` for convenience, `alias ssh="trzsz -d ssh"` for dragging files.
+- It is recommended to set `alias ssh="trzsz ssh"` for convenience, `alias ssh="trzsz -d ssh"` for dragging files to upload.
 
 - If using `tmux` on the local computer, run `tmux` ( without `trzsz` ) first, then `trzsz ssh` to login.
 

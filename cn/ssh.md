@@ -2,7 +2,7 @@
 layout: default
 ---
 
-# trzsz-ssh ( tssh ) 中文文档
+# Trzsz-ssh ( tssh ) 中文文档
 
 支持 [trzsz](https://trzsz.github.io/cn/) ( trz / tsz ) 的 ssh 客户端，支持选择或搜索服务器登录，支持记住密码。
 

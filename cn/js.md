@@ -47,11 +47,11 @@ GitHub: [https://github.com/trzsz/trzsz.js](https://github.com/trzsz/trzsz.js)
   <script src="node_modules/trzsz/lib/trzsz.js"></script>
   ```
 
-- 创建 `TrzszFilter` 对象
+- 创建 `TrzszFilter` 对象（ 每个登录服务器的连接创建一个相应的 ）
 
   ```js
   const trzszFilter = new TrzszFilter({
-    // The trzsz options, see below
+    // 这里设置 trzsz 的属性，详情请参考下文。
   });
   ```
 

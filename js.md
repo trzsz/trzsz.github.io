@@ -47,7 +47,7 @@ GitHub: [https://github.com/trzsz/trzsz.js](https://github.com/trzsz/trzsz.js) ã
   <script src="node_modules/trzsz/lib/trzsz.js"></script>
   ```
 
-- Create `TrzszFilter` object
+- Create `TrzszFilter` object for each connection.
 
   ```js
   const trzszFilter = new TrzszFilter({

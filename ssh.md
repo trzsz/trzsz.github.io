@@ -2,7 +2,7 @@
 layout: default
 ---
 
-# Trzsz ( tssh ) Document
+# Trzsz-ssh ( tssh ) Document
 
 A ssh client that supports [trzsz](https://trzsz.github.io/), supports selecting or searching servers for login, supports remember password.
 
@@ -141,8 +141,9 @@ _On the author's MacOS, the upload speed using `trzsz ssh` is about 10 MB/s, whi
 
   </details>
 
-**_[trzsz](https://trzsz.github.io/cn/) needs to be installed on the server to use `trz / tsz` for uploading and downloading files. Choose either the
-[Go version](https://trzsz.github.io/go) ( ⭐ Recommended ), [Py version](https://trzsz.github.io/), or [Js version](https://trzsz.github.io/js)._**
+**_[trzsz](https://trzsz.github.io/) needs to be installed on the server to use `trz / tsz` for uploading and downloading files._**
+
+_Choose either the [Go version](https://trzsz.github.io/go) ( ⭐ Recommended ), [Py version](https://trzsz.github.io/), or [Js version](https://trzsz.github.io/js)._
 
 _If trzsz is not installed on the server, you can still use `tssh`, but can't use `trz / tsz` for uploading and downloading._
 

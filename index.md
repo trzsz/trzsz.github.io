@@ -23,6 +23,7 @@ In this case, `lrzsz` ( rz / sz ) is convenient to use, but unfortunately it's n
 
 - Support **tmux**, including tmux normal mode, and tmux command mode integrated with iTerm2.
 - Support **transfer directories**, `trz -d` to upload directories, `tsz -d xxx` to download xxx directories.
+- Support **breakpoint resume**, `trz -y` or `tsz -y xxx` overwrite exiting files will auto resume from breakpoint.
 - Support **Windows server**, not only can run on Windows client, but also can run on Windows ssh server.
 - Support **native terminal**, does not require terminal to support, just use `trzsz ssh x.x.x.x` to login.
 - Support **web terminal**, transfer files and directories between local and remote servers over the web.

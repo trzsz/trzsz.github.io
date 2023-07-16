@@ -23,6 +23,7 @@ GitHub: [https://github.com/trzsz/trzsz](https://github.com/trzsz/trzsz)
 
 - 支持 **tmux**，包括 tmux 普通模式，以及与 iTerm2 集成的 tmux 命令模式。
 - 支持 **传输目录**，`trz -d` 命令上传目录，`tsz -d xxx` 命令下载 xxx 目录。
+- 支持 **断点续传**，`trz -y` 或 `tsz -y xxx` 覆盖目标文件会自动进行断点续传。
 - 支持 **Windows**，不仅可在 Windows 客户端使用，也可在 Windows ssh 服务器使用。
 - 支持 **原生终端**，不需要原生终端做支持，只要使用 `trzsz ssh x.x.x.x` 登录即可。
 - 支持 **web 终端**，通过 web 浏览器在本地与服务器之间传输目录和文件。
