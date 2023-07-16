@@ -27,7 +27,9 @@ _On the author's MacOS, the upload speed using `trzsz ssh` is about 10 MB/s, whi
 
 **_Here is how to install `trzsz-ssh (tssh)` on the client side (choose one):_**
 
-- Install with [scoop](https://scoop.sh/) on Windows<details><summary><code>scoop install tssh</code></summary>
+- Install with [scoop](https://scoop.sh/) on Windows
+
+  <details><summary><code>scoop install tssh</code></summary>
 
   ```sh
   scoop bucket add extras
@@ -37,7 +39,9 @@ _On the author's MacOS, the upload speed using `trzsz ssh` is about 10 MB/s, whi
 
   </details>
 
-- Install with [homebrew](https://brew.sh/) on MacOS<details><summary><code>brew install trzsz-ssh</code></summary>
+- Install with [homebrew](https://brew.sh/) on MacOS
+
+  <details><summary><code>brew install trzsz-ssh</code></summary>
 
   ```sh
   brew update
@@ -46,7 +50,9 @@ _On the author's MacOS, the upload speed using `trzsz ssh` is about 10 MB/s, whi
 
   </details>
 
-- Install with apt on Ubuntu<details><summary><code>sudo apt install tssh</code></summary>
+- Install with apt on Ubuntu
+
+  <details><summary><code>sudo apt install tssh</code></summary>
 
   ```sh
   sudo apt update && sudo apt install software-properties-common
@@ -57,7 +63,9 @@ _On the author's MacOS, the upload speed using `trzsz ssh` is about 10 MB/s, whi
 
   </details>
 
-- Install with apt on Debian<details><summary><code>sudo apt install tssh</code></summary>
+- Install with apt on Debian
+
+  <details><summary><code>sudo apt install tssh</code></summary>
 
   ```sh
   sudo apt install curl gpg
@@ -72,7 +80,9 @@ _On the author's MacOS, the upload speed using `trzsz ssh` is about 10 MB/s, whi
 
   </details>
 
-- Install with yum on Linux<details><summary><code>sudo yum install tssh</code></summary>
+- Install with yum on Linux
+
+  <details><summary><code>sudo yum install tssh</code></summary>
 
   - Install with [gemfury](https://gemfury.com/) repository.
 
@@ -96,7 +106,9 @@ _On the author's MacOS, the upload speed using `trzsz ssh` is about 10 MB/s, whi
 
   </details>
 
-- Install with [yay](https://github.com/Jguer/yay) on ArchLinux<details><summary><code>yay -S tssh</code></summary>
+- Install with [yay](https://github.com/Jguer/yay) on ArchLinux
+
+  <details><summary><code>yay -S tssh</code></summary>
 
   ```sh
   yay -Syu
@@ -105,7 +117,9 @@ _On the author's MacOS, the upload speed using `trzsz ssh` is about 10 MB/s, whi
 
   </details>
 
-- Install with Go ( Requires go 1.20 or later )<details><summary><code>go install github.com/trzsz/trzsz-ssh/cmd/tssh@latest</code></summary>
+- Install with Go ( Requires go 1.20 or later )
+
+  <details><summary><code>go install github.com/trzsz/trzsz-ssh/cmd/tssh@latest</code></summary>
 
   ```sh
   go install github.com/trzsz/trzsz-ssh/cmd/tssh@latest
@@ -115,7 +129,9 @@ _On the author's MacOS, the upload speed using `trzsz ssh` is about 10 MB/s, whi
 
   </details>
 
-- Download from the [Releases](https://github.com/trzsz/trzsz-ssh/releases)<details><summary><code>Or build and install from the source code ( Requires go 1.20 or later )</code></summary>
+- Download from the [Releases](https://github.com/trzsz/trzsz-ssh/releases)
+
+  <details><summary><code>Or build and install from the source code ( Requires go 1.20 or later )</code></summary>
 
   ```sh
   git clone https://github.com/trzsz/trzsz-ssh.git

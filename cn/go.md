@@ -19,7 +19,9 @@ GitHub: [https://github.com/trzsz/trzsz-go](https://github.com/trzsz/trzsz-go)
 
 ## 安装方法
 
-- Ubuntu 可用 apt 安装<details><summary><code>sudo apt install trzsz</code></summary>
+- Ubuntu 可用 apt 安装
+
+  <details><summary><code>sudo apt install trzsz</code></summary>
 
   ```sh
   sudo apt update && sudo apt install software-properties-common
@@ -30,7 +32,9 @@ GitHub: [https://github.com/trzsz/trzsz-go](https://github.com/trzsz/trzsz-go)
 
   </details>
 
-- Debian 可用 apt 安装<details><summary><code>sudo apt install trzsz</code></summary>
+- Debian 可用 apt 安装
+
+  <details><summary><code>sudo apt install trzsz</code></summary>
 
   ```sh
   sudo apt install curl gpg
@@ -45,7 +49,9 @@ GitHub: [https://github.com/trzsz/trzsz-go](https://github.com/trzsz/trzsz-go)
 
   </details>
 
-- Linux 可用 yum 安装<details><summary><code>sudo yum install trzsz</code></summary>
+- Linux 可用 yum 安装
+
+  <details><summary><code>sudo yum install trzsz</code></summary>
 
   - 国内推荐使用 [wlnmp](https://www.wlnmp.com/install) 源，安装 trzsz 只需要添加 wlnmp 源（ 配置 epel 源不是必须的 ），以 CentOS 为例：
 
@@ -69,7 +75,9 @@ GitHub: [https://github.com/trzsz/trzsz-go](https://github.com/trzsz/trzsz-go)
 
   </details>
 
-- ArchLinux 可用 [yay](https://github.com/Jguer/yay) 安装<details><summary><code>yay -S trzsz</code></summary>
+- ArchLinux 可用 [yay](https://github.com/Jguer/yay) 安装
+
+  <details><summary><code>yay -S trzsz</code></summary>
 
   ```sh
   yay -Syu
@@ -78,7 +86,9 @@ GitHub: [https://github.com/trzsz/trzsz-go](https://github.com/trzsz/trzsz-go)
 
   </details>
 
-- MacOS 可用 [homebrew](https://brew.sh/) 安装<details><summary><code>brew install trzsz-go</code></summary>
+- MacOS 可用 [homebrew](https://brew.sh/) 安装
+
+  <details><summary><code>brew install trzsz-go</code></summary>
 
   ```sh
   brew update
@@ -87,7 +97,9 @@ GitHub: [https://github.com/trzsz/trzsz-go](https://github.com/trzsz/trzsz-go)
 
   </details>
 
-- Windows 可用 [scoop](https://scoop.sh/) 安装<details><summary><code>scoop install trzsz</code></summary>
+- Windows 可用 [scoop](https://scoop.sh/) 安装
+
+  <details><summary><code>scoop install trzsz</code></summary>
 
   ```sh
   scoop bucket add extras
@@ -97,7 +109,9 @@ GitHub: [https://github.com/trzsz/trzsz-go](https://github.com/trzsz/trzsz-go)
 
   </details>
 
-- 用 Go 直接安装（ 要求 go 1.20 以上 ）<details><summary><code>go install github.com/trzsz/trzsz-go/cmd/...@latest</code></summary>
+- 用 Go 直接安装（ 要求 go 1.20 以上 ）
+
+  <details><summary><code>go install github.com/trzsz/trzsz-go/cmd/...@latest</code></summary>
 
   ```sh
   go install github.com/trzsz/trzsz-go/cmd/trz@latest
@@ -109,7 +123,9 @@ GitHub: [https://github.com/trzsz/trzsz-go](https://github.com/trzsz/trzsz-go)
 
   </details>
 
-- 可从 [Releases](https://github.com/trzsz/trzsz-go/releases) 中直接下载适用的版本<details><summary><code>或者用 Go 编译（ 要求 go 1.20 以上 ）</code></summary>
+- 可从 [Releases](https://github.com/trzsz/trzsz-go/releases) 中直接下载适用的版本
+
+  <details><summary><code>或者用 Go 编译（ 要求 go 1.20 以上 ）</code></summary>
 
   ```sh
   git clone https://github.com/trzsz/trzsz-go.git

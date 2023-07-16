@@ -2,5 +2,6 @@ description: <span>trzsz is a simple file transfer tools,</span> <span>which sim
 theme: jekyll-theme-cayman
 plugins:
   - jekyll-seo-tag
+markdown: CommonMarkGhPages
 google_measurement_id: G-9ZVEKX6BBN
 # google_ad_client: ca-pub-5588329234018540

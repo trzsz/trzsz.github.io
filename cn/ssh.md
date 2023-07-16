@@ -29,7 +29,9 @@ _在作者的 MacOS 上，使用 `trzsz ssh` 的上传速度在 10 MB/s 左右�
 
 **_客户端安装 `trzsz-ssh ( tssh )` 的方法如下（ 任选其一 ）：_**
 
-- Windows 可用 [scoop](https://scoop.sh/) 安装<details><summary><code>scoop install tssh</code></summary>
+- Windows 可用 [scoop](https://scoop.sh/) 安装
+
+  <details><summary><code>scoop install tssh</code></summary>
 
   ```sh
   scoop bucket add extras
@@ -39,7 +41,9 @@ _在作者的 MacOS 上，使用 `trzsz ssh` 的上传速度在 10 MB/s 左右�
 
   </details>
 
-- MacOS 可用 [homebrew](https://brew.sh/) 安装<details><summary><code>brew install trzsz-ssh</code></summary>
+- MacOS 可用 [homebrew](https://brew.sh/) 安装
+
+  <details><summary><code>brew install trzsz-ssh</code></summary>
 
   ```sh
   brew update
@@ -48,7 +52,9 @@ _在作者的 MacOS 上，使用 `trzsz ssh` 的上传速度在 10 MB/s 左右�
 
   </details>
 
-- Ubuntu 可用 apt 安装<details><summary><code>sudo apt install tssh</code></summary>
+- Ubuntu 可用 apt 安装
+
+  <details><summary><code>sudo apt install tssh</code></summary>
 
   ```sh
   sudo apt update && sudo apt install software-properties-common
@@ -59,7 +65,9 @@ _在作者的 MacOS 上，使用 `trzsz ssh` 的上传速度在 10 MB/s 左右�
 
   </details>
 
-- Debian 可用 apt 安装<details><summary><code>sudo apt install tssh</code></summary>
+- Debian 可用 apt 安装
+
+  <details><summary><code>sudo apt install tssh</code></summary>
 
   ```sh
   sudo apt install curl gpg
@@ -74,7 +82,9 @@ _在作者的 MacOS 上，使用 `trzsz ssh` 的上传速度在 10 MB/s 左右�
 
   </details>
 
-- Linux 可用 yum 安装<details><summary><code>sudo yum install tssh</code></summary>
+- Linux 可用 yum 安装
+
+  <details><summary><code>sudo yum install tssh</code></summary>
 
   - 国内推荐使用 [wlnmp](https://www.wlnmp.com/install) 源，安装 tssh 只需要添加 wlnmp 源（ 配置 epel 源不是必须的 ），以 CentOS 为例：
 
@@ -98,7 +108,9 @@ _在作者的 MacOS 上，使用 `trzsz ssh` 的上传速度在 10 MB/s 左右�
 
   </details>
 
-- ArchLinux 可用 [yay](https://github.com/Jguer/yay) 安装<details><summary><code>yay -S tssh</code></summary>
+- ArchLinux 可用 [yay](https://github.com/Jguer/yay) 安装
+
+  <details><summary><code>yay -S tssh</code></summary>
 
   ```sh
   yay -Syu
@@ -107,7 +119,9 @@ _在作者的 MacOS 上，使用 `trzsz ssh` 的上传速度在 10 MB/s 左右�
 
   </details>
 
-- 用 Go 直接安装（ 要求 go 1.20 以上 ）<details><summary><code>go install github.com/trzsz/trzsz-ssh/cmd/tssh@latest</code></summary>
+- 用 Go 直接安装（ 要求 go 1.20 以上 ）
+
+  <details><summary><code>go install github.com/trzsz/trzsz-ssh/cmd/tssh@latest</code></summary>
 
   ```sh
   go install github.com/trzsz/trzsz-ssh/cmd/tssh@latest
@@ -117,7 +131,9 @@ _在作者的 MacOS 上，使用 `trzsz ssh` 的上传速度在 10 MB/s 左右�
 
   </details>
 
-- 可从 [Releases](https://github.com/trzsz/trzsz-ssh/releases) 中直接下载适用的版本<details><summary><code>或者用 Go 编译（ 要求 go 1.20 以上 ）</code></summary>
+- 可从 [Releases](https://github.com/trzsz/trzsz-ssh/releases) 中直接下载适用的版本
+
+  <details><summary><code>或者用 Go 编译（ 要求 go 1.20 以上 ）</code></summary>
 
   ```sh
   git clone https://github.com/trzsz/trzsz-ssh.git

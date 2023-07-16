@@ -19,7 +19,9 @@ GitHub: [https://github.com/trzsz/trzsz-go](https://github.com/trzsz/trzsz-go) ã
 
 ## Installation
 
-- Install with apt on Ubuntu<details><summary><code>sudo apt install trzsz</code></summary>
+- Install with apt on Ubuntu
+
+  <details><summary><code>sudo apt install trzsz</code></summary>
 
   ```sh
   sudo apt update && sudo apt install software-properties-common
@@ -30,7 +32,9 @@ GitHub: [https://github.com/trzsz/trzsz-go](https://github.com/trzsz/trzsz-go) ã
 
   </details>
 
-- Install with apt on Debian<details><summary><code>sudo apt install trzsz</code></summary>
+- Install with apt on Debian
+
+  <details><summary><code>sudo apt install trzsz</code></summary>
 
   ```sh
   sudo apt install curl gpg
@@ -45,7 +49,9 @@ GitHub: [https://github.com/trzsz/trzsz-go](https://github.com/trzsz/trzsz-go) ã
 
   </details>
 
-- Install with yum on Linux<details><summary><code>sudo yum install trzsz</code></summary>
+- Install with yum on Linux
+
+  <details><summary><code>sudo yum install trzsz</code></summary>
 
   - Install with [gemfury](https://gemfury.com/) repository.
 
@@ -69,7 +75,9 @@ GitHub: [https://github.com/trzsz/trzsz-go](https://github.com/trzsz/trzsz-go) ã
 
   </details>
 
-- Install with [yay](https://github.com/Jguer/yay) on ArchLinux<details><summary><code>yay -S trzsz</code></summary>
+- Install with [yay](https://github.com/Jguer/yay) on ArchLinux
+
+  <details><summary><code>yay -S trzsz</code></summary>
 
   ```sh
   yay -Syu
@@ -78,7 +86,9 @@ GitHub: [https://github.com/trzsz/trzsz-go](https://github.com/trzsz/trzsz-go) ã
 
   </details>
 
-- Install with [homebrew](https://brew.sh/) on MacOS<details><summary><code>brew install trzsz-go</code></summary>
+- Install with [homebrew](https://brew.sh/) on MacOS
+
+  <details><summary><code>brew install trzsz-go</code></summary>
 
   ```sh
   brew update
@@ -87,7 +97,9 @@ GitHub: [https://github.com/trzsz/trzsz-go](https://github.com/trzsz/trzsz-go) ã
 
   </details>
 
-- Install with [scoop](https://scoop.sh/) on Windows<details><summary><code>scoop install trzsz</code></summary>
+- Install with [scoop](https://scoop.sh/) on Windows
+
+  <details><summary><code>scoop install trzsz</code></summary>
 
   ```sh
   scoop bucket add extras
@@ -97,7 +109,9 @@ GitHub: [https://github.com/trzsz/trzsz-go](https://github.com/trzsz/trzsz-go) ã
 
   </details>
 
-- Install with Go ( Requires go 1.20 or later )<details><summary><code>go install github.com/trzsz/trzsz-go/cmd/...@latest</code></summary>
+- Install with Go ( Requires go 1.20 or later )
+
+  <details><summary><code>go install github.com/trzsz/trzsz-go/cmd/...@latest</code></summary>
 
   ```sh
   go install github.com/trzsz/trzsz-go/cmd/trz@latest
@@ -109,7 +123,9 @@ GitHub: [https://github.com/trzsz/trzsz-go](https://github.com/trzsz/trzsz-go) ã
 
   </details>
 
-- Download from the [Releases](https://github.com/trzsz/trzsz-go/releases)<details><summary><code>Or build and install from the source code ( Requires go 1.20 or later )</code></summary>
+- Download from the [Releases](https://github.com/trzsz/trzsz-go/releases)
+
+  <details><summary><code>Or build and install from the source code ( Requires go 1.20 or later )</code></summary>
 
   ```sh
   git clone https://github.com/trzsz/trzsz-go.git
