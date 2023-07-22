@@ -15,11 +15,13 @@ GitHub: [https://github.com/trzsz/trzsz-ssh](https://github.com/trzsz/trzsz-ssh)
 
 Does your favorite ssh terminal have server management feature? Does it support remembering password? Does it have a cool file transfer tool?
 
-trzsz-ssh ( tssh ) supports selecting or searching servers configured in `~/.ssh/config`, supports vim operation habit, provides a server management solution.
+tssh supports selecting or searching servers configured in `~/.ssh/config`, supports vim operation habit, provides a server management solution.
 
-trzsz-ssh ( tssh ) supports configuring server login password, solves the trouble of entering password each time ( It's recommended to use the public key to login ).
+tssh supports selecting multiple servers, logging in to them in batches, and executing pre-specified commands in batches.
 
-trzsz-ssh ( tssh ) supports [trzsz](https://trzsz.github.io/) ( trz / tsz ) natively, solved the issue of slow upload speeds while using `trzsz ssh` in Windows.
+tssh supports configuring server login password, solves the trouble of entering password each time ( It's recommended to use the public key to login ).
+
+tssh supports [trzsz](https://trzsz.github.io/) ( trz / tsz ) natively, solved the issue of slow upload speeds while using `trzsz ssh` in Windows.
 
 _On the author's MacOS, the upload speed using `trzsz ssh` is about 10 MB/s, while using `tssh` can reach over 80 MB/s._
 
@@ -178,6 +180,21 @@ _`~/` represents the HOME directory. Please replace `~/` below with `C:\Users\yo
 
 - Execute the `tssh` command without arguments, you can select or search the configured servers in `~/.ssh/config` to log in.
 
+## Batch Login
+
+- tssh supports selecting multiple servers in `tmux` and `Windows Terminal`, logging in to them in batches, and executing pre-specified commands in batches.
+
+- Press `Space`, `Ctrl+Space` or `Alt+Space` to select or cancel the current server. If it cannot be selected, it means that the current terminal is not supported yet. Please run `tmux` first.
+
+- Press `Enter` or `Ctrl+P` to login in split panes, `Ctrl+W` will open new windows for batch login, and `Ctrl+T` will open new tabs for batch login.
+
+- Execute the `tssh` command without arguments, you can log in to servers in batches. And you can specify the commands to be executed in batches by `-o RemoteCommand`. And you can switch to an interactive shell after executing the specified command. `Windows Terminal` does not support semicolon `;`, you can use `|cat&&` instead. For example:
+
+  ```sh
+  tssh -t -o RemoteCommand='ping -c3 trzsz.github.io ; bash'
+  tssh -t -o RemoteCommand="ping -c3 trzsz.github.io |cat&& bash"
+  ```
+
 ## Remember Password
 
 - In order to be compatible with openssh, the password configuration is placed in `~/.ssh/password`.
@@ -223,7 +240,9 @@ _`~/` represents the HOME directory. Please replace `~/` below with `C:\Users\yo
 
 ## Screenshot
 
-![tssh screenshot](https://trzsz.github.io/images/tssh.gif)
+![tssh login demo](https://trzsz.github.io/images/tssh.gif)
+
+![tssh batch login](https://trzsz.github.io/images/batch_ssh.gif)
 
 ## Contact
 
