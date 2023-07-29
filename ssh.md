@@ -4,7 +4,7 @@ layout: default
 
 # Trzsz-ssh ( tssh ) Document
 
-A ssh client that supports [trzsz](https://trzsz.github.io/), supports selecting or searching servers for login, supports remember password.
+An ssh client that supports [trzsz](https://trzsz.github.io/), supports searching and selecting servers for batch login.
 
 GitHub: [https://github.com/trzsz/trzsz-ssh](https://github.com/trzsz/trzsz-ssh) 　中文文档：[https://trzsz.github.io/cn/ssh](https://trzsz.github.io/cn/ssh)
 
@@ -29,14 +29,21 @@ _On the author's MacOS, the upload speed using `trzsz ssh` is about 10 MB/s, whi
 
 **_Here is how to install `trzsz-ssh (tssh)` on the client side (choose one):_**
 
-- Install with [scoop](https://scoop.sh/) on Windows
+- Install with [scoop](https://scoop.sh/) / [winget](https://learn.microsoft.com/en-us/windows/package-manager/winget/) / [choco](https://community.chocolatey.org/) on Windows
 
-  <details><summary><code>scoop install tssh</code></summary>
+  <details><summary><code>scoop install tssh</code> / <code>winget install tssh</code> / <code>choco install tssh</code></summary>
 
   ```sh
   scoop bucket add extras
-  scoop update
   scoop install tssh
+  ```
+
+  ```sh
+  winget install tssh
+  ```
+
+  ```sh
+  choco install tssh
   ```
 
   </details>
@@ -237,6 +244,28 @@ _`~/` represents the HOME directory. Please replace `~/` below with `C:\Users\yo
       6e616d653a20 my_name  # The `6e616d653a20` is the hex code of `name: `
       636f64653a20 my_code  # The `636f64653a20` is the hex code of `code: `
   ```
+
+## Shortcuts
+
+| Action    | Global shortcuts                | Non search shortcuts | Shortcuts description      |
+| --------- | ------------------------------- | -------------------- | -------------------------- |
+| Confirm   | Enter                           |                      | Confirm and login          |
+| Quit/Exit | Ctrl+C Ctrl+Q                   | q Q                  | Cancel and quit            |
+| Move Prev | Ctrl+K Shift+Tab ↑              | k K                  | Move cursor up             |
+| Move Next | Ctrl+J Tab ↓                    | j J                  | Move cursor down           |
+| Page Up   | Ctrl+H Ctrl+U Ctrl+B PageUp ←   | h H u U b B          | Page up                    |
+| Page Down | Ctrl+L Ctrl+D Ctrl+F PageDown → | l L d D f F          | Page down                  |
+| Goto Home | Home                            | g                    | Go to the first item       |
+| Goto End  | End                             | G                    | Go to the last item        |
+| EraseKeys | Ctrl+E                          | e E                  | Erase search keywords      |
+| TglSearch | /                               |                      | Toggle search function     |
+| Tgl Help  | ?                               |                      | Toggle help information    |
+| TglSelect | Ctrl+X Ctrl+Space Alt+Space     | Space x X            | Toggle selection           |
+| SelectAll | Ctrl+A                          | a A                  | Select all current items   |
+| SelectOpp | Ctrl+O                          | o O                  | Select the opposite items  |
+| Open Wins | Ctrl+W                          | w W                  | Batch login in new windows |
+| Open Tabs | Ctrl+T                          | t T                  | Batch login in new tabs    |
+| Open Pane | Ctrl+P                          | p P                  | Batch login in new panes   |
 
 ## Screenshot
 
