@@ -34,7 +34,6 @@ _On the author's MacOS, the upload speed using `trzsz ssh` is about 10 MB/s, whi
   <details><summary><code>scoop install tssh</code> / <code>winget install tssh</code> / <code>choco install tssh</code></summary>
 
   ```sh
-  scoop bucket add extras
   scoop install tssh
   ```
 
