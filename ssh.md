@@ -190,9 +190,9 @@ _`~/` represents the HOME directory. Please replace `~/` below with `C:\Users\yo
 
 - tssh supports selecting multiple servers in `tmux` and `Windows Terminal`, logging in to them in batches, and executing pre-specified commands in batches.
 
-- Press `Space`, `Ctrl+Space` or `Alt+Space` to select or cancel the current server. If it cannot be selected, it means that the current terminal is not supported yet. Please run `tmux` first.
+- Press `Space`, `Ctrl+X` to toggle select the current server. If it cannot be selected, it means that the current terminal is not supported yet. Please run `tmux` first.
 
-- Press `Enter` or `Ctrl+P` to login in split panes, `Ctrl+W` will open new windows for batch login, and `Ctrl+T` will open new tabs for batch login.
+- Press `Ctrl+P` will split panes for batch login, `Ctrl+W` will open new windows for batch login, and `Ctrl+T` will open new tabs for batch login.
 
 - Execute the `tssh` command without arguments, you can log in to servers in batches. And you can specify the commands to be executed in batches by `-o RemoteCommand`. And you can switch to an interactive shell after executing the specified command. `Windows Terminal` does not support semicolon `;`, you can use `|cat&&` instead. For example:
 
@@ -276,7 +276,11 @@ _`~/` represents the HOME directory. Please replace `~/` below with `C:\Users\yo
 
 Feel free to email the author <lonnywong@qq.com>, or create an [issue](https://github.com/trzsz/trzsz-ssh/issues). Welcome to join the QQ group: 318578930.
 
+## Sponsor
+
 Want to buy the author a drink 🍺 ?
 
 ![sponsor wechat qrcode](https://trzsz.github.io/images/sponsor_wechat.jpg)
 ![sponsor alipay qrcode](https://trzsz.github.io/images/sponsor_alipay.jpg)
+
+Thanks [@mx4994](https://github.com/mx4994) .
