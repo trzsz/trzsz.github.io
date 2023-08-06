@@ -266,6 +266,12 @@ _`~/` represents the HOME directory. Please replace `~/` below with `C:\Users\yo
 | Open Tabs | Ctrl+T                          | t T                  | Batch login in new tabs    |
 | Open Pane | Ctrl+P                          | p P                  | Batch login in new panes   |
 
+## Trouble shooting
+
+- If you are using Windows7 or an older version of Windows10, and getting an error `enable virtual terminal failed`.
+
+  - Try using `tssh` in [Cygwin](https://www.cygwin.com/), [MSYS2](https://www.msys2.org/) or [Git Bash](https://www.atlassian.com/git/tutorials/git-bash).
+
 ## Screenshot
 
 ![tssh login demo](https://trzsz.github.io/images/tssh.gif)
