@@ -224,6 +224,24 @@ _`~/` represents the HOME directory. Please replace `~/` below with `C:\Users\yo
       Password 111111
   ```
 
+- Support remember `Passphrase` for private keys. If `IdentityFile` is configured in `~/.ssh/config`, use the same host alias for `Passphrase` in `~/.ssh/password`. If `IdentityFile` is not configured in `~/.ssh/config`, use the private key file name instead of the host alias. For example:
+
+  ```
+  # IdentityFile is configured for test1 in ~/.ssh/config
+  Host test1
+      IdentityFile /path/to/id_rsa
+  ```
+
+  ```
+  # Configure the Passphrase for test1 in ~/.ssh/password
+  Host test1
+      Passphrase 123456
+
+  # Configure the Passphrase for ~/.ssh/id_rsa in ~/.ssh/password
+  Host id_rsa
+      Passphrase 111111
+  ```
+
 ## Remember Answers
 
 - In addition, there is a keyboard interactive authentication. The server returns some questions, and log in by providing the correct answers. Many custom one-time passwords are implemented by it.
@@ -242,6 +260,24 @@ _`~/` represents the HOME directory. Please replace `~/` below with `C:\Users\yo
   Host test3
       6e616d653a20 my_name  # The `6e616d653a20` is the hex code of `name: `
       636f64653a20 my_code  # The `636f64653a20` is the hex code of `code: `
+  ```
+
+## Configuration
+
+- The following custom configurations are supported in `~/.tssh.conf` (`C:\Users\your_name\.tssh.conf` on Windows):
+
+  ```
+  # SSH configuration path, the default is ~/.ssh/config
+  ConfigPath = ~/.ssh/config
+
+  # Extended configuration path, the default is ~/.ssh/password
+  ExConfigPath = ~/.ssh/password
+
+  # The default path of the file dialog for trz uploading, the default is empty which opening the last path.
+  DefaultUploadPath = ~/Downloads
+
+  # The automatically save path for tsz downloading, the default is empty which poping up a folder dialog.
+  DefaultDownloadPath = ~/Downloads
   ```
 
 ## Shortcuts

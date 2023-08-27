@@ -227,6 +227,24 @@ _`~/` 代表 HOME 目录。在 Windows 中，请将下文的 `~/` 替换成 `C:\
       Password 111111
   ```
 
+- 支持记住私钥的`Passphrase`。如果 `~/.ssh/config` 中配置了 `IdentityFile`, 则使用相同的 Host 别名，在 `~/.ssh/password` 中配置对应的 `Passphrase`。如果 `~/.ssh/config` 中没有配置 `IdentityFile`，通用的私钥则使用私钥文件名代替 Host 别名。举例：
+
+  ```
+  # ~/.ssh/config 中 test1 配置了 IdentityFile
+  Host test1
+      IdentityFile /path/to/id_rsa
+  ```
+
+  ```
+  # ~/.ssh/password 中配置 test1 私钥对应的 Passphrase
+  Host test1
+      Passphrase 123456
+
+  # ~/.ssh/password 中配置通用私钥 ~/.ssh/id_rsa 对应的 Passphrase
+  Host id_rsa
+      Passphrase 111111
+  ```
+
 ## 记住答案
 
 - 除了私钥和密码，还有一种登录方式，英文叫 keyboard interactive ，是服务器返回一些问题，客户端提供正确的答案就能登录，很多自定义的一次性密码就是利用这种方式实现的。
@@ -245,6 +263,24 @@ _`~/` 代表 HOME 目录。在 Windows 中，请将下文的 `~/` 替换成 `C:\
   Host test3
       6e616d653a20 my_name  # 其中 `6e616d653a20` 是问题 `name: ` 的 hex 编码
       636f64653a20 my_code  # 其中 `636f64653a20` 是问题 `code: ` 的 hex 编码
+  ```
+
+## 可选配置
+
+- 支持在 `~/.tssh.conf`（ Windows 是 `C:\Users\your_name\.tssh.conf` ）中进行以下自定义配置：
+
+  ```
+  # SSH 配置路径，默认为 ~/.ssh/config
+  ConfigPath = ~/.ssh/config
+
+  # 扩展配置路径，默认为 ~/.ssh/password
+  ExConfigPath = ~/.ssh/password
+
+  # trz 上传时，对话框打开的路径，为空时打开上次的路径， 默认为空
+  DefaultUploadPath = ~/Downloads
+
+  # tsz 下载时，自动保存的路径，为空时弹出对话框手工选择，默认为空
+  DefaultDownloadPath = ~/Downloads
   ```
 
 ## 快捷键
