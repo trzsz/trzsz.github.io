@@ -188,7 +188,7 @@ _`~/` represents the HOME directory. Please replace `~/` below with `C:\Users\yo
 
 ## Batch Login
 
-- tssh supports selecting multiple servers in `tmux` and `Windows Terminal`, logging in to them in batches, and executing pre-specified commands in batches.
+- tssh supports selecting multiple servers in `iTerm2`( Requires [Python API](https://iterm2.com/python-api-auth.html), no need to `Allow all apps to connect` ),`tmux` and `Windows Terminal`, logging in to them in batches, and executing pre-specified commands in batches.
 
 - Press `Space`, `Ctrl+X` to toggle select the current server. If it cannot be selected, it means that the current terminal is not supported yet. Please run `tmux` first.
 
