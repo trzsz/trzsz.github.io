@@ -280,6 +280,34 @@ _`~/` represents the HOME directory. Please replace `~/` below with `C:\Users\yo
   DefaultDownloadPath = ~/Downloads
   ```
 
+## Other Features
+
+- Use `-f` to run in the background, you can also add `--reconnect`, it will automatically reconnect when the background process exits.
+
+- Use `--dragfile` to enable the drag and drop to upload feature. If you want to enable it by default, you can configure it in the `ExConfigPath` configuration file (default is `~/.ssh/password`):
+
+  ```
+  Host *
+    EnableDragFile Yes
+  ```
+
+- Use `-oEnableTrzsz=No` to disable the trzsz feature. If you want to disable it by default, you can configure it in the `ExConfigPath` configuration file (default is `~/.ssh/password`):
+
+  ```
+  Host server1
+    EnableTrzsz No
+  ```
+
+- For the "remember password" and "remember answer" mentioned above, add `enc` in front of the configuration item, you can configure the ciphertext to prevent people from snooping on the screen. Cipher text can solve the issue of passwords containing `#` too.
+
+  Run `tssh --enc-secret`, enter the plaintext of the password or answer (it will not be echoed), and you can get the ciphertext used for configuration (the same password will have different encryption results each time):
+
+  ```
+  Host server2
+    encPassword de88c4dbdc95d85303682734e2397c4d8dd29bfff09ec53580f31dd40291fc8c7755
+    encQuestionAnswer1 93956f6e7e9f2aef3af7d6a61f7046dddf14aa4bbd9845dbb836fe3782b62ac0d89f
+  ```
+
 ## Shortcuts
 
 | Action    | Global shortcuts                | Non search shortcuts | Shortcuts description      |
@@ -320,9 +348,4 @@ Feel free to email the author <lonnywong@qq.com>, or create an [issue](https://g
 
 ## Sponsor
 
-Want to buy the author a drink 🍺 ?
-
-![sponsor wechat qrcode](https://trzsz.github.io/images/sponsor_wechat.jpg)
-![sponsor alipay qrcode](https://trzsz.github.io/images/sponsor_alipay.jpg)
-
-Thanks [@mx4994](https://github.com/mx4994) .
+[❤️ Sponsor trzsz ❤️](https://github.com/trzsz), buy the author a drink 🍺 ? Thank you for your support!

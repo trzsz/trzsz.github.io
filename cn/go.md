@@ -241,9 +241,4 @@ DefaultDownloadPath = /Users/username/Downloads/
 
 ## 赞助打赏
 
-请作者喝一杯咖啡 ☕ ?
-
-![sponsor wechat qrcode](https://trzsz.github.io/images/sponsor_wechat.jpg)
-![sponsor alipay qrcode](https://trzsz.github.io/images/sponsor_alipay.jpg)
-
-感谢 [@BrightXiaoHan](https://github.com/BrightXiaoHan) [@pmzgit](https://github.com/pmzgit) ！
+[❤️ 赞助 trzsz ❤️](https://github.com/trzsz)，请作者喝杯咖啡 ☕ ? 谢谢您们的支持！
