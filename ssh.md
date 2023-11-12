@@ -332,6 +332,16 @@ _`~/` represents the HOME directory. Please replace `~/` below with `C:\Users\yo
 
 ## Trouble shooting
 
+- In the Warp terminal, the features like Blocks requires renaming `tssh` to `ssh`. It is recommended to create a soft link (friendly for updates):
+
+  ```
+  sudo ln -sv $(which tssh) /usr/local/bin/ssh
+  ```
+
+  - The `--dragfile` argument may disable the Warp features, please refer to the previous section to configure `EnableDragFile` to enable the drag and drop to upload feature.
+
+  - After dragging files and directories into the Warp terminal, the upload may not be triggered immediately. You need to press the Enter key once to make it upload.
+
 - If you are using Windows7 or an older version of Windows10, and getting an error `enable virtual terminal failed`.
 
   - Try using `tssh` in [Cygwin](https://www.cygwin.com/), [MSYS2](https://www.msys2.org/) or [Git Bash](https://www.atlassian.com/git/tutorials/git-bash).

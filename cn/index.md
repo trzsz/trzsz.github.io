@@ -135,12 +135,14 @@ tsz file1 file2 file3
 - 如果 `tmux` 是运行在本地电脑上。
 
   - 方案 1：使用 `tmux -CC` 与 iTerm2 集成，请参考 [iTerm2 与 tmux -CC 集成](https://trzsz.github.io/cn/tmuxcc)。
-  - 方案 2：在本地电脑上安装 [trzsz-go](https://github.com/trzsz/trzsz-go)，在 `tmux` 之后用 `trzsz ssh` 登录。
+  - 方案 2：在本地电脑上安装 [trzsz-go](https://trzsz.github.io/cn/go)，在 `tmux` 之后用 `trzsz ssh` 登录。
+  - 方案 3：在本地电脑上安装 [trzsz-ssh](https://trzsz.github.io/cn/ssh)，在 `tmux` 之后用 `tssh` 登录。
 
 - 如果 `tmux` 是运行在跳板机上。
 
   - 方案 1：使用 `tmux -CC` 与 iTerm2 集成，请参考 [iTerm2 与 tmux -CC 集成](https://trzsz.github.io/cn/tmuxcc)。
-  - 方案 2：在跳板机上安装 [trzsz-go](https://github.com/trzsz/trzsz-go)，在 `tmux` 之后用 `trzsz -r ssh` 登录。
+  - 方案 2：在跳板机上安装 [trzsz-go](https://trzsz.github.io/cn/go)，在 `tmux` 之后用 `trzsz -r ssh` 登录。
+  - 方案 3：在跳板机上安装 [trzsz-ssh](https://trzsz.github.io/cn/ssh)，在 `tmux` 之后用 `tssh` 登录。
 
 - 如果出现了错误，且 `trzsz` 挂住不能动了：
 
