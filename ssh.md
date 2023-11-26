@@ -159,8 +159,9 @@ _If trzsz is not installed on the server, you can still use `tssh`, but can't us
 
 _`~/` represents the HOME directory. Please replace `~/` below with `C:\Users\your_name\` on Windows._
 
-- Generate a key pair on the client, generally stored in `~/.ssh/`:
+- Generate a key pair on the client, generally stored in `~/.ssh/` ( choose one of the following ):
 
+  - `ssh-keygen -t ed25519` generates a ED25519 key pair, private key `~/.ssh/id_ed25519`, public key `~/.ssh/id_ed25519.pub`.
   - `ssh-keygen -t rsa -b 4096` generates a RSA key pair, private key `~/.ssh/id_rsa`, public key `~/.ssh/id_rsa.pub`.
 
 - Append the public key to the `~/.ssh/authorized_keys` file on the server, and set the correct permissions:
@@ -201,9 +202,30 @@ _`~/` represents the HOME directory. Please replace `~/` below with `C:\Users\yo
   tssh -t -o RemoteCommand="ping -c3 trzsz.github.io |cat&& bash"
   ```
 
+## Group Labels
+
+- If there are a lot of servers, `GroupLabels` can be used to quickly find the target server when searching by `/`.
+
+- After press `/` and search for a group label, press `Enter` to lock it. You can search for another group label by pressing `/` again, and press `Enter` to lock it too.
+
+- In non-search mode, press `E` to erase the current search group labels. In search mode, press `Ctrl + E` to have the same effect.
+
+- Supports configuring multiple group labels separated by spaces in one `GroupLabels`. Supports configuring multiple `GroupLabels`.
+
+- Supports configuring group labels on multiple Host nodes in the form of wildcard \*, and `tssh` will summarize all the group labels.
+
+  ```
+  # The following testAA has group labels group1 group2 label3 label4 group5. Add `#!!` prefix to be compatible with openssh.
+  Host test*
+      #!! GroupLabels group1 group2
+      #!! GroupLabels label3
+  Host testAA
+      #!! GroupLabels label4 group5
+  ```
+
 ## Remember Password
 
-- In order to be compatible with openssh, the password configuration is placed in `~/.ssh/password`.
+- In order to be compatible with openssh, the password can be configured separately in `~/.ssh/password`, or you can add `#!!` prefix in `~/.ssh/config`.
 
 - It's recommended to use the public key authentication. If you have to use the password authentication, it's recommended to set the permissions of `~/.ssh/password`:
 
@@ -211,9 +233,14 @@ _`~/` represents the HOME directory. Please replace `~/` below with `C:\Users\yo
   chmod 700 ~/.ssh && chmod 600 ~/.ssh/password
   ```
 
-- The following `~/.ssh/password` configuration represents the alias `test2`'s password is `123456`, and other aliases starting with `test`'s password are `111111`:
+- The passwords configured below for `test1` and `test2` are `123456`, and the passwords for other aliases starting with `test` are `111111`:
 
   ```
+  # If configured in ~/.ssh/config, you can add `#!!` prefix to be compatible with openssh.
+  Host test1
+      #!! Password 123456
+
+  # If configured in ~/.ssh/password, there is no need to consider whether it's compatible with openssh.
   Host test2
       Password 123456
 
@@ -224,20 +251,20 @@ _`~/` represents the HOME directory. Please replace `~/` below with `C:\Users\yo
       Password 111111
   ```
 
-- Support remember `Passphrase` for private keys. If `IdentityFile` is configured in `~/.ssh/config`, use the same host alias for `Passphrase` in `~/.ssh/password`. If `IdentityFile` is not configured in `~/.ssh/config`, use the private key file name instead of the host alias. For example:
+- Support remember `Passphrase` for private keys ( It's recommended to use `ssh-agent` ). Support configuring `Passphrase` together with `IdentityFile`. Support configuring `Passphrase` using private key filename instead of host alias. For example:
 
   ```
-  # IdentityFile is configured for test1 in ~/.ssh/config
+  # Configuring Passphrase together with IdentityFile. Add `#!!` prefix to be compatible with openssh.
   Host test1
       IdentityFile /path/to/id_rsa
-  ```
+      #!! Passphrase 123456
 
-  ```
-  # Configure the Passphrase for test1 in ~/.ssh/password
-  Host test1
-      Passphrase 123456
+  # Configure the Passphrase corresponding to the private key ~/.ssh/id_ed25519 in ~/.ssh/config
+  # The wildcard * can be added to prevent the filename from appearing in the tssh server list.
+  Host id_ed25519*
+      #!! Passphrase 111111
 
-  # Configure the Passphrase for ~/.ssh/id_rsa in ~/.ssh/password
+  # If configured in ~/.ssh/password, the wildcard * is not required and will not appear in the server list.
   Host id_rsa
       Passphrase 111111
   ```
@@ -246,11 +273,12 @@ _`~/` represents the HOME directory. Please replace `~/` below with `C:\Users\yo
 
 - In addition, there is a keyboard interactive authentication. The server returns some questions, and log in by providing the correct answers. Many custom one-time passwords are implemented by it.
 
-- If the answers are fixed, `tssh` supports remember answers, also configured in `~/.ssh/password`. Most have only one question, just configure `QuestionAnswer1`. For those with multiple questions, the answer to each question can be configured by serial number, or by the hex code of the question.
+- If the answers are fixed, `tssh` supports remember answers. Most have only one question, just configure `QuestionAnswer1`. For those with multiple questions, the answer to each question can be configured by serial number, or by the hex code of the question.
 
 - Use `tssh --debug` to log in, and the hex code of the questions will be output, so that you will know how to configure with the hex code. For example:
 
   ```
+  # If configured in ~/.ssh/config, add `#!!` prefix to be compatible with openssh.
   Host test1
       QuestionAnswer1 TheAnswer1
   Host test2
@@ -278,23 +306,28 @@ _`~/` represents the HOME directory. Please replace `~/` below with `C:\Users\yo
 
   # The automatically save path for tsz downloading, the default is empty which poping up a folder dialog.
   DefaultDownloadPath = ~/Downloads
+
+  # When tssh searches and selects a server, the number of records displayed on each page, the default is 10.
+  PromptPageSize = 10
   ```
 
 ## Other Features
 
 - Use `-f` to run in the background, you can also add `--reconnect`, it will automatically reconnect when the background process exits.
 
-- Use `--dragfile` to enable the drag and drop to upload feature. If you want to enable it by default, you can configure it in the `ExConfigPath` configuration file (default is `~/.ssh/password`):
+- Use `--dragfile` to enable the drag and drop to upload feature. If you want to enable it by default, you can configure it in `~/.ssh/config` or in the extended configuration `ExConfigPath`:
 
   ```
   Host *
+    # If configured in ~/.ssh/config, add `#!!` prefix to be compatible with openssh.
     EnableDragFile Yes
   ```
 
-- Use `-oEnableTrzsz=No` to disable the trzsz feature. If you want to disable it by default, you can configure it in the `ExConfigPath` configuration file (default is `~/.ssh/password`):
+- Use `-oEnableTrzsz=No` to disable the trzsz feature. If you want to disable it by default, you can configure it in `~/.ssh/config` or in the extended configuration `ExConfigPath`:
 
   ```
   Host server1
+    # If configured in ~/.ssh/config, add `#!!` prefix to be compatible with openssh.
     EnableTrzsz No
   ```
 
@@ -304,6 +337,7 @@ _`~/` represents the HOME directory. Please replace `~/` below with `C:\Users\yo
 
   ```
   Host server2
+    # If configured in ~/.ssh/config, add `#!!` prefix to be compatible with openssh.
     encPassword de88c4dbdc95d85303682734e2397c4d8dd29bfff09ec53580f31dd40291fc8c7755
     encQuestionAnswer1 93956f6e7e9f2aef3af7d6a61f7046dddf14aa4bbd9845dbb836fe3782b62ac0d89f
   ```
@@ -340,11 +374,15 @@ _`~/` represents the HOME directory. Please replace `~/` below with `C:\Users\yo
 
   - The `--dragfile` argument may disable the Warp features, please refer to the previous section to configure `EnableDragFile` to enable the drag and drop to upload feature.
 
-  - After dragging files and directories into the Warp terminal, the upload may not be triggered immediately. You need to press the Enter key once to make it upload.
+  - After dragging files and directories into the Warp terminal, the upload may not be triggered immediately. You need to press the `Enter` key once to make it upload.
 
 - If you are using Windows7 or an older version of Windows10, and getting an error `enable virtual terminal failed`.
 
   - Try using `tssh` in [Cygwin](https://www.cygwin.com/), [MSYS2](https://www.msys2.org/) or [Git Bash](https://www.atlassian.com/git/tutorials/git-bash).
+
+- If the `tssh` specific configuration items are configured in `~/.ssh/config`, and openssh report an error `Bad configuration option`.
+
+  - You can add `#!!` prefix to the items, openssh will treat it as a comment, while `tssh` will treat it as one of the valid configurations.
 
 ## Screenshot
 
