@@ -312,6 +312,9 @@ _`~/` 代表 HOME 目录。在 Windows 中，请将下文的 `~/` 替换成 `C:\
 
   # tssh 搜索和选择服务器时，每页显示的记录数，默认为 10
   PromptPageSize = 10
+
+  # tssh 搜索和选择服务器时，详情中显示的配置列表，默认如下：
+  PromptDetailItems = Alias Host Port User GroupLabels IdentityFile ProxyCommand ProxyJump RemoteCommand
   ```
 
 ## 其他功能
@@ -326,6 +329,18 @@ _`~/` 代表 HOME 目录。在 Windows 中，请将下文的 `~/` 替换成 `C:\
     EnableDragFile Yes
   ```
 
+- 使用 `--zmodem` 启用 `rz / sz` 功能，想默认启用则可以在 `~/.ssh/config` 或扩展配置 `ExConfigPath` 中配置：
+
+  ```
+  Host server0
+    # 如果配置在 ~/.ssh/config 中，可以加上 `#!!` 前缀，以兼容标准 ssh
+    EnableZmodem Yes
+  ```
+
+  - 需要在客户端（ 本地电脑 ）上安装 `lrzsz`，Windows 可以从 [lrzsz-win32](https://github.com/trzsz/lrzsz-win32/releases) 下载解压并加到 `PATH` 中。
+
+  - 关于进度条，己传文件大小和传输速度不是精确值，会比实际偏大一些，它的主要作用只是指示传输正在进行中。
+
 - 使用 `-oEnableTrzsz=No` 禁用 trzsz 功能，想默认禁用则可以在 `~/.ssh/config` 或扩展配置 `ExConfigPath` 中配置：
 
   ```
@@ -336,7 +351,7 @@ _`~/` 代表 HOME 目录。在 Windows 中，请将下文的 `~/` 替换成 `C:\
 
 - 上文说的“记住密码”和“记住答案”，只要在配置项前面加上 `enc` 则可以配置密文，防止被人窥屏。密文可以解决密码含有`#`的问题。
 
-  运行 `tssh --enc-secret`，输入密码或答案的明文（ 不会回显 ），可得到用于配置的密文（ 相同密码每次加密的结果不同 ）：
+  运行 `tssh --enc-secret`，输入密码或答案的明文，可得到用于配置的密文（ 相同密码每次加密的结果不同 ）：
 
   ```
   Host server2
@@ -344,6 +359,8 @@ _`~/` 代表 HOME 目录。在 Windows 中，请将下文的 `~/` 替换成 `C:\
     encPassword de88c4dbdc95d85303682734e2397c4d8dd29bfff09ec53580f31dd40291fc8c7755
     encQuestionAnswer1 93956f6e7e9f2aef3af7d6a61f7046dddf14aa4bbd9845dbb836fe3782b62ac0d89f
   ```
+
+- 运行 `tssh --new-host` 可以在 TUI 界面轻松添加 SSH 配置，并且完成后可以立即登录。
 
 ## 快捷键
 

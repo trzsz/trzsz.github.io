@@ -309,6 +309,9 @@ _`~/` represents the HOME directory. Please replace `~/` below with `C:\Users\yo
 
   # When tssh searches and selects a server, the number of records displayed on each page, the default is 10.
   PromptPageSize = 10
+
+  # When tssh searches and selects a server, the items displayed in details. The default is as follows:
+  PromptDetailItems = Alias Host Port User GroupLabels IdentityFile ProxyCommand ProxyJump RemoteCommand
   ```
 
 ## Other Features
@@ -323,6 +326,18 @@ _`~/` represents the HOME directory. Please replace `~/` below with `C:\Users\yo
     EnableDragFile Yes
   ```
 
+- Use `--zmodem` to enable the `rz / sz` feature. If you want to enable it by default, you can configure it in `~/.ssh/config` or in the extended configuration `ExConfigPath`:
+
+  ```
+  Host server0
+    # If configured in ~/.ssh/config, add `#!!` prefix to be compatible with openssh.
+    EnableZmodem Yes
+  ```
+
+  - `lrzsz` needs to be installed on the client ( local computer ). For Windows, you can download and unzip it from [lrzsz-win32](https://github.com/trzsz/lrzsz-win32/releases) and add it to `PATH`.
+
+  - About the progress, the transferred and speed are not precise. They generally appear larger than reality. It just indicating that the transfer is in progress.
+
 - Use `-oEnableTrzsz=No` to disable the trzsz feature. If you want to disable it by default, you can configure it in `~/.ssh/config` or in the extended configuration `ExConfigPath`:
 
   ```
@@ -333,7 +348,7 @@ _`~/` represents the HOME directory. Please replace `~/` below with `C:\Users\yo
 
 - For the "remember password" and "remember answer" mentioned above, add `enc` in front of the configuration item, you can configure the ciphertext to prevent people from snooping on the screen. Cipher text can solve the issue of passwords containing `#` too.
 
-  Run `tssh --enc-secret`, enter the plaintext of the password or answer (it will not be echoed), and you can get the ciphertext used for configuration (the same password will have different encryption results each time):
+  Run `tssh --enc-secret`, enter the plaintext of the password or answer, and you can get the ciphertext used for configuration (the same password will have different encryption results each time):
 
   ```
   Host server2
@@ -341,6 +356,8 @@ _`~/` represents the HOME directory. Please replace `~/` below with `C:\Users\yo
     encPassword de88c4dbdc95d85303682734e2397c4d8dd29bfff09ec53580f31dd40291fc8c7755
     encQuestionAnswer1 93956f6e7e9f2aef3af7d6a61f7046dddf14aa4bbd9845dbb836fe3782b62ac0d89f
   ```
+
+- Run `tssh --new-host` to easily add SSH configuration in the TUI interface, and you can log in immediately after completion.
 
 ## Shortcuts
 

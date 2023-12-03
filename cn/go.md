@@ -196,6 +196,16 @@ DefaultDownloadPath = /Users/username/Downloads/
 
 - 如果 `DefaultDownloadPath` 不为空，下载文件时会自动下载到此目录（ 不需要再弹窗选择路径 ）。
 
+## 支持 Zmodem
+
+- 使用 `-z` 或 `--zmodem` 启用 `rz / sz` 功能，例如 `trzsz -z ssh remote_server`。
+
+- 需要在客户端（ 本地电脑 ）上安装 `lrzsz`，例如 `brew install lrzsz`、`apt install lrzsz` 等。
+
+- `trzsz --zmodem ssh xxx` 不兼容 Windows，你可以使用 [trzsz-ssh ( tssh )](https://trzsz.github.io/cn/ssh) 代替，如 `tssh --zmodem xxx`。
+
+- 关于进度条，己传文件大小和传输速度不是精确值，会比实际偏大一些，它的主要作用只是指示传输正在进行中。
+
 ## 常见问题
 
 - 如果 [MSYS2](https://www.msys2.org/) 或 [Git Bash](https://www.atlassian.com/git/tutorials/git-bash) 遇到错误 `The handle is invalid`。
