@@ -342,7 +342,7 @@ _`~/` represents the HOME directory. Please replace `~/` below with `C:\Users\yo
   choco install lrzsz --version=0.12.21
   ```
 
-  - About the progress, the transferred and speed are not precise. They generally appear larger than reality. It just indicating that the transfer is in progress.
+  - About the progress, the transferred and speed are not precise, there will be some deviation. It just indicating that the transfer is in progress.
 
 - Use `-oEnableTrzsz=No` to disable the trzsz feature. If you want to disable it by default, you can configure it in `~/.ssh/config` or in the extended configuration `ExConfigPath`:
 

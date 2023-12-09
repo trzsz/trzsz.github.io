@@ -204,7 +204,7 @@ DefaultDownloadPath = /Users/username/Downloads/
 
 - `trzsz --zmodem ssh xxx` 不兼容 Windows，你可以使用 [trzsz-ssh ( tssh )](https://trzsz.github.io/cn/ssh) 代替，如 `tssh --zmodem xxx`。
 
-- 关于进度条，己传文件大小和传输速度不是精确值，会比实际偏大一些，它的主要作用只是指示传输正在进行中。
+- 关于进度条，己传文件大小和传输速度不是精确值，会有一些偏差，它的主要作用只是指示传输正在进行中。
 
 ## 常见问题
 
