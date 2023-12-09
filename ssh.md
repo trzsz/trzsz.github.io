@@ -104,10 +104,10 @@ _On the author's MacOS, the upload speed using `trzsz ssh` is about 10 MB/s, whi
     sudo yum install tssh
     ```
 
-  - Install with [wlnmp](https://www.wlnmp.com/install) repository. It's not necessary to configure the epel repository for tssh, take CentOS as an example:
+  - Install with [wlnmp](https://www.wlnmp.com/install) repository. It's not necessary to configure the epel repository for tssh.
 
     ```sh
-    sudo rpm -ivh https://mirrors.wlnmp.com/centos/wlnmp-release-centos.noarch.rpm
+    curl -fsSL "https://sh.wlnmp.com/wlnmp.sh" | bash
 
     sudo yum install tssh
     ```
@@ -334,7 +334,13 @@ _`~/` represents the HOME directory. Please replace `~/` below with `C:\Users\yo
     EnableZmodem Yes
   ```
 
-  - `lrzsz` needs to be installed on the client ( local computer ). For Windows, you can download and unzip it from [lrzsz-win32](https://github.com/trzsz/lrzsz-win32/releases) and add it to `PATH`.
+  - `lrzsz` needs to be installed on the client ( local computer ). For Windows, you can download and unzip it from [lrzsz-win32](https://github.com/trzsz/lrzsz-win32/releases) and add it to `PATH`, or install it as follows:
+
+  ```
+  scoop install https://trzsz.github.io/lrzsz.json
+
+  choco install lrzsz --version=0.12.21
+  ```
 
   - About the progress, the transferred and speed are not precise. They generally appear larger than reality. It just indicating that the transfer is in progress.
 
@@ -358,6 +364,8 @@ _`~/` represents the HOME directory. Please replace `~/` below with `C:\Users\yo
   ```
 
 - Run `tssh --new-host` to easily add SSH configuration in the TUI interface, and you can log in immediately after completion.
+
+- Run `tssh --install-trzsz` to install [trzsz](https://github.com/trzsz/trzsz-go) to the server's `~/.local/bin/` directory automatically. If obtaining the latest version of `trzsz` fails, you can specify it through `--trzsz-version x.x.x`. If downloading the `trzsz` installation package fails, you can download and specify it through `--trzsz-bin-path /path/to/trzsz.tar.gz`.
 
 ## Shortcuts
 

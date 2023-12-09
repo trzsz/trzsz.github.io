@@ -65,10 +65,10 @@ GitHub: [https://github.com/trzsz/trzsz-go](https://github.com/trzsz/trzsz-go) ã
     sudo yum install trzsz
     ```
 
-  - Install with [wlnmp](https://www.wlnmp.com/install) repository. It's not necessary to configure the epel repository for trzsz, take CentOS as an example:
+  - Install with [wlnmp](https://www.wlnmp.com/install) repository. It's not necessary to configure the epel repository for trzsz.
 
     ```sh
-    sudo rpm -ivh https://mirrors.wlnmp.com/centos/wlnmp-release-centos.noarch.rpm
+    curl -fsSL "https://sh.wlnmp.com/wlnmp.sh" | bash
 
     sudo yum install trzsz
     ```

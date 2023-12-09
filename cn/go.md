@@ -53,10 +53,10 @@ GitHub: [https://github.com/trzsz/trzsz-go](https://github.com/trzsz/trzsz-go)
 
   <details><summary><code>sudo yum install trzsz</code></summary>
 
-  - 国内推荐使用 [wlnmp](https://www.wlnmp.com/install) 源，安装 trzsz 只需要添加 wlnmp 源（ 配置 epel 源不是必须的 ），以 CentOS 为例：
+  - 国内推荐使用 [wlnmp](https://www.wlnmp.com/install) 源，安装 trzsz 只需要添加 wlnmp 源（ 配置 epel 源不是必须的 ）：
 
     ```sh
-    sudo rpm -ivh https://mirrors.wlnmp.com/centos/wlnmp-release-centos.noarch.rpm
+    curl -fsSL "https://sh.wlnmp.com/wlnmp.sh" | bash
 
     sudo yum install trzsz
     ```
