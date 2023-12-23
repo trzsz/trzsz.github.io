@@ -13,17 +13,17 @@ GitHub: [https://github.com/trzsz/trzsz-ssh](https://github.com/trzsz/trzsz-ssh)
 
 ## Introduce
 
-Does your favorite ssh terminal have server management feature? Does it support remembering password? Does it have a cool file transfer tool?
+- Does your favorite ssh terminal have server management feature? Does it support remembering password? Does it have a cool file transfer tool?
 
-tssh supports selecting or searching servers configured in `~/.ssh/config`, supports vim operation habit, provides a server management solution.
+- tssh supports selecting or searching servers configured in `~/.ssh/config`, supports vim operation habit, provides a server management solution.
 
-tssh supports selecting multiple servers, logging in to them in batches, and executing pre-specified commands in batches.
+- tssh supports selecting multiple servers, logging in to them in batches, and executing pre-specified commands in batches.
 
-tssh supports configuring server login password, solves the trouble of entering password each time ( It's recommended to use the public key to login ).
+- tssh supports configuring server login password, solves the trouble of entering password each time ( It's recommended to use the public key to login ).
 
-tssh supports [trzsz](https://trzsz.github.io/) ( trz / tsz ) natively, solved the issue of slow upload speeds while using `trzsz ssh` in Windows.
+- tssh supports [trzsz](https://trzsz.github.io/) ( trz / tsz ) natively, solved the issue of slow upload speeds while using `trzsz ssh` in Windows.
 
-_On the author's MacOS, the upload speed using `trzsz ssh` is about 10 MB/s, while using `tssh` can reach over 80 MB/s._
+- _On the author's MacOS, the upload speed using `trzsz ssh` is about 10 MB/s, while using `tssh` can reach over 80 MB/s._
 
 ## Installation
 
@@ -223,14 +223,39 @@ _`~/` represents the HOME directory. Please replace `~/` below with `C:\Users\yo
       #!! GroupLabels label4 group5
   ```
 
+## Automated Interaction
+
+- Supports automated interaction feature similar to `expect`. After logging into the server, it automatically matches the server's output and then enters input accordingly.
+
+  ```
+  Host auto
+      #!! ExpectCount 3  # Configures the number of automated interactions, default is 0 which means no automated interaction
+      #!! ExpectTimeout 30  # Configures the timeout for automated interaction (in seconds), default is 30 seconds
+      #!! ExpectPattern1 *assword  # Configures the first automated interaction match expression
+      # Configures the first automated input (encrypted). Fill in the string encoded by tssh --enc-secret, it will automatically send \r (enter)
+      #!! ExpectSendPass1 d7983b4a8ac204bd073ed04741913befd4fbf813ad405d7404cb7d779536f8b87e71106d7780b2
+      #!! ExpectPattern2 hostname*$  # Configures the second automated interaction match expression
+      #!! ExpectSendText2 echo tssh expect\r  # Configures the second automated input (plaintext), specify \r to send enter
+      # Choose either ExpectSendPass? or ExpectSendText? for each interaction; if both are configured, ExpectSendPass? has higher priority
+      # --------------------------------------------------
+      # Before each ExpectPattern match, one or multiple optional matches can be configured as follows:
+      #!! ExpectPattern3 hostname*$  # Configures the third automated interaction match expression
+      #!! ExpectSendText3 ssh xxx\r  # Configures the third automated input, can also use ExpectSendPass3 then configure with encrypted text
+      #!! ExpectCaseSendText3 yes/no y\r  # Before matching ExpectPattern3, if encountering yes/no, then send y and enter
+      #!! ExpectCaseSendText3 y/n yes\r   # Before matching ExpectPattern3, if encountering y/n, then send yes and enter
+      #!! ExpectCaseSendPass3 token d7... # Before matching ExpectPattern3, if encountering token, then decode and send d7...
+  ```
+
+  - Use `tssh --debug` to log in, you can see the output captured by `expect`, as well as the interaction between its matching results and automated input.
+
 ## Remember Password
 
 - In order to be compatible with openssh, the password can be configured separately in `~/.ssh/password`, or you can add `#!!` prefix in `~/.ssh/config`.
 
-- It's recommended to use the public key authentication. If you have to use the password authentication, it's recommended to set the permissions of `~/.ssh/password`:
+- It's recommended to use the public key authentication. If you have to use the password authentication, it's recommended to set the permissions:
 
   ```sh
-  chmod 700 ~/.ssh && chmod 600 ~/.ssh/password
+  chmod 700 ~/.ssh && chmod 600 ~/.ssh/password ~/.ssh/config
   ```
 
 - The passwords configured below for `test1` and `test2` are `123456`, and the passwords for other aliases starting with `test` are `111111`:
@@ -238,17 +263,28 @@ _`~/` represents the HOME directory. Please replace `~/` below with `C:\Users\yo
   ```
   # If configured in ~/.ssh/config, you can add `#!!` prefix to be compatible with openssh.
   Host test1
-      #!! Password 123456
+      # The following ciphertext was generated by encoding `123456` with `tssh --enc-secret`.
+      #!! encPassword 756b17766f45bdc44c37f811db9990b0880318d5f00f6531b15e068ef1fde2666550
 
   # If configured in ~/.ssh/password, there is no need to consider whether it's compatible with openssh.
   Host test2
-      Password 123456
+      # The following ciphertext was generated by encoding `123456` with `tssh --enc-secret`.
+      encPassword 051a2f0fdc7d0d40794b845967df4c2d05b5eb0f25339021dc4e02a9d7620070654b
 
   # ~/.ssh/config and ~/.ssh/password support wildcards, and tssh will use the first matched value.
   # Here we want test2 to use a different password from other test*, so we put test* behind test2.
 
   Host test*
-      Password 111111
+      Password 111111  # supports plain text, but it is recommended to encrypt with `tssh --enc-secret`.
+  ```
+
+- - If `ControlMaster` multiplexing is enabled or using `Warp` terminal, you will need to use the `Automated Interaction` mentioned earlier to achieve remembering password. Please refer to the earlier `Automated Interaction` section, simply add a `Ctrl` prefix as follows:
+
+  ```
+  Host ctrl
+      #!! CtrlExpectCount 1  # Configure the number of automated interactions, generally only needing to enter the password once
+      #!! CtrlExpectPattern1 *assword    # Configure the matching expression for the password prompt
+      #!! CtrlExpectSendPass1 d7983b...  # Configure the password encoded by `tssh --enc-secret`
   ```
 
 - Support remember `Passphrase` for private keys ( It's recommended to use `ssh-agent` ). Support configuring `Passphrase` together with `IdentityFile`. Support configuring `Passphrase` using private key filename instead of host alias. For example:
@@ -257,16 +293,18 @@ _`~/` represents the HOME directory. Please replace `~/` below with `C:\Users\yo
   # Configuring Passphrase together with IdentityFile. Add `#!!` prefix to be compatible with openssh.
   Host test1
       IdentityFile /path/to/id_rsa
-      #!! Passphrase 123456
+      # The following ciphertext was generated by encoding `123456` with `tssh --enc-secret`.
+      #!! encPassphrase 6f419911555b0cdc84549ae791ef69f654118d734bb4351de7e83163726ef46d176a
 
   # Configure the Passphrase corresponding to the private key ~/.ssh/id_ed25519 in ~/.ssh/config
   # The wildcard * can be added to prevent the filename from appearing in the tssh server list.
   Host id_ed25519*
-      #!! Passphrase 111111
+      # The following ciphertext was generated by encoding `111111` with `tssh --enc-secret`.
+      #!! encPassphrase 3a929328f2ab1be0ba3fccf29e8125f8e2dac6dab73c946605cf0bb8060b05f02a68
 
   # If configured in ~/.ssh/password, the wildcard * is not required and will not appear in the server list.
   Host id_rsa
-      Passphrase 111111
+      Passphrase 111111  # supports plain text, but it is recommended to encrypt with `tssh --enc-secret`.
   ```
 
 ## Remember Answers
@@ -280,15 +318,21 @@ _`~/` represents the HOME directory. Please replace `~/` below with `C:\Users\yo
   ```
   # If configured in ~/.ssh/config, add `#!!` prefix to be compatible with openssh.
   Host test1
-      QuestionAnswer1 TheAnswer1
+      # The following ciphertext was generated by encoding `TheAnswer1` with `tssh --enc-secret`.
+      encQuestionAnswer1 4f6b79d0e4e48fc56ee29c61bd19559a322cd07f7d27f2a7f33978671be1b522d549252b22ee
   Host test2
-      QuestionAnswer1 TheAnswer1
-      QuestionAnswer2 TheAnswer2
+      # The following ciphertext was generated by encoding `TheAnswer1` with `tssh --enc-secret`.
+      encQuestionAnswer1 09d6936c104f7bbd62e3b4dc43d746496a368776b85d37b1ce8cecc2ace1b920af0ca5a1812b
+      QuestionAnswer2 TheAnswer2  # supports plain text, but it is recommended to encrypt with `tssh --enc-secret`.
       QuestionAnswer3 TheAnswer3
   Host test3
-      6e616d653a20 my_name  # The `6e616d653a20` is the hex code of `name: `
-      636f64653a20 my_code  # The `636f64653a20` is the hex code of `code: `
+      # The `6e616d653a20` is the hex code of `name: `, the `enc` prefix indicates that it's ciphertext.
+      # The following ciphertext was generated by encoding `my_name` with `tssh --enc-secret`.
+      enc6e616d653a20 775f2523ab747384e1661aba7779011cb754b73f2e947672c7fd109607b801d70902d1
+      636f64653a20 my_code  # The `636f64653a20` is the hex code of `code: `, `my_code` is plain answer.
   ```
+
+- If `ControlMaster` multiplexing is enabled or using `Warp` terminal, you will need to use the `Automated Interaction` mentioned earlier to achieve remembering answers.
 
 ## Configuration
 
@@ -310,13 +354,19 @@ _`~/` represents the HOME directory. Please replace `~/` below with `C:\Users\yo
   # When tssh searches and selects a server, the number of records displayed on each page, the default is 10.
   PromptPageSize = 10
 
+  # When tssh searches and selects a server, default is normal mode similar to vim. Configure to search mode as follows:
+  PromptDefaultMode = search
+
   # When tssh searches and selects a server, the items displayed in details. The default is as follows:
   PromptDetailItems = Alias Host Port User GroupLabels IdentityFile ProxyCommand ProxyJump RemoteCommand
+
+  # Auto set terminal title after login. It will not be reset after exiting. Please set PROMPT_COMMAND in local shell.
+  SetTerminalTitle = Yes
   ```
 
 ## Other Features
 
-- Use `-f` to run in the background, you can also add `--reconnect`, it will automatically reconnect when the background process exits.
+- Use `-f` to run in the background, you can add `--reconnect`, it will automatically reconnect when the background process exits.
 
 - Use `--dragfile` to enable the drag and drop to upload feature. If you want to enable it by default, you can configure it in `~/.ssh/config` or in the extended configuration `ExConfigPath`:
 
@@ -336,13 +386,13 @@ _`~/` represents the HOME directory. Please replace `~/` below with `C:\Users\yo
 
   - `lrzsz` needs to be installed on the client ( local computer ). For Windows, you can download and unzip it from [lrzsz-win32](https://github.com/trzsz/lrzsz-win32/releases) and add it to `PATH`, or install it as follows:
 
-  ```
-  scoop install https://trzsz.github.io/lrzsz.json
+    ```
+    scoop install https://trzsz.github.io/lrzsz.json
 
-  choco install lrzsz --version=0.12.21
-  ```
+    choco install lrzsz --version=0.12.21
+    ```
 
-  - About the progress, the transferred and speed are not precise, there will be some deviation. It just indicating that the transfer is in progress.
+  - About the progress, the transferred and speed are not precise. It just indicating that the transfer is in progress.
 
 - Use `-oEnableTrzsz=No` to disable the trzsz feature. If you want to disable it by default, you can configure it in `~/.ssh/config` or in the extended configuration `ExConfigPath`:
 
@@ -365,7 +415,26 @@ _`~/` represents the HOME directory. Please replace `~/` below with `C:\Users\yo
 
 - Run `tssh --new-host` to easily add SSH configuration in the TUI interface, and you can log in immediately after completion.
 
-- Run `tssh --install-trzsz` to install [trzsz](https://github.com/trzsz/trzsz-go) to the server's `~/.local/bin/` directory automatically. If obtaining the latest version of `trzsz` fails, you can specify it through `--trzsz-version x.x.x`. If downloading the `trzsz` installation package fails, you can download and specify it through `--trzsz-bin-path /path/to/trzsz.tar.gz`.
+- Run `tssh --install-trzsz` to install [trzsz](https://github.com/trzsz/trzsz-go) to the server automatically.
+
+  - It is installed to the `~/.local/bin/` directory by default. You can specify the installation directory through `--install-path /path/to/install`.
+  - If the `--install-path` installation directory contains `~/`, single quotes must be added, such as `--install-path '~/path'`.
+  - If obtaining the latest version of `trzsz` fails, you can specify it through `--trzsz-version x.x.x`.
+  - If downloading the `trzsz` installation package fails, you can download and specify it through `--trzsz-bin-path /path/to/trzsz.tar.gz`.
+  - Note: `--install-trzsz` does not support Windows server, and does not support jump server (unless using `ProxyJump`).
+
+- About changing the terminal title, it can be achieved without `tssh`. It only needs to be configured in the server's shell configuration file (such as `~/.bashrc`):
+
+  ```sh
+  # Set fixed server title
+  PROMPT_COMMAND='echo -ne "\033]0;Fixed server title\007"'
+
+  # Dynamically changing title based on environment variables
+  PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD}\007"'
+  ```
+
+  - If `SetTerminalTitle = Yes` is set in `~/.tssh.conf`, the terminal title is automatically set after login, but `PROMPT_COMMAND` on the server overrides the title set by `tssh`.
+  - `tssh` does not reset to the original title after exiting, you need to set `PROMPT_COMMAND` in the local shell so that it overrides the title set by `tssh`.
 
 ## Shortcuts
 
@@ -396,6 +465,10 @@ _`~/` represents the HOME directory. Please replace `~/` below with `C:\Users\yo
   ```
   sudo ln -sv $(which tssh) /usr/local/bin/ssh
   ```
+
+  - After the soft link, `ssh -V` should output `trzsz ssh` plus the version number. If not, it means that the soft link is unsuccessful, or `openssh` has a higher priority in `PATH`, and you need to soft link to another path or adjust the priority of `PATH`.
+
+  - After the soft link, you need to use `ssh` directly, which is equivalent to `tssh`. If you still use `tssh`, it will not support the Blocks feature.
 
   - The `--dragfile` argument may disable the Warp features, please refer to the previous section to configure `EnableDragFile` to enable the drag and drop to upload feature.
 

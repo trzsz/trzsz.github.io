@@ -15,17 +15,17 @@ GitHub: [https://github.com/trzsz/trzsz-ssh](https://github.com/trzsz/trzsz-ssh)
 
 ## tssh 简介
 
-你喜欢的 ssh 终端是否有好用的服务器管理功能？是否支持记住密码？是否有好用的文件传输工具？
+- 你喜欢的 ssh 终端是否有好用的服务器管理功能？是否支持记住密码？是否有好用的文件传输工具？
 
-tssh 支持选择或搜索 `~/.ssh/config` 中配置的服务器，支持 vim 操作习惯，解决 ssh 终端的服务器管理问题。
+- tssh 支持选择或搜索 `~/.ssh/config` 中配置的服务器，支持 vim 操作习惯，解决 ssh 终端的服务器管理问题。
 
-tssh 支持一次选择多台服务器，批量登录，并支持批量执行预先指定的命令，方便快速完成批量服务器操作。
+- tssh 支持一次选择多台服务器，批量登录，并支持批量执行预先指定的命令，方便快速完成批量服务器操作。
 
-tssh 支持配置服务器登录密码，解决每次手工输入密码的麻烦（ 在自己能控制的服务器，推荐使用公私钥登录 ）。
+- tssh 支持配置服务器登录密码，解决每次手工输入密码的麻烦（ 在自己能控制的服务器，推荐使用公私钥登录 ）。
 
-tssh 内置支持 [trzsz](https://trzsz.github.io/cn/) ( trz / tsz ) 文件传输工具，一并解决了 Windows 中使用 `trzsz ssh` 上传速度很慢的问题。
+- tssh 内置支持 [trzsz](https://trzsz.github.io/cn/) ( trz / tsz ) 文件传输工具，一并解决了 Windows 中使用 `trzsz ssh` 上传速度很慢的问题。
 
-_在作者的 MacOS 上，使用 `trzsz ssh` 的上传速度在 10 MB/s 左右，而使用 `tssh` 可以到 80 MB/s 以上。_
+- _在作者的 MacOS 上，使用 `trzsz ssh` 的上传速度在 10 MB/s 左右，而使用 `tssh` 可以到 80 MB/s 以上。_
 
 ## 安装方法
 
@@ -168,11 +168,11 @@ _`~/` 代表 HOME 目录。在 Windows 中，请将下文的 `~/` 替换成 `C:\
 
 - 登录服务器，将公钥（ 即前面生成密钥对时 `.pub` 后缀的文件内容 ）追加写入服务器上的 `~/.ssh/authorized_keys` 文件中。
 
-  一行代表一个客户端的公钥，注意 `~/.ssh/authorized_keys` 要设置正确的权限：
+  - 一行代表一个客户端的公钥，注意 `~/.ssh/authorized_keys` 要设置正确的权限：
 
-  ```sh
-  chmod 700 ~/.ssh && chmod 600 ~/.ssh/authorized_keys
-  ```
+    ```sh
+    chmod 700 ~/.ssh && chmod 600 ~/.ssh/authorized_keys
+    ```
 
 - 在客户端配置好 `~/.ssh/config` 文件，举例：
 
@@ -227,14 +227,39 @@ _`~/` 代表 HOME 目录。在 Windows 中，请将下文的 `~/` 替换成 `C:\
       #!! GroupLabels label4 group5
   ```
 
+## 自动交互
+
+- 支持类似 `expect` 的自动交互功能，可以在登录服务器之后，自动匹配服务器的输出，然后自动输入。
+
+  ```
+  Host auto
+      #!! ExpectCount 3  # 配置自动交互的次数，默认是 0 即无自动交互
+      #!! ExpectTimeout 30  # 配置自动交互的超时时间（单位：秒），默认是 30 秒
+      #!! ExpectPattern1 *assword  # 配置第一个自动交互的匹配表达式
+      # 配置第一个自动输入（密文），填 tssh --enc-secret 编码后的字符串，会自动发送 \r 回车
+      #!! ExpectSendPass1 d7983b4a8ac204bd073ed04741913befd4fbf813ad405d7404cb7d779536f8b87e71106d7780b2
+      #!! ExpectPattern2 hostname*$  # 配置第二个自动交互的匹配表达式
+      #!! ExpectSendText2 echo tssh expect\r  # 配置第二个自动输入（明文），需要指定 \r 才会发送回车
+      # 以上 ExpectSendPass? 和 ExpectSendText? 只要二选一即可，若都配置则 ExpectSendPass? 的优先级更高
+      # --------------------------------------------------
+      # 在每个 ExpectPattern 匹配之前，可以配置一个或多个可选的匹配，用法如下：
+      #!! ExpectPattern3 hostname*$  # 配置第三个自动交互的匹配表达式
+      #!! ExpectSendText3 ssh xxx\r  # 配置第三个自动输入，也可以换成 ExpectSendPass3 然后配置密文
+      #!! ExpectCaseSendText3 yes/no y\r  # 在 ExpectPattern3 匹配之前，若遇到 yes/no 则发送 y 并回车
+      #!! ExpectCaseSendText3 y/n yes\r   # 在 ExpectPattern3 匹配之前，若遇到 y/n 则发送 yes 并回车
+      #!! ExpectCaseSendPass3 token d7... # 在 ExpectPattern3 匹配之前，若遇到 token 则解码并发送 d7...
+  ```
+
+  - 使用 `tssh --debug` 登录，可以看到 `expect` 捕获到的输出，以及其匹配结果和自动输入的交互。
+
 ## 记住密码
 
 - 为了兼容标准 ssh ，密码可以单独配置在 `~/.ssh/password` 中，也可以在 `~/.ssh/config` 中加上 `#!!` 前缀。
 
-- 推荐使用前面密钥认证的方式，密码的安全性弱一些。如果必须要用密码，建议设置好 `~/.ssh/password` 的权限，如：
+- 推荐使用前面公钥认证的方式，密码的安全性弱一些。如果必须要用密码，建议至少设置好权限，如：
 
   ```sh
-  chmod 700 ~/.ssh && chmod 600 ~/.ssh/password
+  chmod 700 ~/.ssh && chmod 600 ~/.ssh/password ~/.ssh/config
   ```
 
 - 下面配置 `test1` 和 `test2` 的密码是 `123456`，其他以 `test` 开头的密码是 `111111`：
@@ -242,17 +267,28 @@ _`~/` 代表 HOME 目录。在 Windows 中，请将下文的 `~/` 替换成 `C:\
   ```
   # 如果配置在 ~/.ssh/config 中，可以加上 `#!!` 前缀，以兼容标准 ssh
   Host test1
-      #!! Password 123456
+      # 下面是运行 tssh --enc-secret 输入密码 123456 得到的密文串，每次运行结果不同。
+      #!! encPassword 756b17766f45bdc44c37f811db9990b0880318d5f00f6531b15e068ef1fde2666550
 
   # 如果配置在 ~/.ssh/password 中，则不需要考虑是否兼容标准 ssh
   Host test2
-      Password 123456
+      # 下面是运行 tssh --enc-secret 输入密码 123456 得到的密文串，每次运行结果不同。
+      encPassword 051a2f0fdc7d0d40794b845967df4c2d05b5eb0f25339021dc4e02a9d7620070654b
 
   # ~/.ssh/config 和 ~/.ssh/password 是支持通配符的，tssh 会使用第一个匹配到的值。
   # 这里希望 test2 使用区别于其他 test* 的密码，所以将 test* 放在了 test2 的后面。
 
   Host test*
-      Password 111111
+      Password 111111  # 支持明文密码，但是推荐使用 tssh --enc-secret 简单加密一下。
+  ```
+
+- 如果启用了 `ControlMaster` 多路复用，或者是在 `Warp` 终端，需要使用前面 `自动交互` 的方式实现记住密码的效果。配置方式请参考前面 `自动交互`，加上 `Ctrl` 前缀即可，如：
+
+  ```
+  Host ctrl
+      #!! CtrlExpectCount 1  # 配置自动交互的次数，一般只要输入一次密码
+      #!! CtrlExpectPattern1 *assword    # 配置密码提示语的匹配表达式
+      #!! CtrlExpectSendPass1 d7983b...  # 配置 tssh --enc-secret 编码后的密码
   ```
 
 - 支持记住私钥的`Passphrase`（ 推荐使用 `ssh-agent` ）。支持与 `IdentityFile` 一起配置, 支持使用私钥文件名代替 Host 别名设置通用密钥的 `Passphrase`。举例：
@@ -261,16 +297,18 @@ _`~/` 代表 HOME 目录。在 Windows 中，请将下文的 `~/` 替换成 `C:\
   # IdentityFile 和 Passphrase 一起配置，可以加上 `#!!` 前缀，以兼容标准 ssh
   Host test1
       IdentityFile /path/to/id_rsa
-      #!! Passphrase 123456
+      # 下面是运行 tssh --enc-secret 输入密码 123456 得到的密文串，每次运行结果不同。
+      #!! encPassphrase 6f419911555b0cdc84549ae791ef69f654118d734bb4351de7e83163726ef46d176a
 
   # 在 ~/.ssh/config 中配置通用私钥 ~/.ssh/id_ed25519 对应的 Passphrase
   # 可以加上通配符 * 以避免 tssh 搜索和选择时，文件名出现在服务器列表中。
   Host id_ed25519*
-      #!! Passphrase 111111
+      # 下面是运行 tssh --enc-secret 输入密码 111111 得到的密文串，每次运行结果不同。
+      #!! encPassphrase 3a929328f2ab1be0ba3fccf29e8125f8e2dac6dab73c946605cf0bb8060b05f02a68
 
   # 在 ~/.ssh/password 中配置则不需要通配符*，也不会出现在服务器列表中。
   Host id_rsa
-      Passphrase 111111
+      Passphrase 111111  # 支持明文密码，但是推荐使用 tssh --enc-secret 简单加密一下。
   ```
 
 ## 记住答案
@@ -284,15 +322,21 @@ _`~/` 代表 HOME 目录。在 Windows 中，请将下文的 `~/` 替换成 `C:\
   ```
   # 如果配置在 ~/.ssh/config 中，可以加上 `#!!` 前缀，以兼容标准 ssh
   Host test1
-      QuestionAnswer1 答案一
+      # 下面是运行 tssh --enc-secret 输入答案 `答案一` 得到的密文串，每次运行结果不同。
+      encQuestionAnswer1 482de7690ccc5229299ccadd8de1cb7c6d842665f0dc92ff947a302f644817baecbab38601
   Host test2
-      QuestionAnswer1 答案一
-      QuestionAnswer2 答案二
+      # 下面是运行 tssh --enc-secret 输入答案 `答案一` 得到的密文串，每次运行结果不同。
+      encQuestionAnswer1 43e86f1140cf6d8c786248aad95a26f30633f1eab671676b0860ecb5b1a64fb3ec5212dddf
+      QuestionAnswer2 答案二  # 支持明文答案，但是推荐使用 tssh --enc-secret 简单加密一下。
       QuestionAnswer3 答案三
   Host test3
-      6e616d653a20 my_name  # 其中 `6e616d653a20` 是问题 `name: ` 的 hex 编码
-      636f64653a20 my_code  # 其中 `636f64653a20` 是问题 `code: ` 的 hex 编码
+      # 其中 `6e616d653a20` 是问题 `name: ` 的 hex 编码，`enc` 前缀代表配置的是密文串。
+      # 下面是运行 tssh --enc-secret 输入答案 `my_name` 得到的密文串，每次运行结果不同。
+      enc6e616d653a20 775f2523ab747384e1661aba7779011cb754b73f2e947672c7fd109607b801d70902d1
+      636f64653a20 my_code  # 其中 `636f64653a20` 是问题 `code: ` 的 hex 编码, `my_code` 是明文答案
   ```
+
+- 如果启用了 `ControlMaster` 多路复用，或者是在 `Warp` 终端，请参考前面 `自动交互` 加 `Ctrl` 前缀来实现。
 
 ## 可选配置
 
@@ -314,15 +358,21 @@ _`~/` 代表 HOME 目录。在 Windows 中，请将下文的 `~/` 替换成 `C:\
   # tssh 搜索和选择服务器时，每页显示的记录数，默认为 10
   PromptPageSize = 10
 
+  # tssh 搜索和选择服务器时，默认是类似 vim 的 normal 模式，想默认进入搜索模式可如下配置：
+  PromptDefaultMode = search
+
   # tssh 搜索和选择服务器时，详情中显示的配置列表，默认如下：
   PromptDetailItems = Alias Host Port User GroupLabels IdentityFile ProxyCommand ProxyJump RemoteCommand
+
+  # 登录后自动设置终端标题，退出后不会重置，你需要参考下文在本地 shell 中设置 PROMPT_COMMAND
+  SetTerminalTitle = Yes
   ```
 
 ## 其他功能
 
-- 使用 `-f` 后台运行时，可以一并加上 `--reconnect` 参数，这样在后台进程因连接断开等而退出时，会自动重新连接。
+- 使用 `-f` 后台运行时，可以加上 `--reconnect` 参数，在后台进程因连接断开等而退出时，会自动重新连接。
 
-- 使用 `--dragfile` 启用拖拽上传功能，想默认启用则可以在 `~/.ssh/config` 或扩展配置 `ExConfigPath` 中配置：
+- 使用 `--dragfile` 启用拖拽上传功能，想默认启用则可以在 `~/.ssh/config` 或 `ExConfigPath` 中配置：
 
   ```
   Host *
@@ -330,7 +380,7 @@ _`~/` 代表 HOME 目录。在 Windows 中，请将下文的 `~/` 替换成 `C:\
     EnableDragFile Yes
   ```
 
-- 使用 `--zmodem` 启用 `rz / sz` 功能，想默认启用则可以在 `~/.ssh/config` 或扩展配置 `ExConfigPath` 中配置：
+- 使用 `--zmodem` 启用 `rz / sz` 功能，想默认启用则可以在 `~/.ssh/config` 或 `ExConfigPath` 中配置：
 
   ```
   Host server0
@@ -340,15 +390,15 @@ _`~/` 代表 HOME 目录。在 Windows 中，请将下文的 `~/` 替换成 `C:\
 
   - 需要在客户端（ 本地电脑 ）上安装 `lrzsz`，Windows 可以从 [lrzsz-win32](https://github.com/trzsz/lrzsz-win32/releases) 下载解压并加到 `PATH` 中，也可以如下安装：
 
-  ```
-  scoop install https://trzsz.github.io/lrzsz.json
+    ```
+    scoop install https://trzsz.github.io/lrzsz.json
 
-  choco install lrzsz --version=0.12.21
-  ```
+    choco install lrzsz --version=0.12.21
+    ```
 
-  - 关于进度条，己传文件大小和传输速度不是精确值，会有一些偏差，它的主要作用只是指示传输正在进行中。
+  - 关于 `rz / sz` 进度条，己传大小和传输速度会有一点偏差，它的主要作用只是指示传输正在进行中。
 
-- 使用 `-oEnableTrzsz=No` 禁用 trzsz 功能，想默认禁用则可以在 `~/.ssh/config` 或扩展配置 `ExConfigPath` 中配置：
+- 使用 `-oEnableTrzsz=No` 禁用 trzsz 功能，想默认禁用则可以在 `~/.ssh/config` 或 `ExConfigPath` 中配置：
 
   ```
   Host server1
@@ -356,9 +406,9 @@ _`~/` 代表 HOME 目录。在 Windows 中，请将下文的 `~/` 替换成 `C:\
     EnableTrzsz No
   ```
 
-- 上文说的“记住密码”和“记住答案”，只要在配置项前面加上 `enc` 则可以配置密文，防止被人窥屏。密文可以解决密码含有`#`的问题。
+- 上文说的“记住密码”和“记住答案”，只要在配置项前面加上 `enc` 则可以配置密文，防止被人窥屏。并且，密文可以解决密码含有`#`的问题。
 
-  运行 `tssh --enc-secret`，输入密码或答案的明文，可得到用于配置的密文（ 相同密码每次加密的结果不同 ）：
+  - 运行 `tssh --enc-secret`，输入密码或答案，可得到用于配置的密文（ 相同密码每次运行结果不同 ）：
 
   ```
   Host server2
@@ -369,7 +419,26 @@ _`~/` 代表 HOME 目录。在 Windows 中，请将下文的 `~/` 替换成 `C:\
 
 - 运行 `tssh --new-host` 可以在 TUI 界面轻松添加 SSH 配置，并且完成后可以立即登录。
 
-- 运行 `tssh --install-trzsz` 可以自动安装 [trzsz](https://github.com/trzsz/trzsz-go) 到服务器的 `~/.local/bin/` 目录。若获取 `trzsz` 的最新版本号失败，可以通过 `--trzsz-version x.x.x` 参数自行指定。若下载 `trzsz` 的安装包失败，可以自行下载并通过 `--trzsz-bin-path /path/to/trzsz.tar.gz` 参数指定。
+- 运行 `tssh --install-trzsz` 可以将 [trzsz](https://github.com/trzsz/trzsz-go) ( `trz` / `tsz` ) 安装到服务器上。
+
+  - 默认安装到 `~/.local/bin/` 目录，可以通过 `--install-path /path/to/install` 指定安装目录。
+  - 若 `--install-path` 安装目录含有 `~/`，则必须加上单引号，如`--install-path '~/path'`。
+  - 若获取 `trzsz` 的最新版本号失败，可以通过 `--trzsz-version x.x.x` 参数自行指定。
+  - 若下载 `trzsz` 的安装包失败，可以自行下载并通过 `--trzsz-bin-path /path/to/trzsz.tar.gz` 参数指定。
+  - 注意：`--install-trzsz` 不支持 Windows 服务器，不支持跳板机（ 除非以 `ProxyJump` 跳过 ）。
+
+- 关于修改终端标题，其实无需 `tssh` 就能实现，只要在服务器的 shell 配置文件中（如`~/.bashrc`）配置：
+
+  ```sh
+  # 设置固定的服务器标题
+  PROMPT_COMMAND='echo -ne "\033]0;固定的服务器标题\007"'
+
+  # 根据环境变量动态变化的标题
+  PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD}\007"'
+  ```
+
+  - 如果在 `~/.tssh.conf` 中设置了 `SetTerminalTitle = Yes`，则会在登录后自动设置终端标题，但是服务器上的 `PROMPT_COMMAND` 会覆盖 `tssh` 设置的标题。
+  - 在 `tssh` 退出后不会重置为原来的标题，你需要在本地 shell 中设置 `PROMPT_COMMAND`，让它覆盖 `tssh` 设置的标题。
 
 ## 快捷键
 
@@ -400,6 +469,10 @@ _`~/` 代表 HOME 目录。在 Windows 中，请将下文的 `~/` 替换成 `C:\
   ```
   sudo ln -sv $(which tssh) /usr/local/bin/ssh
   ```
+
+  - 软链后，`ssh -V` 应输出 `trzsz ssh` 加版本号，如果不是，说明软链不成功，或者在 `PATH` 中 `openssh` 的优先级更高，你要软链到另一个地方或者调整 `PATH` 的优先级。
+
+  - 软链后，要直接使用 `ssh`，它等价于 `tssh`。如果还是用 `tssh` 是不会支持分块 Blocks 功能的。
 
   - `--dragfile` 参数可能会让 Warp 分块功能失效，请参考前文配置 `EnableDragFile` 来启用拖拽功能。
 
