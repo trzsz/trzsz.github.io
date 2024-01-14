@@ -139,18 +139,20 @@ GitHub: [https://github.com/trzsz/trzsz-ssh](https://github.com/trzsz/trzsz-ssh)
 
   </details>
 
-- 可从 [Releases](https://github.com/trzsz/trzsz-ssh/releases) 中直接下载适用的版本
+- 用 Go 自己编译（ 要求 go 1.20 以上 ）
 
-  <details><summary><code>或者用 Go 编译（ 要求 go 1.20 以上 ）</code></summary>
+  <details><summary><code>sudo make install</code></summary>
 
   ```sh
-  git clone https://github.com/trzsz/trzsz-ssh.git
+  git clone --depth 1 https://github.com/trzsz/trzsz-ssh.git
   cd trzsz-ssh
   make
   sudo make install
   ```
 
   </details>
+
+- 可从 [Releases](https://github.com/trzsz/trzsz-ssh/releases) 中直接下载适用的版本
 
 **_服务器上要安装 [trzsz](https://trzsz.github.io/cn/) 才能使用 `trz / tsz` 上传和下载，可任选其一安装：
 [Go 版](https://trzsz.github.io/cn/go)（ ⭐ 推荐 ）、[Py 版](https://trzsz.github.io/cn/)、[Js 版](https://trzsz.github.io/cn/js)。_**
@@ -420,9 +422,11 @@ _`~/` 代表 HOME 目录。在 Windows 中，请将下文的 `~/` 替换成 `C:\
   - 需要在客户端（ 本地电脑 ）上安装 `lrzsz`，Windows 可以从 [lrzsz-win32](https://github.com/trzsz/lrzsz-win32/releases) 下载解压并加到 `PATH` 中，也可以如下安装：
 
     ```
-    scoop install https://trzsz.github.io/lrzsz.json
+    scoop install lrzsz
+    ```
 
-    choco install lrzsz --version=0.12.21
+    ```
+    choco install lrzsz
     ```
 
   - 关于 `rz / sz` 进度条，己传大小和传输速度会有一点偏差，它的主要作用只是指示传输正在进行中。

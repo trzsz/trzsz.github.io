@@ -137,17 +137,20 @@ GitHub: [https://github.com/trzsz/trzsz-ssh](https://github.com/trzsz/trzsz-ssh)
 
   </details>
 
-- Download from the [Releases](https://github.com/trzsz/trzsz-ssh/releases)
+- Build from source ( Requires go 1.20 or later )
 
-  <details><summary><code>Or build and install from the source code ( Requires go 1.20 or later )</code></summary>
+  <details><summary><code>sudo make install</code></summary>
 
   ```sh
-  git clone https://github.com/trzsz/trzsz-ssh.git
+  git clone --depth 1 https://github.com/trzsz/trzsz-ssh.git
   cd trzsz-ssh
-  go build ./cmd/tssh
+  make
+  sudo make install
   ```
 
   </details>
+
+- Download from the [Releases](https://github.com/trzsz/trzsz-ssh/releases)
 
 **_[trzsz](https://trzsz.github.io/) needs to be installed on the server to use `trz / tsz` for uploading and downloading files._**
 
@@ -416,9 +419,11 @@ _`~/` represents the HOME directory. Please replace `~/` below with `C:\Users\yo
   - `lrzsz` needs to be installed on the client ( local computer ). For Windows, you can download and unzip it from [lrzsz-win32](https://github.com/trzsz/lrzsz-win32/releases) and add it to `PATH`, or install it as follows:
 
     ```
-    scoop install https://trzsz.github.io/lrzsz.json
+    scoop install lrzsz
+    ```
 
-    choco install lrzsz --version=0.12.21
+    ```
+    choco install lrzsz
     ```
 
   - About the progress, the transferred and speed are not precise. It just indicating that the transfer is in progress.
