@@ -1,15 +1,13 @@
 ---
 layout: default
+description: trzsz ( trz / tsz ) 是一个兼容 tmux 的文件传输工具，和 lrzsz ( rz / sz ) 类似，并且有进度条和支持目录传输。
 ---
 
 # Trzsz 中文文档
 
-`trzsz` ( trz / tsz ) 是一个兼容 tmux 的文件传输工具，和 lrzsz ( rz / sz ) 类似，并且有进度条和支持目录传输。
-
-GitHub: [https://github.com/trzsz/trzsz](https://github.com/trzsz/trzsz)
-
 [![MIT License](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://choosealicense.com/licenses/mit/)
 [![PyPI trzsz](https://img.shields.io/pypi/v/trzsz?style=flat)](https://pypi.python.org/pypi/trzsz/)
+GitHub: [https://github.com/trzsz/trzsz](https://github.com/trzsz/trzsz)
 
 ## 为什么?
 
