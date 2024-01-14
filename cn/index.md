@@ -7,7 +7,7 @@ description: trzsz ( trz / tsz ) 是一个兼容 tmux 的文件传输工具，�
 
 [![MIT License](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://choosealicense.com/licenses/mit/)
 [![PyPI trzsz](https://img.shields.io/pypi/v/trzsz?style=flat)](https://pypi.python.org/pypi/trzsz/)
-GitHub: [https://github.com/trzsz/trzsz](https://github.com/trzsz/trzsz)
+[![GitHub trzsz](https://img.shields.io/badge/GitHub-https%3A%2F%2Fgithub.com%2Ftrzsz%2Ftrzsz-blue?style=flat)](https://github.com/trzsz/trzsz)
 
 ## 为什么?
 

@@ -4,15 +4,12 @@ layout: default
 
 # Trzsz-iTerm2 Document
 
-`trzsz` ( trz / tsz ) is a simple file transfer tools, similar to `lrzsz` ( rz / sz ), and compatible with `tmux`.
-
 `trzsz-iterm2` is a client tool for [trzsz](https://trzsz.github.io/) used with [iTerm2](https://iterm2.com/).
-
-GitHub: [https://github.com/trzsz/trzsz](https://github.com/trzsz/trzsz)
 
 [![MIT License](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://choosealicense.com/licenses/mit/)
 [![PyPI trzsz-iterm2](https://img.shields.io/pypi/v/trzsz-iterm2?style=flat)](https://pypi.python.org/pypi/trzsz-iterm2/)
-[![中文网站](https://img.shields.io/badge/%E4%B8%AD%E6%96%87-%E7%BD%91%E7%AB%99-blue?style=flat)](https://trzsz.github.io/cn/iterm2)
+[![GitHub trzsz](https://img.shields.io/badge/GitHub-https%3A%2F%2Fgithub.com%2Ftrzsz%2Ftrzsz-blue?style=flat)](https://github.com/trzsz/trzsz)
+[![中文文档](https://img.shields.io/badge/%E4%B8%AD%E6%96%87%E6%96%87%E6%A1%A3-https%3A%2F%2Ftrzsz.github.io%2Fcn%2Fiterm2-blue?style=flat)](https://trzsz.github.io/cn/iterm2)
 
 ## Installation
 

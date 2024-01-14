@@ -6,10 +6,10 @@ layout: default
 
 Making webshell and terminal supports [trzsz](https://trzsz.github.io/) ( trz / tsz ), which similar to ( rz / sz ), and compatible with tmux.
 
-GitHub: [https://github.com/trzsz/trzsz.js](https://github.com/trzsz/trzsz.js) 　中文文档：[https://trzsz.github.io/cn/js](https://trzsz.github.io/cn/js)
-
 [![MIT License](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://choosealicense.com/licenses/mit/)
 [![npmjs trzsz](https://img.shields.io/npm/v/trzsz.svg?style=flat)](https://www.npmjs.com/package/trzsz)
+[![GitHub trzsz.js](https://img.shields.io/badge/GitHub-https%3A%2F%2Fgithub.com%2Ftrzsz%2Ftrzsz.js-blue?style=flat)](https://github.com/trzsz/trzsz.js)
+[![中文文档](https://img.shields.io/badge/%E4%B8%AD%E6%96%87%E6%96%87%E6%A1%A3-https%3A%2F%2Ftrzsz.github.io%2Fcn%2Fjs-blue?style=flat)](https://trzsz.github.io/cn/js)
 
 **_Please check [https://trzsz.github.io](https://trzsz.github.io) for more information of `trzsz`._**
 

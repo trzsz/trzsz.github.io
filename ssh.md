@@ -6,10 +6,10 @@ layout: default
 
 An ssh client that supports [trzsz](https://trzsz.github.io/), supports searching and selecting servers for batch login.
 
-GitHub: [https://github.com/trzsz/trzsz-ssh](https://github.com/trzsz/trzsz-ssh) 　中文文档：[https://trzsz.github.io/cn/ssh](https://trzsz.github.io/cn/ssh)
-
 [![MIT License](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://choosealicense.com/licenses/mit/)
 [![GitHub Release](https://img.shields.io/github/v/release/trzsz/trzsz-ssh)](https://github.com/trzsz/trzsz-ssh/releases)
+[![GitHub trzsz-ssh](https://img.shields.io/badge/GitHub-https%3A%2F%2Fgithub.com%2Ftrzsz%2Ftrzsz--ssh-blue?style=flat)](https://github.com/trzsz/trzsz-ssh)
+[![中文文档](https://img.shields.io/badge/%E4%B8%AD%E6%96%87%E6%96%87%E6%A1%A3-https%3A%2F%2Ftrzsz.github.io%2Fcn%2Fssh-blue?style=flat)](https://trzsz.github.io/cn/ssh)
 
 ## Introduce
 

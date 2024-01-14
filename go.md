@@ -4,16 +4,14 @@ layout: default
 
 # Trzsz ( go ) Document
 
-[trzsz](https://trzsz.github.io/) ( trz / tsz ) is a simple file transfer tools, similar to lrzsz ( rz / sz ), and compatible with tmux.
-
-GitHub: [https://github.com/trzsz/trzsz-go](https://github.com/trzsz/trzsz-go) 　中文文档：[https://trzsz.github.io/cn/go](https://trzsz.github.io/cn/go)
+`trzsz-go` is the `go` version of `trzsz`, supports native terminals that support a local shell.
 
 [![MIT License](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://choosealicense.com/licenses/mit/)
 [![GitHub Release](https://img.shields.io/github/v/release/trzsz/trzsz-go)](https://github.com/trzsz/trzsz-go/releases)
+[![GitHub trzsz-go](https://img.shields.io/badge/GitHub-https%3A%2F%2Fgithub.com%2Ftrzsz%2Ftrzsz--go-blue?style=flat)](https://github.com/trzsz/trzsz-go)
+[![中文文档](https://img.shields.io/badge/%E4%B8%AD%E6%96%87%E6%96%87%E6%A1%A3-https%3A%2F%2Ftrzsz.github.io%2Fcn%2Fgo-blue?style=flat)](https://trzsz.github.io/cn/go)
 
 **_Please check [https://trzsz.github.io](https://trzsz.github.io) for more information of `trzsz`._**
-
-`trzsz-go` is the `go` version of `trzsz`, supports native terminals that support a local shell.
 
 ⭐ It's recommended to use the `go` version of `trzsz` on the server.
 
