@@ -9,7 +9,7 @@ description: trzsz ( trz / tsz ) 是一个兼容 tmux 的文件传输工具，�
 [![npmjs trzsz](https://img.shields.io/npm/v/trzsz.svg?style=flat)](https://www.npmjs.com/package/trzsz)
 [![GitHub trzsz.js](https://img.shields.io/badge/GitHub-https%3A%2F%2Fgithub.com%2Ftrzsz%2Ftrzsz.js-blue?style=flat)](https://github.com/trzsz/trzsz.js)
 
-`trzsz.js` 使 webshell 和用 electron 开发的终端支持 [trzsz](https://trzsz.github.io/cn/) ( trz / tsz ) —— 和 rz / sz 类似、兼容 tmux 。
+`trzsz.js` 使 webshell 和用 electron 开发的终端支持 [trzsz](https://trzsz.github.io/cn/) ( trz / tsz —— 和 rz / sz 类似、兼容 tmux )。
 
 _有关 `trzsz ( trz / tsz )` 更详细的文档，请查看 [https://trzsz.github.io/cn](https://trzsz.github.io/cn/)。_
 

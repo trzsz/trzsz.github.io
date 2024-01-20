@@ -11,7 +11,7 @@ layout: default
 
 `trzsz-go` makes all terminals that support local shell to support [trzsz](https://trzsz.github.io/) ( trz / tsz ), which similar to ( rz / sz ), and compatible with tmux.
 
-⭐ It's recommended to use the go version of `trzsz ( trz / tsz )` on the server.
+⭐ It's recommended to use the go version of `trzsz` on the server, use [trzsz-ssh ( tssh )](https://trzsz.github.io/ssh) on local.
 
 _Please check [https://trzsz.github.io](https://trzsz.github.io) for more information about `trzsz ( trz / tsz )`._
 

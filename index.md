@@ -17,7 +17,7 @@ layout: default
 
 2. Use supported terminal on local. Use [trzsz-ssh ( tssh )](https://github.com/trzsz/trzsz-ssh) on local shell, or refer to `Supported Terminals` below.
 
-3. Use the `trz` ( similar to `rz` ) command to upload files, and use the `tsz` ( similar to `sz` ) command to download files.
+3. Use the `trz` ( similar to `rz` ) to upload files, and use the `tsz` ( similar to `sz` ) to download files.
 
 ## Why to do
 
