@@ -127,18 +127,20 @@ _Please check [https://trzsz.github.io](https://trzsz.github.io) for more inform
 
   </details>
 
-- Download from the [Releases](https://github.com/trzsz/trzsz-go/releases)
+- Build from source ( Requires go 1.20 or later )
 
-  <details><summary><code>Or build and install from the source code ( Requires go 1.20 or later )</code></summary>
+  <details><summary><code>sudo make install</code></summary>
 
   ```sh
-  git clone https://github.com/trzsz/trzsz-go.git
+  git clone --depth 1 https://github.com/trzsz/trzsz-go.git
   cd trzsz-go
   make
   sudo make install
   ```
 
   </details>
+
+- Download from the [Releases](https://github.com/trzsz/trzsz-go/releases)
 
 ## Usage
 
