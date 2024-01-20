@@ -127,18 +127,20 @@ _有关 `trzsz ( trz / tsz )` 更详细的文档，请查看 [https://trzsz.gith
 
   </details>
 
-- 可从 [Releases](https://github.com/trzsz/trzsz-go/releases) 中直接下载适用的版本
+- 用 Go 自己编译（ 要求 go 1.20 以上 ）
 
-  <details><summary><code>或者用 Go 编译（ 要求 go 1.20 以上 ）</code></summary>
+  <details><summary><code>sudo make install</code></summary>
 
   ```sh
-  git clone https://github.com/trzsz/trzsz-go.git
+  git clone --depth 1 https://github.com/trzsz/trzsz-go.git
   cd trzsz-go
   make
   sudo make install
   ```
 
   </details>
+
+- 可从 [Releases](https://github.com/trzsz/trzsz-go/releases) 中直接下载适用的版本
 
 ## 使用方法
 
