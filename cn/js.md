@@ -5,15 +5,13 @@ description: trzsz ( trz / tsz ) 是一个兼容 tmux 的文件传输工具，�
 
 # Trzsz ( js ) 中文文档
 
-让 webshell 等 js 终端支持 [trzsz](https://trzsz.github.io/cn/) ( trz / tsz )，和 lrzsz ( rz / sz ) 类似，并且有进度条和支持目录传输。
-
 [![MIT License](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://choosealicense.com/licenses/mit/)
 [![npmjs trzsz](https://img.shields.io/npm/v/trzsz.svg?style=flat)](https://www.npmjs.com/package/trzsz)
 [![GitHub trzsz.js](https://img.shields.io/badge/GitHub-https%3A%2F%2Fgithub.com%2Ftrzsz%2Ftrzsz.js-blue?style=flat)](https://github.com/trzsz/trzsz.js)
 
-**_有关 `trzsz` 更详细的文档，请查看 [https://trzsz.github.io/cn](https://trzsz.github.io/cn/)。_**
+`trzsz.js` 使 webshell 和用 electron 开发的终端支持 [trzsz](https://trzsz.github.io/cn/) ( trz / tsz )，和 lrzsz ( rz / sz ) 类似的、兼容 tmux 的文件传输工具。
 
-`trzsz.js` 是 `trzsz` 的 `js` 版实现，支持在浏览器中运行的 webshell，支持用 electron 等实现的 js 语言的终端。
+_有关 `trzsz ( trz / tsz )` 更详细的文档，请查看 [https://trzsz.github.io/cn](https://trzsz.github.io/cn/)。_
 
 ## 开发指引
 

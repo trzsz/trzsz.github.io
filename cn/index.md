@@ -9,7 +9,17 @@ description: trzsz ( trz / tsz ) 是一个兼容 tmux 的文件传输工具，�
 [![PyPI trzsz](https://img.shields.io/pypi/v/trzsz?style=flat)](https://pypi.python.org/pypi/trzsz/)
 [![GitHub trzsz](https://img.shields.io/badge/GitHub-https%3A%2F%2Fgithub.com%2Ftrzsz%2Ftrzsz-blue?style=flat)](https://github.com/trzsz/trzsz)
 
-## 为什么?
+`trzsz` ( trz / tsz ) 是一款优秀的文件传输工具，和 lrzsz ( rz / sz ) 类似的、兼容 tmux 的文件传输工具。
+
+## 如何使用
+
+1. 在服务器上安装 trzsz ( trz / tsz )，有 [go](https://github.com/trzsz/trzsz-go)、[py](https://github.com/trzsz/trzsz) 和 [js](https://github.com/trzsz/trzsz.js) 三种实现，互相兼容。
+
+2. 本地要使用支持的终端，有本地 shell 的终端可以使用 [trzsz-ssh ( tssh )](https://github.com/trzsz/trzsz-ssh)，或参考下文【支持的终端】。
+
+3. 使用 `trz` ( 类似 `rz` ) 命令上传文件，使用 `tsz` ( 类似 `sz` ) 命令下载文件。
+
+## 为什么做
 
 考虑 `laptop -> hostA -> hostB -> docker -> tmux` 这种场景，使用 `scp` 或 `sftp` 是不方便的。
 

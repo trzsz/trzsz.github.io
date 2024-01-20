@@ -5,15 +5,15 @@ description: trzsz ( trz / tsz ) 是一个兼容 tmux 的文件传输工具，�
 
 # Trzsz ( go ) 中文文档
 
-`trzsz-go` 是 `trzsz` 的 `go` 版实现，客户端有本地 shell 的终端都可以使用。
-
 [![MIT License](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://choosealicense.com/licenses/mit/)
 [![GitHub Release](https://img.shields.io/github/v/release/trzsz/trzsz-go)](https://github.com/trzsz/trzsz-go/releases)
 [![GitHub trzsz-go](https://img.shields.io/badge/GitHub-https%3A%2F%2Fgithub.com%2Ftrzsz%2Ftrzsz--go-blue?style=flat)](https://github.com/trzsz/trzsz-go)
 
-**_有关 `trzsz` 更详细的文档，请查看 [https://trzsz.github.io/cn](https://trzsz.github.io/cn/)。_**
+`trzsz-go` 使所有支持本地 shell 的终端都支持 [trzsz](https://trzsz.github.io/cn/) ( trz / tsz )，和 lrzsz ( rz / sz ) 类似的、兼容 tmux 的文件传输工具。
 
-⭐ 推荐在服务器上使用 `go` 版 `trzsz`。
+⭐ 推荐在服务器上使用 `go` 版 `trzsz ( trz / tsz )`。
+
+_有关 `trzsz ( trz / tsz )` 更详细的文档，请查看 [https://trzsz.github.io/cn](https://trzsz.github.io/cn/)。_
 
 ## 安装方法
 
