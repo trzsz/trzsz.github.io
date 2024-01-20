@@ -13,7 +13,7 @@ layout: default
 
 ⭐ It's recommended to use the go version of `trzsz ( trz / tsz )` on the server.
 
-_Please check [https://trzsz.github.io](https://trzsz.github.io) for more information of `trzsz ( trz / tsz )`._
+_Please check [https://trzsz.github.io](https://trzsz.github.io) for more information about `trzsz ( trz / tsz )`._
 
 ## Installation
 

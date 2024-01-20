@@ -11,7 +11,7 @@ layout: default
 
 `trzsz.js` makes terminal built with electron and webshell to support [trzsz](https://trzsz.github.io/) ( trz / tsz ), which similar to ( rz / sz ), and compatible with tmux.
 
-_Please check [https://trzsz.github.io](https://trzsz.github.io) for more information of `trzsz ( trz / tsz )`._
+_Please check [https://trzsz.github.io](https://trzsz.github.io) for more information about `trzsz ( trz / tsz )`._
 
 ## Getting Started
 

@@ -13,19 +13,19 @@ layout: default
 
 ## How to use
 
-1. Install trzsz ( trz / tsz ) on the server. [go](https://github.com/trzsz/trzsz-go), [py](https://github.com/trzsz/trzsz) and [js](https://github.com/trzsz/trzsz.js) versions are compatible with each other.
+1. Install `trzsz` ( trz / tsz ) on the server. [go](https://github.com/trzsz/trzsz-go), [py](https://github.com/trzsz/trzsz) and [js](https://github.com/trzsz/trzsz.js) versions are compatible with each other.
 
-2. Use supported terminal on local. Terminals with local shell can use [trzsz-ssh ( tssh )](https://github.com/trzsz/trzsz-ssh), or refer to `Supported Terminals` below.
+2. Use supported terminal on local. Use [trzsz-ssh ( tssh )](https://github.com/trzsz/trzsz-ssh) on local shell, or refer to `Supported Terminals` below.
 
 3. Use the `trz` ( similar to `rz` ) command to upload files, and use the `tsz` ( similar to `sz` ) command to download files.
 
 ## Why to do
 
-Considering `laptop -> hostA -> hostB -> docker -> tmux`, using `scp` or `sftp` is inconvenience.
+- Considering `laptop -> hostA -> hostB -> docker -> tmux`, using `scp` or `sftp` is inconvenience.
 
-In this case, `lrzsz` ( rz / sz ) is convenient to use, but unfortunately it's not compatible with `tmux`.
+- In this case, `lrzsz` ( rz / sz ) is convenient to use, but unfortunately it's not compatible with `tmux`.
 
-`tmux` is not going to support rz / sz ( [906](https://github.com/tmux/tmux/issues/906), [1439](https://github.com/tmux/tmux/issues/1439) ), and creating a new tools is much easier than patching `tmux`.
+- `tmux` is not going to support rz / sz ( [906](https://github.com/tmux/tmux/issues/906), [1439](https://github.com/tmux/tmux/issues/1439) ), so `trzsz` ( trz / tsz ) was developed.
 
 ## Advantage
 

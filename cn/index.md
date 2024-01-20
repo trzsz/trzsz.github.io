@@ -13,7 +13,7 @@ description: trzsz ( trz / tsz ) 是一个兼容 tmux 的文件传输工具，�
 
 ## 如何使用
 
-1. 在服务器上安装 trzsz ( trz / tsz )，有 [go](https://github.com/trzsz/trzsz-go)、[py](https://github.com/trzsz/trzsz) 和 [js](https://github.com/trzsz/trzsz.js) 三种实现，互相兼容。
+1. 在服务器上安装 `trzsz` ( trz / tsz )，有 [go](https://github.com/trzsz/trzsz-go)、[py](https://github.com/trzsz/trzsz) 和 [js](https://github.com/trzsz/trzsz.js) 三种实现，互相兼容。
 
 2. 本地要使用支持的终端，有本地 shell 的终端可以使用 [trzsz-ssh ( tssh )](https://github.com/trzsz/trzsz-ssh)，或参考下文【支持的终端】。
 
@@ -21,11 +21,11 @@ description: trzsz ( trz / tsz ) 是一个兼容 tmux 的文件传输工具，�
 
 ## 为什么做
 
-考虑 `laptop -> hostA -> hostB -> docker -> tmux` 这种场景，使用 `scp` 或 `sftp` 是不方便的。
+- 考虑 `laptop -> hostA -> hostB -> docker -> tmux` 这种场景，使用 `scp` 或 `sftp` 是不方便的。
 
-在这种场景下，使用 `lrzsz` ( rz / sz ) 是很方便的，但是很可惜它与 `tmux` 不兼容。
+- 在这种场景下，使用 `lrzsz` ( rz / sz ) 是很方便的，但是很可惜它与 `tmux` 不兼容。
 
-`tmux` 不愿意支持 rz / sz ( [906](https://github.com/tmux/tmux/issues/906), [1439](https://github.com/tmux/tmux/issues/1439) )，而重新造一个工具比修改 `tmux` 简单很多。
+- `tmux` 不打算支持 rz / sz ( [906](https://github.com/tmux/tmux/issues/906), [1439](https://github.com/tmux/tmux/issues/1439) )，于是就开发了 `trzsz` ( trz / tsz )。
 
 ## 优点介绍
 
