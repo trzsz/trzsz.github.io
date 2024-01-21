@@ -5,25 +5,23 @@ description: trzsz ( trz / tsz ) 是一个兼容 tmux 的文件传输工具，�
 
 # Trzsz-ssh ( tssh ) 中文文档
 
-支持 [trzsz](https://trzsz.github.io/cn/) ( trz / tsz ) 的 ssh 客户端，支持搜索和选择服务器进行批量登录，支持记住密码。
-
 [![MIT License](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://choosealicense.com/licenses/mit/)
 [![GitHub Release](https://img.shields.io/github/v/release/trzsz/trzsz-ssh)](https://github.com/trzsz/trzsz-ssh/releases)
 [![GitHub trzsz-ssh](https://img.shields.io/badge/GitHub-https%3A%2F%2Fgithub.com%2Ftrzsz%2Ftrzsz--ssh-blue?style=flat)](https://github.com/trzsz/trzsz-ssh)
 
-## tssh 简介
+trzsz-ssh ( tssh ) 设计为 ssh 客户端的直接替代品，提供与 openssh 完全兼容的基础功能，同时实现其他有用的扩展功能。
 
-- 你喜欢的 ssh 终端是否有好用的服务器管理功能？是否支持记住密码？是否有好用的文件传输工具？
+## 为什么做
 
-- tssh 支持选择或搜索 `~/.ssh/config` 中配置的服务器，支持 vim 操作习惯，解决 ssh 终端的服务器管理问题。
+- 服务器太多，记不住所有别名，`tssh` 内置登录界面，支持搜索和选择服务器登录。
 
-- tssh 支持一次选择多台服务器，批量登录，并支持批量执行预先指定的命令，方便快速完成批量服务器操作。
+- `tssh` 登录服务器后，内置支持 [trzsz](https://trzsz.github.io/cn/) ( trz / tsz ) 工具，传文件无需另外新开窗口。
 
-- tssh 支持配置服务器登录密码，解决每次手工输入密码的麻烦（ 自己能控制的服务器，推荐使用公钥登录 ）。
+- 有时需要同时登录一批机器，`tssh` 支持多选并批量登录，同时支持执行预设的命令。
 
-- tssh 内置支持 [trzsz](https://trzsz.github.io/cn/) ( trz / tsz ) 文件传输工具，一并解决了 Windows 中使用 `trzsz ssh` 上传速度很慢的问题。
+- 有些服务器不支持公钥登录，`tssh` 支持记住密码，支持自动交互，提升登录的效率。
 
-- _在作者的 MacOS 上，使用 `trzsz ssh` 的上传速度在 10 MB/s 左右，而使用 `tssh` 可以到 80 MB/s 以上。_
+- 在 Windows 中使用 `tssh` 代替 `trzsz ssh`，可以解决 `trz` 上传速度很慢的问题。
 
 ## 安装方法
 
@@ -152,44 +150,195 @@ description: trzsz ( trz / tsz ) 是一个兼容 tmux 的文件传输工具，�
 
 - 可从 [Releases](https://github.com/trzsz/trzsz-ssh/releases) 中直接下载适用的版本
 
-**_服务器上要安装 [trzsz](https://trzsz.github.io/cn/) 才能使用 `trz / tsz` 上传和下载，可任选其一安装：
-[Go 版](https://trzsz.github.io/cn/go)（ ⭐ 推荐 ）、[Py 版](https://trzsz.github.io/cn/)、[Js 版](https://trzsz.github.io/cn/js)。_**
+## 登录界面
 
-_如果服务器不安装 [trzsz](https://trzsz.github.io/cn/)，也能用 `tssh`，只是不使用 `trz / tsz` 上传和下载而已。_
+- 使用之前，需要配置好 `~/.ssh/config` ( Windows 是 `C:\Users\xxx\.ssh\config`, `xxx` 换成用户名 )。
 
-## 使用方法
+- 关于如何配置 `~/.ssh/config`，请参考 [openssh](https://manpages.debian.org/bookworm/openssh-client/ssh_config.5.en.html) ( 暂不支持 `Match` )，或参考 tssh wiki [SSH基本配置](https://github.com/trzsz/trzsz-ssh/wiki/SSH%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE)。
 
-_`~/` 代表 HOME 目录。在 Windows 中，请将下文的 `~/` 替换成 `C:\Users\your_name\`。_
+- 直接无参数运行 `tssh` 命令就会打开登录界面，或者有除目标机器外的其他参数也会打开登录界面。
 
-- 在客户端生成密钥对，一般存放在 `~/.ssh/` 下（ 只要一种就可以了 ）：
+- 如果目标机器参数是 `~/.ssh/config` 中别名的一部分，不能完全匹配某个别名，也会打开登录界面。
 
-  - `ssh-keygen -t ed25519` 生成 ED25519 的，私钥 `~/.ssh/id_ed25519`，公钥 `~/.ssh/id_ed25519.pub`。
-  - `ssh-keygen -t rsa -b 4096` 生成 RSA 的，私钥 `~/.ssh/id_rsa`，公钥 `~/.ssh/id_rsa.pub`。
+- 别名含有 `*` 或 `?` 通配符时，则不会显示在登录界面中，要隐藏的别名可以加个 `*` 前缀或后缀。
 
-- 登录服务器，将公钥（ 即前面生成密钥对时 `.pub` 后缀的文件内容 ）追加写入服务器上的 `~/.ssh/authorized_keys` 文件中。
+- `tssh` 支持很多快捷键，支持搜索，在 `tmux`、`iTerm2` 和 `Windows Terminal` 等中使用时支持多选。
 
-  - 一行代表一个客户端的公钥，注意 `~/.ssh/authorized_keys` 要设置正确的权限：
+  | 操作      | 全局快捷键                      | 非搜索快捷键 | 快捷键描述      |
+  | --------- | ------------------------------- | ------------ | --------------- |
+  | Confirm   | Enter                           |              | 确认并登录      |
+  | Quit/Exit | Ctrl+C Ctrl+Q                   | q Q          | 取消并退出      |
+  | Move Prev | Ctrl+K Shift+Tab ↑              | k K          | 往上移光标      |
+  | Move Next | Ctrl+J Tab ↓                    | j J          | 往下移光标      |
+  | Page Up   | Ctrl+H Ctrl+U Ctrl+B PageUp ←   | h H u U b B  | 往上翻一页      |
+  | Page Down | Ctrl+L Ctrl+D Ctrl+F PageDown → | l L d D f F  | 往下翻一页      |
+  | Goto Home | Home                            | g            | 跳到第一行      |
+  | Goto End  | End                             | G            | 跳到最尾行      |
+  | EraseKeys | Ctrl+E                          | e E          | 擦除搜索关键字  |
+  | TglSearch | /                               |              | 切换搜索功能    |
+  | Tgl Help  | ?                               |              | 切换帮助信息    |
+  | TglSelect | Ctrl+X Ctrl+Space Alt+Space     | Space x X    | 切换选中状态    |
+  | SelectAll | Ctrl+A                          | a A          | 全选当前页      |
+  | SelectOpp | Ctrl+O                          | o O          | 反选当前页      |
+  | Open Wins | Ctrl+W                          | w W          | 新窗口批量登录  |
+  | Open Tabs | Ctrl+T                          | t T          | 新 Tab 批量登录 |
+  | Open Pane | Ctrl+P                          | p P          | 分屏批量登录    |
 
-    ```sh
-    chmod 700 ~/.ssh && chmod 600 ~/.ssh/authorized_keys
-    ```
+## 主题风格
 
-- 在客户端配置好 `~/.ssh/config` 文件，举例：
+- `tssh` 支持多种主题风格，在 `~/.tssh.conf` 中配置 `PromptThemeLayout` 选用。欢迎一起来创造更多更好看的。
+
+- 每种主题风格都支持自定义颜色，在 `~/.tssh.conf` 中配置 `PromptThemeColors`，只要配置非默认的颜色即可。
+
+- 请为你喜欢的主题风格[❤️投票❤️](https://github.com/trzsz/trzsz-ssh/issues/75)，得票数最高的主题风格将会在下个版本被设置为默认主题。
+
+### tiny 小巧风
+
+- 在 `~/.tssh.conf` 中配置 `PromptThemeLayout = tiny` 选用 `tiny 小巧风`。
+  ![tssh tiny](https://trzsz.github.io/images/tssh_tiny.gif)
+
+- 在 `~/.tssh.conf` 中配置 `PromptThemeColors`，要求配置成一行。`tiny 小巧风` 支持以下配置项：
+
+  <details><summary><code>tiny 颜色配置项和默认值</code></summary>
+
+  ```json
+  {
+    "help_tips": "faint",
+    "shortcuts": "faint",
+    "label_icon": "blue",
+    "label_text": "default",
+    "cursor_icon": "green|bold",
+    "active_selected": "green|bold",
+    "active_alias": "cyan|bold",
+    "active_host": "magenta|bold",
+    "active_group": "blue|bold",
+    "inactive_selected": "green|bold",
+    "inactive_alias": "cyan",
+    "inactive_host": "magenta",
+    "inactive_group": "blue",
+    "details_title": "default",
+    "details_name": "faint",
+    "details_value": "default"
+  }
+  ```
+
+  </details>
+
+  <details><summary><code>tiny 支持的颜色枚举，可用 `|` 连接多个。</code></summary>
 
   ```
-  Host alias1
-      HostName 192.168.0.1
-      Port 22
-      User your_name
-  Host alias2
-      HostName 192.168.0.2
-      Port 22
-      User your_name
+  default
+  black
+  red
+  green
+  yellow
+  blue
+  magenta
+  cyan
+  white
+  bgBlack
+  bgRed
+  bgGreen
+  bgYellow
+  bgBlue
+  bgMagenta
+  bgCyan
+  bgWhite
+  bold
+  faint
+  italic
+  underline
   ```
 
-- 使用 `tssh` 命令登录服务器，`tssh alias1` 命令登录在 `~/.ssh/config` 中 `alias1` 对应的服务器。
+  </details>
 
-- 直接执行 `tssh` 命令（ 不带参数 ），可以选择（ 搜索 ） `~/.ssh/config` 中配置好的服务器并登录。
+### simple 简约风
+
+- 在 `~/.tssh.conf` 中配置 `PromptThemeLayout = simple` 选用 `simple 简约风`。
+  ![tssh simple](https://trzsz.github.io/images/tssh_simple.gif)
+
+- `simple 简约风` 支持的颜色配置项、默认值和颜色枚举，和 `tiny 小巧风` 完全相同，请参考前文。
+
+### table 表格风
+
+- 在 `~/.tssh.conf` 中配置 `PromptThemeLayout = table` 选用 `table 表格风`。
+  ![tssh table](https://trzsz.github.io/images/tssh_table.gif)
+
+- 在 `~/.tssh.conf` 中配置 `PromptThemeColors`，要求配置成一行。`table 表格风` 支持以下配置项：
+
+  <details><summary><code>table 颜色配置项和默认值</code></summary>
+
+  ```json
+  {
+    "help_tips": "faint",
+    "shortcuts": "faint",
+    "table_header": "10",
+    "default_alias": "6",
+    "default_host": "5",
+    "default_group": "4",
+    "selected_icon": "2",
+    "selected_alias": "14",
+    "selected_host": "13",
+    "selected_group": "12",
+    "default_border": "8",
+    "selected_border": "10",
+    "details_name": "4",
+    "details_value": "3",
+    "details_border": "8"
+  }
+  ```
+
+  </details>
+
+- 支持的颜色枚举请参考 [lipgloss](https://github.com/charmbracelet/lipgloss#colors)，除了 `help_tips` 和 `shortcuts` 与前文 `tiny 小巧风` 相同。
+
+## 支持 trzsz
+
+- 在服务器上要安装 [trzsz](https://trzsz.github.io/cn/)，才能使用 `trz / tsz` 上传和下载，可任选其一安装：[Go 版](https://trzsz.github.io/cn/go)（ ⭐ 推荐 ）、[Py 版](https://trzsz.github.io/cn/)、[Js 版](https://trzsz.github.io/cn/js)。
+
+- 在 `~/.ssh/config` 或 `ExConfigPath` 配置文件中，配置 `EnableDragFile` 为 `Yes` 启用拖拽上传功能。
+
+  ```
+  Host *
+    # 如果配置在 ~/.ssh/config 中，可以加上 `#!!` 前缀，以兼容标准 ssh
+    EnableDragFile Yes
+  ```
+
+- 如果只是想临时启用拖拽上传功能，可以在命令行中使用 `tssh --dragfile` 登录服务器。
+
+- 在 `~/.ssh/config` 或 `ExConfigPath` 配置文件中，配置 `EnableTrzsz` 为 `No` 禁用 trzsz 和 zmodem。
+
+  ```
+  Host no_trzsz_nor_zmodem
+    # 如果配置在 ~/.ssh/config 中，可以加上 `#!!` 前缀，以兼容标准 ssh
+    EnableTrzsz No
+  ```
+
+![tssh trzsz](https://trzsz.github.io/images/tssh_trzsz.gif)
+
+## 支持 zmodem
+
+- 在 `~/.ssh/config` 或 `ExConfigPath` 配置文件中，配置 `EnableZmodem` 为 `Yes` 启用 `rz / sz` 功能。
+
+  ```
+  Host *
+    # 如果配置在 ~/.ssh/config 中，可以加上 `#!!` 前缀，以兼容标准 ssh
+    EnableZmodem Yes
+  ```
+
+- 除了服务器，本地电脑也要安装 `lrzsz`，Windows 可以从 [lrzsz-win32](https://github.com/trzsz/lrzsz-win32/releases) 下载解压并加到 `PATH` 中，也可以如下安装：
+
+  ```
+  scoop install lrzsz
+  ```
+
+  ```
+  choco install lrzsz
+  ```
+
+- 如果只是想临时启用 `rz / sz` 传文件功能，可以在命令行中使用 `tssh --zmodem` 登录服务器。
+
+- 关于 `rz / sz` 进度条，己传大小和传输速度会有一点偏差，它的主要作用只是指示传输正在进行中。
 
 ## 批量登录
 
@@ -205,6 +354,8 @@ _`~/` 代表 HOME 目录。在 Windows 中，请将下文的 `~/` 替换成 `C:\
   tssh -t -o RemoteCommand='ping -c3 trzsz.github.io ; bash'
   tssh -t -o RemoteCommand="ping -c3 trzsz.github.io |cat&& bash"
   ```
+
+![tssh batch](https://trzsz.github.io/images/tssh_batch.gif)
 
 ## 分组标签
 
@@ -260,9 +411,9 @@ _`~/` 代表 HOME 目录。在 Windows 中，请将下文的 `~/` 替换成 `C:\
 
 ## 记住密码
 
-- 为了兼容标准 ssh ，密码可以单独配置在 `~/.ssh/password` 中，也可以在 `~/.ssh/config` 中加上 `#!!` 前缀。
+- 推荐使用公钥认证登录，可参考 openssh 的文档，或者参考 tssh wiki [公钥认证登录](https://github.com/trzsz/trzsz-ssh/wiki/%E5%85%AC%E9%92%A5%E8%AE%A4%E8%AF%81%E7%99%BB%E5%BD%95)。
 
-- 推荐使用前面公钥认证的方式，密码的安全性弱一些。如果必须要用密码，建议至少设置好权限，如：
+- 如果只能使用密码登录，建议至少设置一下配置文件的权限，如：
 
   ```sh
   chmod 700 ~/.ssh && chmod 600 ~/.ssh/password ~/.ssh/config
@@ -317,6 +468,8 @@ _`~/` 代表 HOME 目录。在 Windows 中，请将下文的 `~/` 替换成 `C:\
       Passphrase 111111  # 支持明文密码，但是推荐使用 tssh --enc-secret 简单加密一下。
   ```
 
+- `记住密码`之后还提示输入密码？可能服务器的认证方式是 `keyboard interactive`，请参考下文`记住答案`。
+
 ## 记住答案
 
 - 除了私钥和密码，还有一种登录方式，英文叫 keyboard interactive ，是服务器返回一些问题，客户端提供正确的答案就能登录，很多自定义的一次性密码就是利用这种方式实现的。
@@ -363,7 +516,7 @@ _`~/` 代表 HOME 目录。在 Windows 中，请将下文的 `~/` 替换成 `C:\
       #!! CtrlExpectSendEncOtp1 77b4ce85d0...  # 或者配置 tssh --enc-secret 得到的密文串
   ```
 
-## 可选配置
+## 个性配置
 
 - 支持在 `~/.tssh.conf`（ Windows 是 `C:\Users\your_name\.tssh.conf` ）中进行以下自定义配置：
 
@@ -379,6 +532,10 @@ _`~/` 代表 HOME 目录。在 Windows 中，请将下文的 `~/` 替换成 `C:\
 
   # tsz 下载时，自动保存的路径，为空时弹出对话框手工选择，默认为空
   DefaultDownloadPath = ~/Downloads
+
+  # tssh 搜索和选择服务器时，配置主题风格和自定义颜色
+  PromptThemeLayout = simple
+  PromptThemeColors = {"active_host": "magenta|bold", "inactive_host": "magenta"}
 
   # tssh 搜索和选择服务器时，每页显示的记录数，默认为 10
   PromptPageSize = 10
@@ -401,45 +558,10 @@ _`~/` 代表 HOME 目录。在 Windows 中，请将下文的 `~/` 替换成 `C:\
 
 - 使用 `-f` 后台运行时，可以加上 `--reconnect` 参数，在后台进程因连接断开等而退出时，会自动重新连接。
 
-- 使用 `--dragfile` 启用拖拽上传功能，想默认启用则可以在 `~/.ssh/config` 或 `ExConfigPath` 中配置：
+- 运行 `tssh --enc-secret`，输入密码或答案，可得到用于配置的密文（ 相同密码每次运行结果不同 ）。
 
-  ```
-  Host *
-    # 如果配置在 ~/.ssh/config 中，可以加上 `#!!` 前缀，以兼容标准 ssh
-    EnableDragFile Yes
-  ```
-
-- 使用 `--zmodem` 启用 `rz / sz` 功能，想默认启用则可以在 `~/.ssh/config` 或 `ExConfigPath` 中配置：
-
-  ```
-  Host server0
-    # 如果配置在 ~/.ssh/config 中，可以加上 `#!!` 前缀，以兼容标准 ssh
-    EnableZmodem Yes
-  ```
-
-  - 需要在客户端（ 本地电脑 ）上安装 `lrzsz`，Windows 可以从 [lrzsz-win32](https://github.com/trzsz/lrzsz-win32/releases) 下载解压并加到 `PATH` 中，也可以如下安装：
-
-    ```
-    scoop install lrzsz
-    ```
-
-    ```
-    choco install lrzsz
-    ```
-
-  - 关于 `rz / sz` 进度条，己传大小和传输速度会有一点偏差，它的主要作用只是指示传输正在进行中。
-
-- 使用 `-oEnableTrzsz=No` 禁用 trzsz 功能，想默认禁用则可以在 `~/.ssh/config` 或 `ExConfigPath` 中配置：
-
-  ```
-  Host server1
-    # 如果配置在 ~/.ssh/config 中，可以加上 `#!!` 前缀，以兼容标准 ssh
-    EnableTrzsz No
-  ```
-
-- 上文说的“记住密码”和“记住答案”，只要在配置项前面加上 `enc` 则可以配置密文，防止被人窥屏。并且，密文可以解决密码含有`#`的问题。
-
-  - 运行 `tssh --enc-secret`，输入密码或答案，可得到用于配置的密文（ 相同密码每次运行结果不同 ）：
+  - 上文说的`记住密码`和`记住答案`等，在配置项前面加上 `enc` 则可以配置成密文，防止被人窥屏。
+  - 如果密码中含有 `#` 等特殊字符，直接配置密码明文可能会导致登录失败，此时则必须使用密文配置。
 
   ```
   Host server2
@@ -471,28 +593,6 @@ _`~/` 代表 HOME 目录。在 Windows 中，请将下文的 `~/` 替换成 `C:\
   - 如果在 `~/.tssh.conf` 中设置了 `SetTerminalTitle = Yes`，则会在登录后自动设置终端标题，但是服务器上的 `PROMPT_COMMAND` 会覆盖 `tssh` 设置的标题。
   - 在 `tssh` 退出后不会重置为原来的标题，你需要在本地 shell 中设置 `PROMPT_COMMAND`，让它覆盖 `tssh` 设置的标题。
 
-## 快捷键
-
-| 操作      | 全局快捷键                      | 非搜索快捷键 | 快捷键描述      |
-| --------- | ------------------------------- | ------------ | --------------- |
-| Confirm   | Enter                           |              | 确认并登录      |
-| Quit/Exit | Ctrl+C Ctrl+Q                   | q Q          | 取消并退出      |
-| Move Prev | Ctrl+K Shift+Tab ↑              | k K          | 往上移光标      |
-| Move Next | Ctrl+J Tab ↓                    | j J          | 往下移光标      |
-| Page Up   | Ctrl+H Ctrl+U Ctrl+B PageUp ←   | h H u U b B  | 往上翻一页      |
-| Page Down | Ctrl+L Ctrl+D Ctrl+F PageDown → | l L d D f F  | 往下翻一页      |
-| Goto Home | Home                            | g            | 跳到第一行      |
-| Goto End  | End                             | G            | 跳到最尾行      |
-| EraseKeys | Ctrl+E                          | e E          | 擦除搜索关键字  |
-| TglSearch | /                               |              | 切换搜索功能    |
-| Tgl Help  | ?                               |              | 切换帮助信息    |
-| TglSelect | Ctrl+X Ctrl+Space Alt+Space     | Space x X    | 切换选中状态    |
-| SelectAll | Ctrl+A                          | a A          | 全选当前页      |
-| SelectOpp | Ctrl+O                          | o O          | 反选当前页      |
-| Open Wins | Ctrl+W                          | w W          | 新窗口批量登录  |
-| Open Tabs | Ctrl+T                          | t T          | 新 Tab 批量登录 |
-| Open Pane | Ctrl+P                          | p P          | 分屏批量登录    |
-
 ## 故障排除
 
 - 在 Warp 终端，分块 Blocks 的功能需要将 `tssh` 重命名为 `ssh`，推荐建个软链接（ 对更新友好 ）：
@@ -516,12 +616,6 @@ _`~/` 代表 HOME 目录。在 Windows 中，请将下文的 `~/` 替换成 `C:\
 - 如果在 `~/.ssh/config` 中配置了 `tssh` 特有的配置项后，标准 `ssh` 报错 `Bad configuration option`。
 
   - 可以在出错配置项中加上前缀 `#!!`，标准 `ssh` 会将它当作注释，而 `tssh` 则会认为它是有效配置之一。
-
-## 录屏演示
-
-![tssh登录演示](https://trzsz.github.io/images/tssh.gif)
-
-![tssh批量执行](https://trzsz.github.io/images/batch_ssh.gif)
 
 ## 联系方式
 
