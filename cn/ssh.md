@@ -199,7 +199,7 @@ trzsz-ssh ( tssh ) 设计为 ssh 客户端的直接替代品，提供与 openssh
 
 - 在 `~/.tssh.conf` 中配置 `PromptThemeColors`，要求配置成一行。`tiny 小巧风` 支持以下配置项：
 
-  <details><summary><code>tiny 颜色配置项和默认值</code></summary>
+  <details><summary><code>tiny 颜色配置项和默认值：</code></summary>
 
   ```json
   {
@@ -224,7 +224,7 @@ trzsz-ssh ( tssh ) 设计为 ssh 客户端的直接替代品，提供与 openssh
 
   </details>
 
-  <details><summary><code>tiny 支持的颜色枚举，可用 `|` 连接多个。</code></summary>
+  <details><summary><code>tiny 支持的颜色枚举，可用 `|` 连接多个：</code></summary>
 
   ```
   default
@@ -266,7 +266,7 @@ trzsz-ssh ( tssh ) 设计为 ssh 客户端的直接替代品，提供与 openssh
 
 - 在 `~/.tssh.conf` 中配置 `PromptThemeColors`，要求配置成一行。`table 表格风` 支持以下配置项：
 
-  <details><summary><code>table 颜色配置项和默认值</code></summary>
+  <details><summary><code>table 颜色配置项和默认值：</code></summary>
 
   ```json
   {

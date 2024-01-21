@@ -199,7 +199,7 @@ trzsz-ssh ( tssh ) is an ssh client designed as a drop-in replacement for the op
 
 - Configure `PromptThemeColors` in `~/.tssh.conf` and configure it in one line. `tiny theme` supports the following color items:
 
-  <details><summary><code>tiny theme colors and default values</code></summary>
+  <details><summary><code>tiny theme colors and default values:</code></summary>
 
   ```json
   {
@@ -224,7 +224,7 @@ trzsz-ssh ( tssh ) is an ssh client designed as a drop-in replacement for the op
 
   </details>
 
-  <details><summary><code>tiny theme color enumerations which can be concatenated with `|`</code></summary>
+  <details><summary><code>tiny theme color enumerations which can be concatenated with `|`:</code></summary>
 
   ```
   default
@@ -266,7 +266,7 @@ trzsz-ssh ( tssh ) is an ssh client designed as a drop-in replacement for the op
 
 - Configure `PromptThemeColors` in `~/.tssh.conf` and configure it in one line. `table theme` supports the following color items:
 
-  <details><summary><code>table theme colors and default values</code></summary>
+  <details><summary><code>table theme colors and default values:</code></summary>
 
   ```json
   {
