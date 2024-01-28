@@ -41,9 +41,18 @@ li > div:first-of-type {
   right: 0.5em;
   bottom: 0.5em;
   left: 0.5em;
-  background: linear-gradient(#fff 20%, transparent 20%, transparent 40%, #fff 40%, #fff 60%, transparent 60%, transparent 80%, #fff 80%);
+  background: linear-gradient(
+    #fff 20%,
+    transparent 20%,
+    transparent 40%,
+    #fff 40%,
+    #fff 60%,
+    transparent 60%,
+    transparent 80%,
+    #fff 80%
+  );
   opacity: 0.6;
-  content: '';
+  content: "";
 }
 
 .menu-button:hover {
@@ -67,7 +76,7 @@ li > div:first-of-type {
 
 .close-button::before,
 .close-button::after {
-  content: '';
+  content: "";
   position: absolute;
   width: 3px;
   height: 100%;
@@ -94,12 +103,12 @@ li > div:first-of-type {
   background-image: linear-gradient(120deg, #155799, #159957);
   padding: 0 1em 1em 1em;
   font-size: 1.15em;
-  -webkit-transform: translate3d(-320px,0,0);
-  transform: translate3d(-320px,0,0);
+  -webkit-transform: translate3d(-320px, 0, 0);
+  transform: translate3d(-320px, 0, 0);
   -webkit-transition: -webkit-transform 0.1s;
   transition: transform 0.1s;
-  -webkit-transition-timing-function: cubic-bezier(0.7,0,0.3,1);
-  transition-timing-function: cubic-bezier(0.7,0,0.3,1);
+  -webkit-transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
+  transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
 }
 
 .menu-wrap a {
@@ -112,48 +121,48 @@ li > div:first-of-type {
 }
 
 .icon-list {
-  -webkit-transform: translate3d(0,100%,0);
-  transform: translate3d(0,100%,0);
+  -webkit-transform: translate3d(0, 100%, 0);
+  transform: translate3d(0, 100%, 0);
 }
 
 .icon-list a {
   display: block;
   padding: 5px;
-  -webkit-transform: translate3d(0,500px,0);
-  transform: translate3d(0,500px,0);
+  -webkit-transform: translate3d(0, 500px, 0);
+  transform: translate3d(0, 500px, 0);
 }
 
 .icon-list,
 .icon-list a {
   -webkit-transition: -webkit-transform 0s 0.1s;
   transition: transform 0s 0.1s;
-  -webkit-transition-timing-function: cubic-bezier(0.7,0,0.3,1);
-  transition-timing-function: cubic-bezier(0.7,0,0.3,1);
+  -webkit-transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
+  transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
 }
 
 .icon-list a:nth-child(2) {
-  -webkit-transform: translate3d(0,1000px,0);
-  transform: translate3d(0,1000px,0);
+  -webkit-transform: translate3d(0, 1000px, 0);
+  transform: translate3d(0, 1000px, 0);
 }
 
 .icon-list a:nth-child(3) {
-  -webkit-transform: translate3d(0,1500px,0);
-  transform: translate3d(0,1500px,0);
+  -webkit-transform: translate3d(0, 1500px, 0);
+  transform: translate3d(0, 1500px, 0);
 }
 
 .icon-list a:nth-child(4) {
-  -webkit-transform: translate3d(0,2000px,0);
-  transform: translate3d(0,2000px,0);
+  -webkit-transform: translate3d(0, 2000px, 0);
+  transform: translate3d(0, 2000px, 0);
 }
 
 .icon-list a:nth-child(5) {
-  -webkit-transform: translate3d(0,2500px,0);
-  transform: translate3d(0,2500px,0);
+  -webkit-transform: translate3d(0, 2500px, 0);
+  transform: translate3d(0, 2500px, 0);
 }
 
 .icon-list a:nth-child(6) {
-  -webkit-transform: translate3d(0,3000px,0);
-  transform: translate3d(0,3000px,0);
+  -webkit-transform: translate3d(0, 3000px, 0);
+  transform: translate3d(0, 3000px, 0);
 }
 
 .icon-list a span {
@@ -163,22 +172,22 @@ li > div:first-of-type {
 
 /* Shown menu */
 .show-menu .menu-wrap {
-  -webkit-transform: translate3d(0,0,0);
-  transform: translate3d(0,0,0);
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
   -webkit-transition: -webkit-transform 0.2s;
   transition: transform 0.2s;
-  -webkit-transition-timing-function: cubic-bezier(0.7,0,0.3,1);
-  transition-timing-function: cubic-bezier(0.7,0,0.3,1);
+  -webkit-transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
+  transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
 }
 
 .show-menu .icon-list,
 .show-menu .icon-list a {
-  -webkit-transform: translate3d(0,0,0);
-  transform: translate3d(0,0,0);
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
   -webkit-transition: -webkit-transform 0.2s;
   transition: transform 0.2s;
-  -webkit-transition-timing-function: cubic-bezier(0.7,0,0.3,1);
-  transition-timing-function: cubic-bezier(0.7,0,0.3,1);
+  -webkit-transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
+  transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
 }
 
 .show-menu .icon-list a {
@@ -190,8 +199,25 @@ li > div:first-of-type {
   opacity: 1;
   -webkit-transition: opacity 0.2s;
   transition: opacity 0.2s;
-  -webkit-transition-timing-function: cubic-bezier(0.7,0,0.3,1);
-  transition-timing-function: cubic-bezier(0.7,0,0.3,1);
-  -webkit-transform: translate3d(0,0,0);
-  transform: translate3d(0,0,0);
+  -webkit-transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
+  transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+}
+
+details > summary {
+  cursor: pointer;
+  list-style-type: none;
+}
+
+details > summary::-webkit-details-marker {
+  display: none;
+}
+
+details > summary::before {
+  content: "► ";
+}
+
+details[open] > summary::before {
+  content: "▼ ";
 }

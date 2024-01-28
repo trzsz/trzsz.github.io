@@ -3,8 +3,8 @@
 `trzsz` ( trz / tsz ) is a simple file transfer tools, similar to `lrzsz` ( rz / sz ), and compatible with `tmux`.
 
 ```sh
-gem install jekyll
-gem install bundler
+sudo gem install -n /usr/local/bin jekyll
+sudo gem install -n /usr/local/bin bundler
 
 bundle install
 bundle exec jekyll serve

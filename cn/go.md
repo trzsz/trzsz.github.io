@@ -140,7 +140,7 @@ _有关 `trzsz ( trz / tsz )` 更详细的文档，请查看 [https://trzsz.gith
 
   </details>
 
-- 可从 [Releases](https://github.com/trzsz/trzsz-go/releases) 中直接下载适用的版本
+- 可从 [GitHub Releases](https://github.com/trzsz/trzsz-go/releases) 中下载，国内可从 [Gitee 发行版](https://gitee.com/trzsz/trzsz-go/releases) 中下载，解压并加到 `PATH` 环境变量中。
 
 ## 使用方法
 

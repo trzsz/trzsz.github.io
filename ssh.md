@@ -148,7 +148,7 @@ trzsz-ssh ( tssh ) is an ssh client designed as a drop-in replacement for the op
 
   </details>
 
-- Download from the [Releases](https://github.com/trzsz/trzsz-ssh/releases)
+- Download from the [GitHub Releases](https://github.com/trzsz/trzsz-ssh/releases), unzip and add to `PATH` environment.
 
 ## Login Prompt
 
@@ -326,7 +326,7 @@ trzsz-ssh ( tssh ) is an ssh client designed as a drop-in replacement for the op
     EnableZmodem Yes
   ```
 
-- Not only the server, but also the local computer needs to install `lrzsz`. For Windows, you can download and unzip it from [lrzsz-win32](https://github.com/trzsz/lrzsz-win32/releases) and add it to `PATH`, or install it as follows:
+- Not only the server, but also the local computer needs to install `lrzsz`. For Windows, you can download from [lrzsz-win32](https://github.com/trzsz/lrzsz-win32/releases), unzip and add to `PATH` environment, or install it as follows:
 
   ```
   scoop install lrzsz

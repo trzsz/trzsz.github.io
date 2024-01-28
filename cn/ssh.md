@@ -148,7 +148,7 @@ trzsz-ssh ( tssh ) 设计为 ssh 客户端的直接替代品，提供与 openssh
 
   </details>
 
-- 可从 [Releases](https://github.com/trzsz/trzsz-ssh/releases) 中直接下载适用的版本
+- 可从 [GitHub Releases](https://github.com/trzsz/trzsz-ssh/releases) 中下载，国内可从 [Gitee 发行版](https://gitee.com/trzsz/tssh/releases) 中下载，解压并加到 `PATH` 环境变量中。
 
 ## 登录界面
 
@@ -326,7 +326,7 @@ trzsz-ssh ( tssh ) 设计为 ssh 客户端的直接替代品，提供与 openssh
     EnableZmodem Yes
   ```
 
-- 除了服务器，本地电脑也要安装 `lrzsz`，Windows 可以从 [lrzsz-win32](https://github.com/trzsz/lrzsz-win32/releases) 下载解压并加到 `PATH` 中，也可以如下安装：
+- 除了服务器，本地电脑也要安装 `lrzsz`，Windows 可以从 [lrzsz-win32](https://github.com/trzsz/lrzsz-win32/releases) 下载，解压并加到 `PATH` 环境变量中，也可以如下安装：
 
   ```
   scoop install lrzsz
