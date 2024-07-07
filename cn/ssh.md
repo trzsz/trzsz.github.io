@@ -123,7 +123,7 @@ trzsz-ssh ( tssh ) 设计为 ssh 客户端的直接替代品，提供与 openssh
 
   </details>
 
-- 用 Go 直接安装（ 要求 go 1.20 以上 ）
+- 用 Go 直接安装（ 要求 go 1.21 以上 ）
 
   <details><summary><code>go install github.com/trzsz/trzsz-ssh/cmd/tssh@latest</code></summary>
 
@@ -135,7 +135,7 @@ trzsz-ssh ( tssh ) 设计为 ssh 客户端的直接替代品，提供与 openssh
 
   </details>
 
-- 用 Go 自己编译（ 要求 go 1.20 以上 ）
+- 用 Go 自己编译（ 要求 go 1.21 以上 ）
 
   <details><summary><code>sudo make install</code></summary>
 
@@ -666,6 +666,29 @@ trzsz-ssh ( tssh ) 设计为 ssh 客户端的直接替代品，提供与 openssh
 
   - 如果在 `~/.tssh.conf` 中设置了 `SetTerminalTitle = Yes`，则会在登录后自动设置终端标题，但是服务器上的 `PROMPT_COMMAND` 会覆盖 `tssh` 设置的标题。
   - 在 `tssh` 退出后不会重置为原来的标题，你需要在本地 shell 中设置 `PROMPT_COMMAND`，让它覆盖 `tssh` 设置的标题。
+
+## UDP 模式
+
+- 在服务器上安装 [tsshd](https://github.com/trzsz/tsshd)，使用 `tssh --udp xxx` 登录服务器，或者如下配置以省略 `--udp` 参数：
+
+  ```
+  Host xxx
+      #!! UdpMode yes
+      #!! TsshdPath ~/go/bin/tsshd
+  ```
+
+- `tssh` 在客户端扮演 `ssh` 的角色，`tsshd` 在服务端扮演 `sshd` 的角色。
+
+- `tssh` 会先作为一个 ssh 客户端正常登录到服务器上，然后在服务器上启动一个新的 `tsshd` 进程。
+
+- `tsshd` 进程会随机侦听一个 61000 到 62000 之间的 UDP 端口，并将其端口和密钥通过 ssh 通道发回给 `tssh` 进程。登录的 ssh 连接会被关闭，然后 `tssh` 进程通过 UDP 与 `tsshd` 进程通讯。
+
+- `tsshd` 支持 `QUIC` 协议和 `KCP` 协议（默认是 `QUIC` 协议），可以命令行指定（如 `-oUdpMode=KCP`），或如下配置：
+
+  ```
+  Host xxx
+      #!! UdpMode KCP
+  ```
 
 ## 故障排除
 

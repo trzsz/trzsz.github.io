@@ -123,7 +123,7 @@ trzsz-ssh ( tssh ) is an ssh client designed as a drop-in replacement for the op
 
   </details>
 
-- Install with Go ( Requires go 1.20 or later )
+- Install with Go ( Requires go 1.21 or later )
 
   <details><summary><code>go install github.com/trzsz/trzsz-ssh/cmd/tssh@latest</code></summary>
 
@@ -135,7 +135,7 @@ trzsz-ssh ( tssh ) is an ssh client designed as a drop-in replacement for the op
 
   </details>
 
-- Build from source ( Requires go 1.20 or later )
+- Build from source ( Requires go 1.21 or later )
 
   <details><summary><code>sudo make install</code></summary>
 
@@ -668,6 +668,29 @@ trzsz-ssh ( tssh ) is an ssh client designed as a drop-in replacement for the op
 
   - If `SetTerminalTitle = Yes` is set in `~/.tssh.conf`, the terminal title is automatically set after login, but `PROMPT_COMMAND` on the server overrides the title set by `tssh`.
   - `tssh` does not reset to the original title after exiting, you need to set `PROMPT_COMMAND` in the local shell so that it overrides the title set by `tssh`.
+
+## UDP Mode
+
+- Install [tsshd](https://github.com/trzsz/tsshd) on the server, use `tssh --udp xxx` to login to the server, or configure as follows to omit `--udp`:
+
+  ```
+  Host xxx
+      #!! UdpMode yes
+      #!! TsshdPath ~/go/bin/tsshd
+  ```
+
+- The `tssh` plays the role of `ssh` on the client side, and the `tsshd` plays the role of `sshd` on the server side.
+
+- The `tssh` will first login to the server normally as an ssh client, and then run a new `tsshd` process on the server.
+
+- The `tsshd` process listens on a random udp port between 61000 and 62000, and sends its port number and a secret key back to the `tssh` process over the ssh channel. The ssh connection is then shut down, and the `tssh` process communicates with the `tsshd` process over udp.
+
+- The `tsshd` supports `QUIC` protocol and `KCP` protocol (the default is `QUIC`), which can be specified on the command line (such as `-oUdpMode=KCP`), or configured as follows:
+
+  ```
+  Host xxx
+      #!! UdpMode KCP
+  ```
 
 ## Trouble shooting
 
