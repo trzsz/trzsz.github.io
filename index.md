@@ -96,7 +96,7 @@ layout: default
 #### `trz` upload files to the remote server
 
 ```
-usage: trz [-h] [-v] [-q] [-y] [-b] [-e] [-d] [-B N] [-t N] [path]
+usage: trz [-h] [-v] [-q] [-y] [-b] [-e] [-d] [-r] [-f] [-B N] [-t N] [-c yes/no/auto] [path]
 
 Receive file(s), similar to rz and compatible with tmux.
 
@@ -112,15 +112,17 @@ optional arguments:
   -e, --escape       escape all known control characters
   -d, --directory    transfer directories and files
   -r, --recursive    transfer directories and files, same as -d
+  -f, --fork         fork to transfer in background (implies -q)
   -B N, --bufsize N  max buffer chunk size (1K<=N<=1G). (default: 10M)
   -t N, --timeout N  timeout ( N seconds ) for each buffer chunk.
                      N <= 0 means never timeout. (default: 20)
+  -c yes/no/auto, --compress yes/no/auto   compress type (default: auto)
 ```
 
 #### `tsz` download files from the remote server
 
 ```
-usage: tsz [-h] [-v] [-q] [-y] [-b] [-e] [-d] [-B N] [-t N] file [file ...]
+usage: tsz [-h] [-v] [-q] [-y] [-b] [-e] [-d] [-r] [-f] [-B N] [-t N] [-c yes/no/auto] file [file ...]
 
 Send file(s), similar to sz and compatible with tmux.
 
@@ -136,9 +138,11 @@ optional arguments:
   -e, --escape       escape all known control characters
   -d, --directory    transfer directories and files
   -r, --recursive    transfer directories and files, same as -d
+  -f, --fork         fork to transfer in background (implies -q)
   -B N, --bufsize N  max buffer chunk size (1K<=N<=1G). (default: 10M)
   -t N, --timeout N  timeout ( N seconds ) for each buffer chunk.
                      N <= 0 means never timeout. (default: 20)
+  -c yes/no/auto, --compress yes/no/auto   compress type (default: auto)
 ```
 
 #### Trouble shooting

@@ -304,6 +304,14 @@ trzsz-ssh ( tssh ) 设计为 ssh 客户端的直接替代品，提供与 openssh
     EnableDragFile Yes
   ```
 
+- 如果想在拖拽上传时覆盖现有文件，请将 `DragFileUploadCommand` 配置为 `trz -y` ：
+
+  ```
+  Host xxx
+    # 如果配置在 ~/.ssh/config 中，可以加上 `#!!` 前缀，以兼容标准 ssh
+    DragFileUploadCommand trz -y
+  ```
+
 - 如果只是想临时启用拖拽上传功能，可以在命令行中使用 `tssh --dragfile` 登录服务器。
 
 - 在 `~/.ssh/config` 或 `ExConfigPath` 配置文件中，配置 `EnableTrzsz` 为 `No` 禁用 trzsz 和 zmodem。
@@ -312,6 +320,18 @@ trzsz-ssh ( tssh ) 设计为 ssh 客户端的直接替代品，提供与 openssh
   Host no_trzsz_nor_zmodem
     # 如果配置在 ~/.ssh/config 中，可以加上 `#!!` 前缀，以兼容标准 ssh
     EnableTrzsz No
+  ```
+
+- 可使用 `--upload-file` 参数在命令行中指定文件或目录直接上传，也可在服务器后面指定 `trz` 上传命令参数和保存路径，如：
+
+  ```sh
+  tssh --upload-file /path/to/file1 --upload-file /path/to/dir2 xxx_server '~/.local/bin/trz -d /tmp/'
+  ```
+
+- 可在命令行中使用 `tsz` 直接下载文件或目录到本地，可一并使用 `--download-path` 参数指定本地保存的路径，如：
+
+  ```sh
+  tssh -t --client --download-path /tmp/ xxx_server 'tsz -d /path/to/file1 /path/to/dir2'
   ```
 
 ![tssh trzsz](https://trzsz.github.io/images/tssh_trzsz.gif)
@@ -324,6 +344,15 @@ trzsz-ssh ( tssh ) 设计为 ssh 客户端的直接替代品，提供与 openssh
   Host *
     # 如果配置在 ~/.ssh/config 中，可以加上 `#!!` 前缀，以兼容标准 ssh
     EnableZmodem Yes
+  ```
+
+- 如果想在拖拽文件时使用 rz 上传，请将 `DragFileUploadCommand` 配置为 `rz` ：
+
+  ```
+  Host xxx
+    # 如果配置在 ~/.ssh/config 中，可以加上 `#!!` 前缀，以兼容标准 ssh
+    EnableDragFile Yes
+    DragFileUploadCommand rz
   ```
 
 - 除了服务器，本地电脑也要安装 `lrzsz`，Windows 可以从 [lrzsz-win32](https://github.com/trzsz/lrzsz-win32/releases) 下载，解压并加到 `PATH` 环境变量中，也可以如下安装：
@@ -339,6 +368,18 @@ trzsz-ssh ( tssh ) 设计为 ssh 客户端的直接替代品，提供与 openssh
 - 如果只是想临时启用 `rz / sz` 传文件功能，可以在命令行中使用 `tssh --zmodem` 登录服务器。
 
 - 关于 `rz / sz` 进度条，己传大小和传输速度会有一点偏差，它的主要作用只是指示传输正在进行中。
+
+- 可使用 `--upload-file` 参数在命令行中指定文件直接上传，在服务器后面 `cd` 到保存路径再指定 `rz` 命令及参数即可，如：
+
+  ```sh
+  tssh --upload-file /path/to/file1 --upload-file /path/to/file2 xxx_server 'cd /tmp/ && rz -yeb'
+  ```
+
+- 可在命令行中使用 `sz` 直接下载文件到本地，可一并使用 `--download-path` 参数指定本地保存的路径，如：
+
+  ```sh
+  tssh -t --client --zmodem --download-path /tmp/ xxx_server 'sz /path/to/file1 /path/to/file2'
+  ```
 
 ## 批量登录
 
@@ -559,6 +600,14 @@ trzsz-ssh ( tssh ) 设计为 ssh 客户端的直接替代品，提供与 openssh
       encotp636f64653a20 77b4ce85d087b39909e563efb165659b22b9ea700a537f1258bdf56ce6fdd6ea70bc7591ea5c01918537a65433133bc0bd5ed3e4
   ```
 
+- 可以自己实现获取动态密码的程序，指定 `%q` 参数可以得到问题内容，将动态密码输出到 stdout 并正常退出即可，调试信息可以输出到 stderr （ `tssh --debug` 运行时可以看到 ）。配置举例（序号代表第几个问题，一般只有一个问题，只需配置 `OtpCommand1` 即可）：
+
+  ```
+  Host custom_otp_command
+      #!! OtpCommand1 /path/to/your_own_program %q
+      #!! OtpCommand2 python C:\your_python_code.py %q
+  ```
+
 - 如果启用了 `ControlMaster` 多路复用，或者是在 `Warp` 终端，请参考前面 `自动交互` 加 `Ctrl` 前缀来实现。
 
   ```
@@ -591,6 +640,12 @@ trzsz-ssh ( tssh ) 设计为 ssh 客户端的直接替代品，提供与 openssh
 
   # tsz 下载时，自动保存的路径，为空时弹出对话框手工选择，默认为空
   DefaultDownloadPath = ~/Downloads
+
+  # 全局的拖拽文件上传命令，注意 ~/.ssh/config 中配置的优先级更高
+  DragFileUploadCommand = trz -y
+
+  # trzsz 进度条将从第一种颜色渐变到第二种颜色。注意不要带 `#`。
+  ProgressColorPair = B14FFF 00FFA3
 
   # tssh 搜索和选择服务器时，配置主题风格和自定义颜色
   PromptThemeLayout = simple
@@ -627,6 +682,20 @@ trzsz-ssh ( tssh ) 设计为 ssh 客户端的直接替代品，提供与 openssh
 - `#` 开头的配置行，`openssh` 一律认为是注释；`tssh` 认为 `#!!` 开头的配置行不是注释，其他以 `#` 开头的配置行是注释。
 - `Key Value # Comment` 配置（没有 `=` 号），`openssh` 有些情况认为 `#` 后的内容是注释，有些情况认为不是注释；`tssh` 一律认为 `#` 后的内容是注释。
 - `Key=Value # Comment` 配置（有 `=` 号），`openssh` 有些情况认为 `#` 后的内容是注释，有些情况认为不是注释；`tssh` 一律认为 `#` 后的内容不是注释。
+
+## 剪贴板集成
+
+- 在 `~/.ssh/config` 或 `ExConfigPath` 配置文件中，配置 `EnableOSC52` 为 `Yes` 启用剪贴板集成功能。
+
+  ```
+  Host *
+    # 如果配置在 ~/.ssh/config 中，可以加上 `#!!` 前缀，以兼容标准 ssh
+    EnableOSC52 Yes
+  ```
+
+- 启用剪贴板集成功能后，支持远程服务器通过 OSC52 序列写入本地剪贴板。
+
+- 在 Linux 系统，剪贴板集成功能需要安装 `xclip` 或 `xsel` 命令。
 
 ## 其他功能
 
@@ -674,6 +743,7 @@ trzsz-ssh ( tssh ) 设计为 ssh 客户端的直接替代品，提供与 openssh
   ```
   Host xxx
       #!! UdpMode yes
+      #!! UdpPort 61000-62000
       #!! TsshdPath ~/go/bin/tsshd
   ```
 
@@ -681,7 +751,7 @@ trzsz-ssh ( tssh ) 设计为 ssh 客户端的直接替代品，提供与 openssh
 
 - `tssh` 会先作为一个 ssh 客户端正常登录到服务器上，然后在服务器上启动一个新的 `tsshd` 进程。
 
-- `tsshd` 进程会随机侦听一个 61000 到 62000 之间的 UDP 端口，并将其端口和密钥通过 ssh 通道发回给 `tssh` 进程。登录的 ssh 连接会被关闭，然后 `tssh` 进程通过 UDP 与 `tsshd` 进程通讯。
+- `tsshd` 进程会随机侦听一个 61000 到 62000 之间的 UDP 端口（可通过 `UdpPort` 配置自定义），并将其端口和密钥通过 ssh 通道发回给`tssh`进程。登录的 ssh 连接会被关闭，然后`tssh`进程通过 UDP 与`tsshd` 进程通讯。
 
 - `tsshd` 支持 `QUIC` 协议和 `KCP` 协议（默认是 `QUIC` 协议），可以命令行指定（如 `-oUdpMode=KCP`），或如下配置：
 
@@ -700,7 +770,17 @@ trzsz-ssh ( tssh ) 设计为 ssh 客户端的直接替代品，提供与 openssh
 
   - 软链后，`ssh -V` 应输出 `trzsz ssh` 加版本号，如果不是，说明软链不成功，或者在 `PATH` 中 `openssh` 的优先级更高，你要软链到另一个地方或者调整 `PATH` 的优先级。
 
-  - 软链后，要直接使用 `ssh`，它等价于 `tssh`。如果还是用 `tssh` 是不会支持分块 Blocks 功能的。
+  - 为了让 `tssh` 搜索登录也支持分块 Blocks 功能，需要在 `~/.bash_profile` ( bash ) 或 `~/.zshrc` ( zsh ) 中建一个 `tssh` 函数：
+
+    ```sh
+    tssh() {
+        if [ $# -eq 0 ]; then
+            ssh FAKE_DEST_IN_WARP
+        else
+            ssh "$@"
+        fi
+    }
+    ```
 
   - `--dragfile` 参数可能会让 Warp 分块功能失效，请参考前文配置 `EnableDragFile` 来启用拖拽功能。
 
@@ -709,6 +789,8 @@ trzsz-ssh ( tssh ) 设计为 ssh 客户端的直接替代品，提供与 openssh
 - 如果你在使用 Windows7 或者旧版本的 Windows10 等，遇到 `enable virtual terminal failed` 的错误。
 
   - 可以尝试在 [Cygwin](https://www.cygwin.com/)、[MSYS2](https://www.msys2.org/) 或 [Git Bash](https://www.atlassian.com/git/tutorials/git-bash) 内使用 `tssh`。
+
+  - 从 `v0.1.21` 起，默认的 Windows 版本不再支持 Windows7，需要在 [Releases](https://github.com/trzsz/trzsz-ssh/releases) 中下载带有 `win7` 关键字的版本来使用。
 
 - 如果在 `~/.ssh/config` 中配置了 `tssh` 特有的配置项后，标准 `ssh` 报错 `Bad configuration option`。
 

@@ -138,6 +138,14 @@ tsz file1 file2 file3
 
 `trz -t 30` 或 `tsz -t 30 xxx` 等，设置超时秒数 ( 默认 20 秒 )。在超时时间内，如果无法传完一个缓冲区大小的数据则会报错并退出。设置为 0 或负数，则永不超时。
 
+#### `-c` 压缩模式
+
+`trz -c yes` 或 `tsz -c no xxx` 等（ 加上 `-c` 选项，指定 `yes`、`no` 或 `auto` 三者之一 ），可指定传输前是否压缩，默认是 `auto` 自动判断是否压缩会更快。
+
+#### `-f` 后台传输
+
+`trz -f` 或 `tsz -f xxx` ( 加上 `-f` 选项 )，则进入后台传输模式，不阻塞其他输入和输出。要求服务端使用 [go 版](https://github.com/trzsz/trzsz-go) v1.1.8 以上，客户端使用 [tssh](https://github.com/trzsz/trzsz-ssh) v0.1.22 以上，并且中间无跳板机才生效。
+
 #### 异常处理方法
 
 - 如果 `tmux` 是运行在本地电脑上。

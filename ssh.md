@@ -304,6 +304,14 @@ trzsz-ssh ( tssh ) is an ssh client designed as a drop-in replacement for the op
     EnableDragFile Yes
   ```
 
+- If you want to overwrite the existing files when dragging files to upload, configure `DragFileUploadCommand` to `trz -y`:
+
+  ```
+  Host xxx
+    # If configured in ~/.ssh/config, add `#!!` prefix to be compatible with openssh.
+    DragFileUploadCommand trz -y
+  ```
+
 - If you want to temporarily enable the drag and drop to upload feature, use `tssh --dragfile` to log in.
 
 - In the `~/.ssh/config` or `ExConfigPath` configuration file, configure `EnableTrzsz` to `No` to disable the trzsz and zmodem feature.
@@ -312,6 +320,18 @@ trzsz-ssh ( tssh ) is an ssh client designed as a drop-in replacement for the op
   Host no_trzsz_nor_zmodem
     # If configured in ~/.ssh/config, add `#!!` prefix to be compatible with openssh.
     EnableTrzsz No
+  ```
+
+- You can use the `--upload-file` argument to specify file or directory to upload directly in the command line, and you can specify the `trz` upload command arguments and save path after the server, such as:
+
+  ```sh
+  tssh --upload-file /path/to/file1 --upload-file /path/to/dir2 xxx_server '~/.local/bin/trz -d /tmp/'
+  ```
+
+- You can use `tsz` in the command line to directly download files and directories to your local computer. You can also use the `--download-path` argument to specify the path for local saving, such as:
+
+  ```sh
+  tssh -t --client --download-path /tmp/ xxx_server 'tsz -d /path/to/file1 /path/to/dir2'
   ```
 
 ![tssh trzsz](https://trzsz.github.io/images/tssh_trzsz.gif)
@@ -324,6 +344,15 @@ trzsz-ssh ( tssh ) is an ssh client designed as a drop-in replacement for the op
   Host *
     # If configured in ~/.ssh/config, add `#!!` prefix to be compatible with openssh.
     EnableZmodem Yes
+  ```
+
+- If you want to use `rz` to upload when dragging files, configure `DragFileUploadCommand` to `rz`:
+
+  ```
+  Host xxx
+    # If configured in ~/.ssh/config, add `#!!` prefix to be compatible with openssh.
+    EnableDragFile Yes
+    DragFileUploadCommand rz
   ```
 
 - Not only the server, but also the local computer needs to install `lrzsz`. For Windows, you can download from [lrzsz-win32](https://github.com/trzsz/lrzsz-win32/releases), unzip and add to `PATH` environment, or install it as follows:
@@ -339,6 +368,18 @@ trzsz-ssh ( tssh ) is an ssh client designed as a drop-in replacement for the op
 - If you want to temporarily enable the zmodem ( rz / sz ) feature, use `tssh --zmodem` to log in.
 
 - About the progress, the transferred and speed are not precise. It just indicating that the transfer is in progress.
+
+- You can use the `--upload-file` argument to specify file to upload directly in the command line, and `cd` to the save path and specify the `rz` command with arguments after the server, such as:
+
+  ```sh
+  tssh --upload-file /path/to/file1 --upload-file /path/to/file2 xxx_server 'cd /tmp/ && rz -yeb'
+  ```
+
+- You can use `sz` in the command line to directly download files to your local computer. You can also use the `--download-path` argument to specify the path for local saving, such as:
+
+  ```sh
+  tssh -t --client --zmodem --download-path /tmp/ xxx_server 'sz /path/to/file1 /path/to/file2'
+  ```
 
 ## Batch Login
 
@@ -559,6 +600,14 @@ trzsz-ssh ( tssh ) is an ssh client designed as a drop-in replacement for the op
       encotp636f64653a20 77b4ce85d087b39909e563efb165659b22b9ea700a537f1258bdf56ce6fdd6ea70bc7591ea5c01918537a65433133bc0bd5ed3e4
   ```
 
+- You can write a program to obtain the one-time password. Specify the `%q` argument if you want to get the question. Just output the one-time password to stdout and exit with 0, and the debugging information can be output to stderr (you can see it when running `tssh --debug`). Configuration example (the serial number represents the number of questions, generally there is only one question, just configure `OtpCommand1`):
+
+  ```
+  Host custom_otp_command
+      #!! OtpCommand1 /path/to/your_own_program %q
+      #!! OtpCommand2 python C:\your_python_code.py %q
+  ```
+
 - If `ControlMaster` multiplexing is enabled or using `Warp` terminal, you will need to use the `Automated Interaction` mentioned earlier to achieve remembering answers.
 
   ```
@@ -591,6 +640,12 @@ trzsz-ssh ( tssh ) is an ssh client designed as a drop-in replacement for the op
 
   # The automatically save path for tsz downloading, the default is empty which poping up a folder dialog.
   DefaultDownloadPath = ~/Downloads
+
+  # The global drag file upload command, note that the priority configured in ~/.ssh/config is higher.
+  DragFileUploadCommand = trz -y
+
+  # The trzsz progress bar will gradient from the first color to the second color. Don't include `#`.
+  ProgressColorPair = B14FFF 00FFA3
 
   # When searching and selecting servers with tssh, the theme and colors.
   PromptThemeLayout = simple
@@ -629,6 +684,20 @@ trzsz-ssh ( tssh ) is an ssh client designed as a drop-in replacement for the op
 - `Key Value # Comment` configuration (without `=` sign), `openssh` considers the content after `#` to be a comment in some cases, and considers it not to be a comment in some other cases; `tssh` always considers the content after `#` to be a comment.
 
 - `Key=Value # Comment` configuration (with `=` sign), `openssh` considers the content after `#` to be a comment in some cases, and considers it not to be a comment in some other cases; `tssh` always considers the content after `#` not to be a comment.
+
+## Clipboard Integration
+
+- In the `~/.ssh/config` or `ExConfigPath` configuration file, configure `EnableOSC52` to `Yes` to enable the clipboard integration feature.
+
+  ```
+  Host *
+    # If configured in ~/.ssh/config, add `#!!` prefix to be compatible with openssh.
+    EnableOSC52 Yes
+  ```
+
+- Clipboard integration allows remote servers to write to the local clipboard via OSC52 sequences.
+
+- On Linux, clipboard integration requires `xclip` or `xsel` command to be installed.
 
 ## Other Features
 
@@ -676,6 +745,7 @@ trzsz-ssh ( tssh ) is an ssh client designed as a drop-in replacement for the op
   ```
   Host xxx
       #!! UdpMode yes
+      #!! UdpPort 61000-62000
       #!! TsshdPath ~/go/bin/tsshd
   ```
 
@@ -683,7 +753,7 @@ trzsz-ssh ( tssh ) is an ssh client designed as a drop-in replacement for the op
 
 - The `tssh` will first login to the server normally as an ssh client, and then run a new `tsshd` process on the server.
 
-- The `tsshd` process listens on a random udp port between 61000 and 62000, and sends its port number and a secret key back to the `tssh` process over the ssh channel. The ssh connection is then shut down, and the `tssh` process communicates with the `tsshd` process over udp.
+- The `tsshd` process listens on a random udp port between 61000 and 62000 (can be customized by `UdpPort`), and sends its port number and a secret key back to the `tssh`process over the ssh channel. The ssh connection is then shut down, and the`tssh`process communicates with the`tsshd` process over udp.
 
 - The `tsshd` supports `QUIC` protocol and `KCP` protocol (the default is `QUIC`), which can be specified on the command line (such as `-oUdpMode=KCP`), or configured as follows:
 
@@ -694,7 +764,7 @@ trzsz-ssh ( tssh ) is an ssh client designed as a drop-in replacement for the op
 
 ## Trouble shooting
 
-- In the Warp terminal, the features like Blocks requires renaming `tssh` to `ssh`. It is recommended to create a soft link (friendly for updates):
+- In the Warp terminal, the features like blocks requires renaming `tssh` to `ssh`. It is recommended to create a soft link (friendly for updates):
 
   ```
   sudo ln -sv $(which tssh) /usr/local/bin/ssh
@@ -702,7 +772,17 @@ trzsz-ssh ( tssh ) is an ssh client designed as a drop-in replacement for the op
 
   - After the soft link, `ssh -V` should output `trzsz ssh` plus the version number. If not, it means that the soft link is unsuccessful, or `openssh` has a higher priority in `PATH`, and you need to soft link to another path or adjust the priority of `PATH`.
 
-  - After the soft link, you need to use `ssh` directly, which is equivalent to `tssh`. If you still use `tssh`, it will not support the Blocks feature.
+  - In order to make `tssh` search login also support the blocks feature, you need to create a `tssh` function in `~/.bash_profile` ( bash ) or `~/.zshrc` ( zsh ):
+
+    ```sh
+    tssh() {
+        if [ $# -eq 0 ]; then
+            ssh FAKE_DEST_IN_WARP
+        else
+            ssh "$@"
+        fi
+    }
+    ```
 
   - The `--dragfile` argument may disable the Warp features, please refer to the previous section to configure `EnableDragFile` to enable the drag and drop to upload feature.
 
@@ -711,6 +791,8 @@ trzsz-ssh ( tssh ) is an ssh client designed as a drop-in replacement for the op
 - If you are using Windows7 or an older version of Windows10, and getting an error `enable virtual terminal failed`.
 
   - Try using `tssh` in [Cygwin](https://www.cygwin.com/), [MSYS2](https://www.msys2.org/) or [Git Bash](https://www.atlassian.com/git/tutorials/git-bash).
+
+  - Since `v0.1.21`, the default Windows version no longer supports Windows7, you need to download the version with the `win7` keyword in [Releases](https://github.com/trzsz/trzsz-ssh/releases) to use.
 
 - If the `tssh` specific configuration items are configured in `~/.ssh/config`, and openssh report an error `Bad configuration option`.
 
