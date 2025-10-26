@@ -123,7 +123,7 @@ trzsz-ssh ( tssh ) 设计为 ssh 客户端的直接替代品，提供与 openssh
 
   </details>
 
-- 用 Go 直接安装（ 要求 go 1.21 以上 ）
+- 用 Go 直接安装（ 要求 go 1.25 以上 ）
 
   <details><summary><code>go install github.com/trzsz/trzsz-ssh/cmd/tssh@latest</code></summary>
 
@@ -135,7 +135,7 @@ trzsz-ssh ( tssh ) 设计为 ssh 客户端的直接替代品，提供与 openssh
 
   </details>
 
-- 用 Go 自己编译（ 要求 go 1.21 以上 ）
+- 用 Go 自己编译（ 要求 go 1.25 以上 ）
 
   <details><summary><code>sudo make install</code></summary>
 
@@ -186,18 +186,18 @@ trzsz-ssh ( tssh ) 设计为 ssh 客户端的直接替代品，提供与 openssh
 
 ## 主题风格
 
-- `tssh` 支持多种主题风格，在 `~/.tssh.conf` 中配置 `PromptThemeLayout` 选用。欢迎一起来创造更多更好看的。
+- `tssh` 支持多种主题风格，在 `$XDG_CONFIG_HOME/tssh/tssh.conf` ( 或 `~/.tssh.conf` ) 中配置 `PromptThemeLayout` 选用。欢迎一起来创造更多更好看的。
 
-- 每种主题风格都支持自定义颜色，在 `~/.tssh.conf` 中配置 `PromptThemeColors`，只要配置非默认的颜色即可。
+- 每种主题风格都支持自定义颜色，在 `$XDG_CONFIG_HOME/tssh/tssh.conf` ( 或 `~/.tssh.conf` ) 中配置 `PromptThemeColors`，只要配置非默认的颜色即可。
 
 - 请为你喜欢的主题风格[❤️投票❤️](https://github.com/trzsz/trzsz-ssh/issues/75)，得票数最高的主题风格将会在下个版本被设置为默认主题。
 
 ### tiny 小巧风
 
-- 在 `~/.tssh.conf` 中配置 `PromptThemeLayout = tiny` 选用 `tiny 小巧风`。
+- 在 `$XDG_CONFIG_HOME/tssh/tssh.conf` ( 或 `~/.tssh.conf` ) 中配置 `PromptThemeLayout = tiny` 选用 `tiny 小巧风`。
   ![tssh tiny](https://trzsz.github.io/images/tssh_tiny.gif)
 
-- 在 `~/.tssh.conf` 中配置 `PromptThemeColors`，要求配置成一行。`tiny 小巧风` 支持以下配置项：
+- 在 `$XDG_CONFIG_HOME/tssh/tssh.conf` ( 或 `~/.tssh.conf` ) 中配置 `PromptThemeColors`，要求配置成一行。`tiny 小巧风` 支持以下配置项：
 
   <details><summary><code>tiny 颜色配置项和默认值：</code></summary>
 
@@ -254,17 +254,17 @@ trzsz-ssh ( tssh ) 设计为 ssh 客户端的直接替代品，提供与 openssh
 
 ### simple 简约风
 
-- 在 `~/.tssh.conf` 中配置 `PromptThemeLayout = simple` 选用 `simple 简约风`。
+- 在 `$XDG_CONFIG_HOME/tssh/tssh.conf` ( 或 `~/.tssh.conf` ) 中配置 `PromptThemeLayout = simple` 选用 `simple 简约风`。
   ![tssh simple](https://trzsz.github.io/images/tssh_simple.gif)
 
 - `simple 简约风` 支持的颜色配置项、默认值和颜色枚举，和 `tiny 小巧风` 完全相同，请参考前文。
 
 ### table 表格风
 
-- 在 `~/.tssh.conf` 中配置 `PromptThemeLayout = table` 选用 `table 表格风`。
+- 在 `$XDG_CONFIG_HOME/tssh/tssh.conf` ( 或 `~/.tssh.conf` ) 中配置 `PromptThemeLayout = table` 选用 `table 表格风`。
   ![tssh table](https://trzsz.github.io/images/tssh_table.gif)
 
-- 在 `~/.tssh.conf` 中配置 `PromptThemeColors`，要求配置成一行。`table 表格风` 支持以下配置项：
+- 在 `$XDG_CONFIG_HOME/tssh/tssh.conf` ( 或 `~/.tssh.conf` ) 中配置 `PromptThemeColors`，要求配置成一行。`table 表格风` 支持以下配置项：
 
   <details><summary><code>table 颜色配置项和默认值：</code></summary>
 
@@ -626,7 +626,7 @@ trzsz-ssh ( tssh ) 设计为 ssh 客户端的直接替代品，提供与 openssh
 
 ## 个性配置
 
-- 支持在 `~/.tssh.conf`（ Windows 是 `C:\Users\your_name\.tssh.conf` ）中进行以下自定义配置：
+- 支持在 `$XDG_CONFIG_HOME/tssh/tssh.conf` ( 或 `~/.tssh.conf`，Windows 是 `C:\Users\your_name\.tssh.conf` ）中进行以下自定义配置：
 
   ```
   # SSH 配置路径，默认为 ~/.ssh/config
@@ -733,8 +733,20 @@ trzsz-ssh ( tssh ) 设计为 ssh 客户端的直接替代品，提供与 openssh
   PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD}\007"'
   ```
 
-  - 如果在 `~/.tssh.conf` 中设置了 `SetTerminalTitle = Yes`，则会在登录后自动设置终端标题，但是服务器上的 `PROMPT_COMMAND` 会覆盖 `tssh` 设置的标题。
+  - 如果在 `$XDG_CONFIG_HOME/tssh/tssh.conf` ( 或 `~/.tssh.conf` ) 中设置了 `SetTerminalTitle = Yes`，则会在登录后自动设置终端标题，但是服务器上的 `PROMPT_COMMAND` 会覆盖 `tssh` 设置的标题。
   - 在 `tssh` 退出后不会重置为原来的标题，你需要在本地 shell 中设置 `PROMPT_COMMAND`，让它覆盖 `tssh` 设置的标题。
+
+- 支持 DNS SRV，假设你家里有多台主机，但你只有一个公网 IP，你可以像下面这样设置 SRV 记录，并在 `~/.ssh/config` 中类似配置：
+
+  ```sh
+  $ dig +short _ssh._tcp.myhost.mydomain.com SRV
+  1 1 22029 gateway.mydomain.com.
+  ```
+
+  ```
+  Host xxx
+    #!! DnsSrvName myhost.mydomain.com
+  ```
 
 ## UDP 模式
 
@@ -743,15 +755,18 @@ trzsz-ssh ( tssh ) 设计为 ssh 客户端的直接替代品，提供与 openssh
   ```
   Host xxx
       #!! UdpMode yes
-      #!! UdpPort 61000-62000
       #!! TsshdPath ~/go/bin/tsshd
+      #!! UdpPort 61000-62000
+      #!! UdpAliveTimeout 86400
   ```
 
 - `tssh` 在客户端扮演 `ssh` 的角色，`tsshd` 在服务端扮演 `sshd` 的角色。
 
 - `tssh` 会先作为一个 ssh 客户端正常登录到服务器上，然后在服务器上启动一个新的 `tsshd` 进程。
 
-- `tsshd` 进程会随机侦听一个 61000 到 62000 之间的 UDP 端口（可通过 `UdpPort` 配置自定义），并将其端口和密钥通过 ssh 通道发回给`tssh`进程。登录的 ssh 连接会被关闭，然后`tssh`进程通过 UDP 与`tsshd` 进程通讯。
+- `tsshd` 进程会随机侦听一个 61000 到 62000 之间的 UDP 端口（可通过 `UdpPort` 配置自定义），并将其端口和密钥通过 ssh 通道发回给 `tssh` 进程。登录的 ssh 连接会被关闭，然后 `tssh` 进程通过 UDP 与 `tsshd` 进程通讯。
+
+- `tsshd` 进程会在网络断开超过 24 小时后退出（默认情况下），可以通过修改 `UdpAliveTimeout` 配置来调整（单位：秒）。
 
 - `tsshd` 支持 `QUIC` 协议和 `KCP` 协议（默认是 `QUIC` 协议），可以命令行指定（如 `-oUdpMode=KCP`），或如下配置：
 
