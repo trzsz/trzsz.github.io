@@ -73,7 +73,18 @@ _有关 `trzsz ( trz / tsz )` 更详细的文档，请查看 [https://trzsz.gith
 
   </details>
 
-- ArchLinux 可用 [yay](https://github.com/Jguer/yay) 安装
+- Linux 可用 dnf 安装
+
+  <details><summary><code>sudo dnf install trzsz</code></summary>
+
+  ```sh
+  sudo dnf copr enable @trzsz/trzsz
+  sudo dnf install trzsz
+  ```
+
+  </details>
+
+- ArchLinux 可用 yay 安装
 
   <details><summary><code>yay -S trzsz</code></summary>
 
@@ -84,18 +95,27 @@ _有关 `trzsz ( trz / tsz )` 更详细的文档，请查看 [https://trzsz.gith
 
   </details>
 
-- MacOS 可用 [homebrew](https://brew.sh/) 安装
+- MacOS 可用 Homebrew 安装
 
   <details><summary><code>brew install trzsz-go</code></summary>
 
   ```sh
-  brew update
   brew install trzsz-go
   ```
 
   </details>
 
-- Windows 可用 [scoop](https://scoop.sh/) / [winget](https://learn.microsoft.com/zh-cn/windows/package-manager/winget/) / [choco](https://community.chocolatey.org/) 安装
+- ChromeOS 可用 Chromebrew 安装
+
+  <details><summary><code>crew install trzsz</code></summary>
+
+  ```sh
+  crew install trzsz
+  ```
+
+  </details>
+
+- Windows 可用 scoop / winget / choco 安装
 
   <details><summary><code>scoop install trzsz</code> / <code>winget install trzsz</code> / <code>choco install trzsz</code></summary>
 
@@ -113,7 +133,7 @@ _有关 `trzsz ( trz / tsz )` 更详细的文档，请查看 [https://trzsz.gith
 
   </details>
 
-- 用 Go 直接安装（ 要求 go 1.20 以上 ）
+- 用 Go 直接安装（ 要求 go 1.25 以上 ）
 
   <details><summary><code>go install github.com/trzsz/trzsz-go/cmd/...@latest</code></summary>
 
@@ -127,7 +147,7 @@ _有关 `trzsz ( trz / tsz )` 更详细的文档，请查看 [https://trzsz.gith
 
   </details>
 
-- 用 Go 自己编译（ 要求 go 1.20 以上 ）
+- 用 Go 自己编译（ 要求 go 1.25 以上 ）
 
   <details><summary><code>sudo make install</code></summary>
 
@@ -140,7 +160,25 @@ _有关 `trzsz ( trz / tsz )` 更详细的文档，请查看 [https://trzsz.gith
 
   </details>
 
-- 可从 [GitHub Releases](https://github.com/trzsz/trzsz-go/releases) 中下载，国内可从 [Gitee 发行版](https://gitee.com/trzsz/trzsz-go/releases) 中下载，解压并加到 `PATH` 环境变量中。
+- 可从 [GitHub Releases](https://github.com/trzsz/trzsz-go/releases) 中下载，国内可从 [Gitee 发行版](https://gitee.com/trzsz/trzsz-go/releases) 中下载，然后本地安装。
+
+  <details><summary><code>下载并本地安装</code></summary>
+
+  ```sh
+  sudo apt install /tmp/trzsz_*.deb
+
+  sudo dpkg -i /tmp/trzsz_*.deb
+
+  sudo dnf install /tmp/trzsz_*.rpm
+
+  sudo yum install /tmp/trzsz_*.rpm
+
+  sudo rpm -i /tmp/trzsz_*.rpm
+
+  tar zxvf trzsz_*.tar.gz && sudo cp trzsz_*/t* /usr/bin/
+  ```
+
+  </details>
 
 ## 使用方法
 
@@ -183,19 +221,6 @@ _有关 `trzsz ( trz / tsz )` 更详细的文档，请查看 [https://trzsz.gith
 
 - 如果在本地电脑使用 `tmux`，先不带 `trzsz` 运行 `tmux`，然后再使用 `trzsz ssh` 登录远程服务器。
 
-## 可配置项
-
-`trzsz` 使用的配置文件是 `~/.trzsz.conf`（ Windows 是 `C:\Users\your_name\.trzsz.conf` ）。注意路径必须包含 `/` 结尾，如：
-
-```
-DefaultUploadPath =
-DefaultDownloadPath = /Users/username/Downloads/
-```
-
-- 如果 `DefaultUploadPath` 不为空，上传选择文件时会默认打开此目录。
-
-- 如果 `DefaultDownloadPath` 不为空，下载文件时会自动下载到此目录（ 不需要再弹窗选择路径 ）。
-
 ## 支持 Zmodem
 
 - 使用 `-z` 或 `--zmodem` 启用 `rz / sz` 功能，例如 `trzsz -z ssh remote_server`。
@@ -205,6 +230,33 @@ DefaultDownloadPath = /Users/username/Downloads/
 - `trzsz --zmodem ssh xxx` 不兼容 Windows，你可以使用 [trzsz-ssh ( tssh )](https://trzsz.github.io/cn/ssh) 代替，如 `tssh --zmodem xxx`。
 
 - 关于进度条，己传文件大小和传输速度不是精确值，会有一些偏差，它的主要作用只是指示传输正在进行中。
+
+## 剪贴板集成
+
+- 使用 `-o` 或 `--osc52` 启用剪贴板集成功能，例如 `trzsz -o ssh remote_server`。
+
+- 启用剪贴板集成功能后，支持远程服务器通过 OSC52 序列写入本地剪贴板。
+
+- 在 Linux 系统，剪贴板集成功能需要安装 `xclip` 或 `xsel` 命令。
+
+## 可配置项
+
+`trzsz` 使用的配置文件是 `~/.trzsz.conf`（ Windows 是 `C:\Users\your_name\.trzsz.conf` ），如：
+
+```
+DefaultUploadPath =
+DefaultDownloadPath = /Users/username/Downloads/
+DragFileUploadCommand = trz -y
+ProgressColorPair = B14FFF 00FFA3
+```
+
+- 如果 `DefaultUploadPath` 不为空，上传选择文件时会默认打开此目录。
+
+- 如果 `DefaultDownloadPath` 不为空，下载文件时会自动下载到此目录（ 不需要再弹窗选择路径 ）。
+
+- `DragFileUploadCommand` 的默认值是 `trz`，如果想上传时覆盖现有文件可配置成 `trz -y`，如果想使用 `rz` 上传可配置成 `rz`。
+
+- `ProgressColorPair` 配置进度条的颜色，需要配置 2 个颜色并且不要带 `#`，进度条将从第一个颜色渐变到第二个颜色。
 
 ## 常见问题
 

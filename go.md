@@ -73,7 +73,18 @@ _Please check [https://trzsz.github.io](https://trzsz.github.io) for more inform
 
   </details>
 
-- Install with [yay](https://github.com/Jguer/yay) on ArchLinux
+- Install with dnf on Linux
+
+  <details><summary><code>sudo dnf install trzsz</code></summary>
+
+  ```sh
+  sudo dnf copr enable @trzsz/trzsz
+  sudo dnf install trzsz
+  ```
+
+  </details>
+
+- Install with yay on ArchLinux
 
   <details><summary><code>yay -S trzsz</code></summary>
 
@@ -84,18 +95,27 @@ _Please check [https://trzsz.github.io](https://trzsz.github.io) for more inform
 
   </details>
 
-- Install with [homebrew](https://brew.sh/) on MacOS
+- Install with Homebrew on MacOS
 
   <details><summary><code>brew install trzsz-go</code></summary>
 
   ```sh
-  brew update
   brew install trzsz-go
   ```
 
   </details>
 
-- Install with [scoop](https://scoop.sh/) / [winget](https://learn.microsoft.com/en-us/windows/package-manager/winget/) / [choco](https://community.chocolatey.org/) on Windows
+- Install with Chromebrew on ChromeOS
+
+  <details><summary><code>crew install trzsz</code></summary>
+
+  ```sh
+  crew install trzsz
+  ```
+
+  </details>
+
+- Install with scoop / winget / choco on Windows
 
   <details><summary><code>scoop install trzsz</code> / <code>winget install trzsz</code> / <code>choco install trzsz</code></summary>
 
@@ -113,7 +133,7 @@ _Please check [https://trzsz.github.io](https://trzsz.github.io) for more inform
 
   </details>
 
-- Install with Go ( Requires go 1.20 or later )
+- Install with Go ( Requires go 1.25 or later )
 
   <details><summary><code>go install github.com/trzsz/trzsz-go/cmd/...@latest</code></summary>
 
@@ -127,7 +147,7 @@ _Please check [https://trzsz.github.io](https://trzsz.github.io) for more inform
 
   </details>
 
-- Build from source ( Requires go 1.20 or later )
+- Build from source ( Requires go 1.25 or later )
 
   <details><summary><code>sudo make install</code></summary>
 
@@ -140,7 +160,25 @@ _Please check [https://trzsz.github.io](https://trzsz.github.io) for more inform
 
   </details>
 
-- Download from the [GitHub Releases](https://github.com/trzsz/trzsz-go/releases), unzip and add to `PATH` environment.
+- Download from the [GitHub Releases](https://github.com/trzsz/trzsz-go/releases) and install locally
+
+  <details><summary><code>download and install locally</code></summary>
+
+  ```sh
+  sudo apt install /tmp/trzsz_*.deb
+
+  sudo dpkg -i /tmp/trzsz_*.deb
+
+  sudo dnf install /tmp/trzsz_*.rpm
+
+  sudo yum install /tmp/trzsz_*.rpm
+
+  sudo rpm -i /tmp/trzsz_*.rpm
+
+  tar zxvf trzsz_*.tar.gz && sudo cp trzsz_*/t* /usr/bin/
+  ```
+
+  </details>
 
 ## Usage
 
@@ -183,19 +221,6 @@ _Please check [https://trzsz.github.io](https://trzsz.github.io) for more inform
 
 - If using `tmux` on the local computer, run `tmux` ( without `trzsz` ) first, then `trzsz ssh` to login.
 
-## Configuration
-
-`trzsz` looks for configuration at `~/.trzsz.conf` ( `C:\Users\your_name\.trzsz.conf` on Windows ). The path have to end with `/`, e.g.:
-
-```
-DefaultUploadPath =
-DefaultDownloadPath = /Users/username/Downloads/
-```
-
-- If the `DefaultUploadPath` is not empty, the path will be opened by default while choosing upload files.
-
-- If the `DefaultDownloadPath` is not empty, downloading files will be saved to the path automatically instead of asking each time.
-
 ## Zmodem support
 
 - Use `-z` or `--zmodem` to enable the `rz / sz` feature. e.g., `trzsz -z ssh remote_server`.
@@ -205,6 +230,33 @@ DefaultDownloadPath = /Users/username/Downloads/
 - `trzsz --zmodem ssh xxx` is not supported on Windows. You can use [trzsz-ssh ( tssh )](https://trzsz.github.io/ssh) instead, `tssh --zmodem xxx`.
 
 - About the progress, the transferred and speed are not precise, there will be some deviation. It just indicating that the transfer is in progress.
+
+## Clipboard integration
+
+- Use `-o` or `--osc52` to enable the clipboard integration feature. e.g., `trzsz -o ssh remote_server`.
+
+- Clipboard integration allows remote servers to write to the local clipboard via OSC52 sequences.
+
+- On Linux, clipboard integration requires `xclip` or `xsel` command to be installed.
+
+## Configuration
+
+`trzsz` looks for configuration at `~/.trzsz.conf` ( `C:\Users\your_name\.trzsz.conf` on Windows ), e.g.:
+
+```
+DefaultUploadPath =
+DefaultDownloadPath = /Users/username/Downloads/
+DragFileUploadCommand = trz -y
+ProgressColorPair = B14FFF 00FFA3
+```
+
+- If the `DefaultUploadPath` is not empty, the path will be opened by default while choosing upload files.
+
+- If the `DefaultDownloadPath` is not empty, downloading files will be saved to the path automatically instead of asking each time.
+
+- The default value of `DragFileUploadCommand` is `trz`, configure it to `trz -y` if you want to overwrite the existing files, configure it to `rz` if you want to use `rz` to upload.
+
+- The `ProgressColorPair` configures the color of the progress bar. You need to configure 2 colors and do not include `#`. The progress bar will gradient from the first color to the second color.
 
 ## Trouble shooting
 
