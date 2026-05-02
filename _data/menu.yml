@@ -6,7 +6,7 @@ menus:
   - name: Tsshd ( UDP SSH )
     url: /tsshd
   - name: Trzsz ( py )
-    url: /
+    url: /py
   - name: Trzsz ( go )
     url: /go
   - name: Trzsz ( js )
@@ -20,7 +20,7 @@ menus:
   - name: Tsshd ( UDP SSH ) 中文
     url: /cn/tsshd
   - name: Trzsz ( py ) 中文
-    url: /cn/
+    url: /cn/py
   - name: Trzsz ( go ) 中文
     url: /cn/go
   - name: Trzsz ( js ) 中文
