@@ -3,7 +3,7 @@ layout: default
 description: trzsz ( trz / tsz ) 是一个兼容 tmux 的文件传输工具，和 lrzsz ( rz / sz ) 类似，并且有进度条和支持目录传输。
 ---
 
-# Trzsz-ssh ( tssh ) 中文文档
+# trzsz-ssh(tssh): 高度兼容 OpenSSH 并提供丰富扩展功能的 SSH 客户端
 
 [![MIT License](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://choosealicense.com/licenses/mit/)
 [![GitHub Release](https://img.shields.io/github/v/release/trzsz/trzsz-ssh)](https://github.com/trzsz/trzsz-ssh/releases)
