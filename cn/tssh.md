@@ -8,6 +8,7 @@ description: trzsz ( trz / tsz ) 是一个兼容 tmux 的文件传输工具，�
 [![MIT License](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://choosealicense.com/licenses/mit/)
 [![GitHub Release](https://img.shields.io/github/v/release/trzsz/trzsz-ssh)](https://github.com/trzsz/trzsz-ssh/releases)
 [![GitHub trzsz-ssh](https://img.shields.io/badge/GitHub-https%3A%2F%2Fgithub.com%2Ftrzsz%2Ftrzsz--ssh-blue?style=flat)](https://github.com/trzsz/trzsz-ssh)
+[![中文文档](https://img.shields.io/badge/%E4%B8%AD%E6%96%87%E6%96%87%E6%A1%A3-https%3A%2F%2Ftrzsz.github.io%2Fcn%2Ftssh-blue?style=flat)](https://trzsz.github.io/cn/tssh)
 
 trzsz-ssh ( tssh ) 设计为 ssh 客户端的直接替代品，提供与 openssh 完全兼容的基础功能，同时实现其他有用的扩展功能。
 
@@ -54,7 +55,6 @@ trzsz-ssh ( tssh ) 与 [tsshd](https://github.com/trzsz/tsshd) 一起，适用�
   <details><summary><code>brew install trzsz-ssh</code></summary>
 
   ```sh
-  brew update
   brew install trzsz-ssh
   ```
 
@@ -90,7 +90,18 @@ trzsz-ssh ( tssh ) 与 [tsshd](https://github.com/trzsz/tsshd) 一起，适用�
 
   </details>
 
-- Linux 可用 yum 安装
+- Fedora / CentOS / RHEL 可用 dnf 安装
+
+  <details><summary><code>sudo dnf install tssh</code></summary>
+
+  ```sh
+  sudo dnf copr enable @trzsz/tssh
+  sudo dnf install tssh
+  ```
+
+  </details>
+
+- 传统版本 CentOS / RHEL 可用 yum 安装
 
   <details><summary><code>sudo yum install tssh</code></summary>
 
@@ -142,7 +153,11 @@ trzsz-ssh ( tssh ) 与 [tsshd](https://github.com/trzsz/tsshd) 一起，适用�
   <details><summary><code>go install github.com/trzsz/trzsz-ssh/cmd/tssh@latest</code></summary>
 
   ```sh
+  # 最新发布版本
   go install github.com/trzsz/trzsz-ssh/cmd/tssh@latest
+
+  # 最新开发版本（ main 分支 ）
+  go install github.com/trzsz/trzsz-ssh/cmd/tssh@main
   ```
 
   安装后，`tssh` 程序一般位于 `~/go/bin/` 目录下（ Windows 一般在 `C:\Users\your_name\go\bin\` ）。
@@ -186,7 +201,7 @@ trzsz-ssh ( tssh ) 与 [tsshd](https://github.com/trzsz/tsshd) 一起，适用�
 
 - 使用之前，需要配置好 `~/.ssh/config` ( Windows 是 `C:\Users\xxx\.ssh\config`, `xxx` 换成用户名 )。
 
-- 关于如何配置 `~/.ssh/config`，请参考 [openssh](https://manpages.debian.org/bookworm/openssh-client/ssh_config.5.en.html) ( 暂不支持 `Match` )，或参考 tssh wiki [SSH基本配置](https://github.com/trzsz/trzsz-ssh/wiki/SSH%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE)。
+- 关于如何配置 `~/.ssh/config`，请参考 [openssh](https://manpages.debian.org/bookworm/openssh-client/ssh_config.5.en.html) ( `Match` 中的 `exec` 暂时要参考下文配置 `UseOpenSSHConfig` 才支持 )，或参考 tssh wiki [SSH基本配置](https://github.com/trzsz/trzsz-ssh/wiki/SSH%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE)。
 
 - 直接无参数运行 `tssh` 命令就会打开登录界面，或者有除目标机器外的其他参数也会打开登录界面。
 
@@ -604,6 +619,55 @@ trzsz-ssh ( tssh ) 与 [tsshd](https://github.com/trzsz/tsshd) 一起，适用�
 
 - `记住密码`之后还提示输入密码？可能服务器的认证方式是 `keyboard interactive`，请参考下文`记住答案`。
 
+### 外部密码管理器
+
+- 对于任何密钥配置项（如 `Password`、`Passphrase`、`QuestionAnswer1`、`TotpSecret1`），可以在配置项名称后加 `Command` 后缀，通过外部命令在运行时获取密钥。命令的标准输出（去除首尾空白）将作为密钥值。
+
+- 命令中支持以下 token，执行前会自动展开：
+
+  | Token | 展开为 |
+  | ----- | ------ |
+  | `%n`  | Host 别名（ssh config 中的 `Host` 值） |
+  | `%h`  | 远程主机名（`HostName`） |
+  | `%r`  | 远程用户名（`User`） |
+  | `%p`  | 远程端口（`Port`） |
+  | `%%`  | 字面量 `%` |
+
+- 优先级：`enc{Key}`（加密）> `{Key}Command`（外部命令）> `{Key}`（明文）。
+
+- 各种密码管理器配置示例：
+
+  ```
+  # gopass (https://github.com/gopass-io/gopass)
+  Host server1
+      #!! PasswordCommand gopass show -o ssh/%n
+      #!! PassphraseCommand gopass show -o ssh/%n/passphrase
+
+  # pass (https://www.passwordstore.org)
+  Host server2
+      #!! PasswordCommand pass show ssh/%n
+
+  # 1Password CLI
+  Host server3
+      #!! PasswordCommand op read "op://Vault/ssh-%n/password"
+
+  # macOS 钥匙串
+  Host server4
+      #!! PasswordCommand security find-generic-password -a %r -s %n -w
+
+  # Bitwarden CLI
+  Host server5
+      #!! PasswordCommand bw get password ssh-%n
+
+  # HashiCorp Vault
+  Host server6
+      #!! PasswordCommand vault kv get -field=password secret/ssh/%n
+
+  # 为所有主机使用统一命令
+  Host *
+      #!! PasswordCommand gopass show -o ssh/%n
+  ```
+
 ### 记住答案
 
 - 除了私钥和密码，还有一种登录方式，英文叫 keyboard interactive ，是服务器返回一些问题，客户端提供正确的答案就能登录，很多自定义的一次性密码就是利用这种方式实现的。
@@ -717,6 +781,9 @@ trzsz-ssh ( tssh ) 与 [tsshd](https://github.com/trzsz/tsshd) 一起，适用�
 
   # 登录后自动设置终端标题，退出后不会重置，你需要参考下文在本地 shell 中设置 PROMPT_COMMAND
   SetTerminalTitle = Yes
+
+  # 使用 `ssh -G` 解析 OpenSSH 配置，包括 `Match` 规则
+  UseOpenSSHConfig = Yes
   ```
 
 ### 配置注释
@@ -797,8 +864,6 @@ trzsz-ssh ( tssh ) 与 [tsshd](https://github.com/trzsz/tsshd) 一起，适用�
 
 ### 其他功能
 
-- 使用 `-f` 后台运行时，可以加上 `--reconnect` 参数，在后台进程因连接断开等而退出时，会自动重新连接。
-
 - 运行 `tssh --enc-secret`，输入密码或答案，可得到用于配置的密文（ 相同密码每次运行结果不同 ）。
 
   - 上文说的`记住密码`和`记住答案`等，在配置项前面加上 `enc` 则可以配置成密文，防止被人窥屏。
@@ -854,18 +919,26 @@ trzsz-ssh ( tssh ) 与 [tsshd](https://github.com/trzsz/tsshd) 一起，适用�
     #!! DnsSrvName myhost.mydomain.com
   ```
 
+### 重连模式
+
+- 在前台模式（未用 `-f`）下，使用 `--reconnect` 会在程序退出后询问重启 tssh 进程并重新登录到远程服务器。
+
+- 在后台模式（使用 `-f`）下，使用 `--reconnect` 会在程序退出后自动重启 tssh 进程并重新登录到远程服务器。
+
+- **注意：** `--reconnect` 仅会重启 tssh 进程并重登录；**不会恢复之前的 SSH 会话**。如需恢复已有的 SSH 会话，请使用下面的 UDP 模式。
+
 ### UDP 模式
 
 - 在服务器上安装 [tsshd](https://github.com/trzsz/tsshd?tab=readme-ov-file#installation)，使用 `tssh --udp xxx` 登录服务器（对延迟敏感可指定 `--kcp` 选项），或者在 `~/.ssh/config` 中如下配置以省略 `--udp` 或 `--kcp` 选项：
 
   ```
   Host xxx
-      #!! UdpMode Yes/QUIC/KCP
+      #!! UdpMode  ( Yes | QUIC | KCP )
   ```
 
 - `tssh` 在客户端扮演 `ssh` 的角色，`tsshd` 在服务端扮演 `sshd` 的角色。
 
-- `tssh` 会先作为一个 ssh 客户端正常登录到服务器上，然后在服务器上启动一个新的 `tsshd` 进程。
+- `tssh` 会先作为一个 ssh 客户端正常登录到服务器上，然后在服务器上启动一个 `tsshd` 进程（每次登录都是一个独立的 `tsshd` 进程）。
 
 - `tsshd` 进程会随机侦听一个 61001 到 61999 之间的 UDP 端口（可通过 `TsshdPort` 配置自定义），并将其端口和几个密钥通过 ssh 通道发回给 `tssh` 进程。登录的 ssh 连接会被关闭，然后 `tssh` 进程通过 UDP 与 `tsshd` 进程通讯。
 
@@ -882,6 +955,7 @@ Host xxx
     #!! ShowNotificationOnTop yes
     #!! ShowFullNotifications yes
     #!! UdpProxyMode UDP
+    #!! UdpMTU 1400
 ```
 
 - `UdpMode`: `No` (默认为`No`: tssh 工作在 TCP 模式), `Yes` (默认协议: `QUIC`), `QUIC` ([QUIC](https://github.com/quic-go/quic-go) 协议：速度更快), `KCP` ([KCP](https://github.com/xtaci/kcp-go) 协议：延迟更低).
@@ -901,6 +975,42 @@ Host xxx
 - `ShowFullNotifications`: 是显示完整的通知，还是显示简短的通知。默认为 yes，这可能会输出几行通知到屏幕上。设置为 `No` 只输出一行通知。
 
 - `UdpProxyMode`: 默认使用 `UDP` 协议进行传输。如果所在的网络环境有防火墙禁止了 `UDP` 流量，可以配置为 `TCP` 以绕过防火墙限制，但这可能会带来额外的延迟。
+
+- `UdpMTU`: 设置 UDP 数据包的最大传输单元（MTU），默认值为 1400。
+
+### UDP 端口转发
+
+使用 UDP 模式时，支持 UDP 端口转发。
+
+- 命令行 UDP 端口转发，扩展 `-L` / `-R` 参数，增加 `udp/` 前缀 ( 其中 `/` 可以换成 `:`、`_` 或 `-` )：
+
+  ```
+  -L udp/[bind_address:]port:host:hostport
+  -L udp:[bind_address:]port:/remote_socket
+  -L udp_/local_socket:host:hostport
+  -L udp-/local_socket:/remote_socket
+
+  -R udp/[bind_address:]port:host:hostport
+  -R udp:[bind_address:]port:/local_socket
+  -R udp_/remote_socket:host:hostport
+  -R udp-/remote_socket:/local_socket
+  ```
+
+- 配置文件 UDP 端口转发，类似 `LocalForward` 和 `RemoteForward`，增加 `UDP` 前缀 (不区分大小写)：
+
+  ```
+  UdpLocalForward [bind_address:]port host:hostport
+  UdpLocalForward [bind_address:]port /remote_socket
+  UdpLocalForward /local_socket host:hostport
+  UdpLocalForward /local_socket /remote_socket
+
+  UdpRemoteForward [bind_address:]port host:hostport
+  UdpRemoteForward [bind_address:]port /local_socket
+  UdpRemoteForward /remote_socket host:hostport
+  UdpRemoteForward /remote_socket /local_socket
+  ```
+
+- `ForwardUdpTimeout`: 设置 UDP 转发会话的空闲超时时间。在指定时间内无数据收发时将自动清理对应的转发会话以释放资源。默认 5 分钟。
 
 ### 故障排除
 

@@ -8,6 +8,7 @@ description: trzsz ( trz / tsz ) 是一个兼容 tmux 的文件传输工具，�
 [![MIT License](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://choosealicense.com/licenses/mit/)
 [![GitHub Release](https://img.shields.io/github/v/release/trzsz/tsshd)](https://github.com/trzsz/tsshd/releases)
 [![GitHub tsshd](https://img.shields.io/badge/GitHub-https%3A%2F%2Fgithub.com%2Ftrzsz%2Ftsshd-blue?style=flat)](https://github.com/trzsz/tsshd)
+[![中文文档](https://img.shields.io/badge/%E4%B8%AD%E6%96%87%E6%96%87%E6%A1%A3-https%3A%2F%2Ftrzsz.github.io%2Fcn%2Ftsshd-blue?style=flat)](https://trzsz.github.io/cn/tsshd)
 
 **tsshd** 是一个基于 UDP 的 SSH 服务器，专为不稳定网络环境设计，支持在网络切换或 IP 变化时无缝漫游，并能在高延迟链路（如蜂窝网络和不稳定的 Wi-Fi）上稳定工作。
 
@@ -92,7 +93,18 @@ tssh 和 tsshd 的工作方式与 ssh 完全相同，没有计划支持本地回
 
   </details>
 
-- Linux 可用 yum 安装
+- Fedora / CentOS / RHEL 可用 dnf 安装
+
+  <details><summary><code>sudo dnf install tsshd</code></summary>
+
+  ```sh
+  sudo dnf copr enable @trzsz/tsshd
+  sudo dnf install tsshd
+  ```
+
+  </details>
+
+- 传统版本 CentOS / RHEL 可用 yum 安装
 
   <details><summary><code>sudo yum install tsshd</code></summary>
 

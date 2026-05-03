@@ -47,7 +47,18 @@ _Please check [https://trzsz.github.io](https://trzsz.github.io) for more inform
 
   </details>
 
-- Install with yum on Linux
+- Install with dnf on Fedora / CentOS / RHEL
+
+  <details><summary><code>sudo dnf install trzsz</code></summary>
+
+  ```sh
+  sudo dnf copr enable @trzsz/trzsz
+  sudo dnf install trzsz
+  ```
+
+  </details>
+
+- Install with yum on Legacy CentOS / RHEL
 
   <details><summary><code>sudo yum install trzsz</code></summary>
 
@@ -70,17 +81,6 @@ _Please check [https://trzsz.github.io](https://trzsz.github.io) for more inform
 
     sudo yum install trzsz
     ```
-
-  </details>
-
-- Install with dnf on Linux
-
-  <details><summary><code>sudo dnf install trzsz</code></summary>
-
-  ```sh
-  sudo dnf copr enable @trzsz/trzsz
-  sudo dnf install trzsz
-  ```
 
   </details>
 
@@ -138,9 +138,15 @@ _Please check [https://trzsz.github.io](https://trzsz.github.io) for more inform
   <details><summary><code>go install github.com/trzsz/trzsz-go/cmd/...@latest</code></summary>
 
   ```sh
+  # latest release
   go install github.com/trzsz/trzsz-go/cmd/trz@latest
   go install github.com/trzsz/trzsz-go/cmd/tsz@latest
   go install github.com/trzsz/trzsz-go/cmd/trzsz@latest
+
+  # latest development version (main branch)
+  go install github.com/trzsz/trzsz-go/cmd/trz@main
+  go install github.com/trzsz/trzsz-go/cmd/tsz@main
+  go install github.com/trzsz/trzsz-go/cmd/trzsz@main
   ```
 
   The binaries are usually located in `~/go/bin/` ( `C:\Users\your_name\go\bin\` on Windows ).

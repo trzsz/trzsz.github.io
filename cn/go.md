@@ -8,6 +8,7 @@ description: trzsz ( trz / tsz ) 是一个兼容 tmux 的文件传输工具，�
 [![MIT License](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://choosealicense.com/licenses/mit/)
 [![GitHub Release](https://img.shields.io/github/v/release/trzsz/trzsz-go)](https://github.com/trzsz/trzsz-go/releases)
 [![GitHub trzsz-go](https://img.shields.io/badge/GitHub-https%3A%2F%2Fgithub.com%2Ftrzsz%2Ftrzsz--go-blue?style=flat)](https://github.com/trzsz/trzsz-go)
+[![中文文档](https://img.shields.io/badge/%E4%B8%AD%E6%96%87%E6%96%87%E6%A1%A3-https%3A%2F%2Ftrzsz.github.io%2Fcn%2Fgo-blue?style=flat)](https://trzsz.github.io/cn/go)
 
 `trzsz-go` 使所有支持本地 shell 的终端都支持 [trzsz](https://trzsz.github.io/cn/) ( trz / tsz —— 和 rz / sz 类似、兼容 tmux )。
 
@@ -47,7 +48,18 @@ _有关 `trzsz ( trz / tsz )` 更详细的文档，请查看 [https://trzsz.gith
 
   </details>
 
-- Linux 可用 yum 安装
+- Fedora / CentOS / RHEL 可用 dnf 安装
+
+  <details><summary><code>sudo dnf install trzsz</code></summary>
+
+  ```sh
+  sudo dnf copr enable @trzsz/trzsz
+  sudo dnf install trzsz
+  ```
+
+  </details>
+
+- 传统版本 CentOS / RHEL 可用 yum 安装
 
   <details><summary><code>sudo yum install trzsz</code></summary>
 
@@ -70,17 +82,6 @@ _有关 `trzsz ( trz / tsz )` 更详细的文档，请查看 [https://trzsz.gith
 
     sudo yum install trzsz
     ```
-
-  </details>
-
-- Linux 可用 dnf 安装
-
-  <details><summary><code>sudo dnf install trzsz</code></summary>
-
-  ```sh
-  sudo dnf copr enable @trzsz/trzsz
-  sudo dnf install trzsz
-  ```
 
   </details>
 
@@ -138,9 +139,15 @@ _有关 `trzsz ( trz / tsz )` 更详细的文档，请查看 [https://trzsz.gith
   <details><summary><code>go install github.com/trzsz/trzsz-go/cmd/...@latest</code></summary>
 
   ```sh
+  # 最新发布版本
   go install github.com/trzsz/trzsz-go/cmd/trz@latest
   go install github.com/trzsz/trzsz-go/cmd/tsz@latest
   go install github.com/trzsz/trzsz-go/cmd/trzsz@latest
+
+  # 最新开发版本（ main 分支 ）
+  go install github.com/trzsz/trzsz-go/cmd/trz@main
+  go install github.com/trzsz/trzsz-go/cmd/tsz@main
+  go install github.com/trzsz/trzsz-go/cmd/trzsz@main
   ```
 
   安装后，`trzsz` 程序一般位于 `~/go/bin/` 目录下（ Windows 一般在 `C:\Users\your_name\go\bin\` ）。

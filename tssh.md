@@ -7,7 +7,7 @@ layout: default
 [![MIT License](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://choosealicense.com/licenses/mit/)
 [![GitHub Release](https://img.shields.io/github/v/release/trzsz/trzsz-ssh)](https://github.com/trzsz/trzsz-ssh/releases)
 [![GitHub trzsz-ssh](https://img.shields.io/badge/GitHub-https%3A%2F%2Fgithub.com%2Ftrzsz%2Ftrzsz--ssh-blue?style=flat)](https://github.com/trzsz/trzsz-ssh)
-[![中文文档](https://img.shields.io/badge/%E4%B8%AD%E6%96%87%E6%96%87%E6%A1%A3-https%3A%2F%2Ftrzsz.github.io%2Fcn%2Fssh-blue?style=flat)](https://trzsz.github.io/cn/ssh)
+[![中文文档](https://img.shields.io/badge/%E4%B8%AD%E6%96%87%E6%96%87%E6%A1%A3-https%3A%2F%2Ftrzsz.github.io%2Fcn%2Ftssh-blue?style=flat)](https://trzsz.github.io/cn/tssh)
 
 trzsz-ssh ( tssh ) is an ssh client designed as a drop-in replacement for the openssh client. It aims to provide complete compatibility with openssh, mirroring all its features, while also offering additional useful features not found in the openssh client.
 
@@ -90,7 +90,18 @@ trzsz-ssh ( tssh ) with [tsshd](https://github.com/trzsz/tsshd) also supports in
 
   </details>
 
-- Install with yum on Linux
+- Install with dnf on Fedora / CentOS / RHEL
+
+  <details><summary><code>sudo dnf install tssh</code></summary>
+
+  ```sh
+  sudo dnf copr enable @trzsz/tssh
+  sudo dnf install tssh
+  ```
+
+  </details>
+
+- Install with yum on Legacy CentOS / RHEL
 
   <details><summary><code>sudo yum install tssh</code></summary>
 
@@ -142,7 +153,11 @@ trzsz-ssh ( tssh ) with [tsshd](https://github.com/trzsz/tsshd) also supports in
   <details><summary><code>go install github.com/trzsz/trzsz-ssh/cmd/tssh@latest</code></summary>
 
   ```sh
+  # latest release
   go install github.com/trzsz/trzsz-ssh/cmd/tssh@latest
+
+  # latest development version (main branch)
+  go install github.com/trzsz/trzsz-ssh/cmd/tssh@main
   ```
 
   The binaries are usually located in ~/go/bin/ ( C:\Users\your_name\go\bin\ on Windows ).
@@ -186,7 +201,7 @@ trzsz-ssh ( tssh ) with [tsshd](https://github.com/trzsz/tsshd) also supports in
 
 - Before use, you need to configure `~/.ssh/config` (for Windows, it is `C:\Users\xxx\.ssh\config`, replace `xxx` with your username).
 
-- For how to configure `~/.ssh/config`, please refer to the documentation of [openssh](https://manpages.debian.org/bookworm/openssh-client/ssh_config.5.en.html) ( `Match` section is not supported yet ).
+- For how to configure `~/.ssh/config`, please refer to the documentation of [openssh](https://manpages.debian.org/bookworm/openssh-client/ssh_config.5.en.html). `Match exec` is supported only when `UseOpenSSHConfig` is enabled (see configuration below).
 
 - Running `tssh` without arguments will open the login prompt. If there are arguments except destination will also open the login prompt.
 
@@ -604,6 +619,55 @@ trzsz-ssh ( tssh ) with [tsshd](https://github.com/trzsz/tsshd) also supports in
 
 - Still ask for password after `Remember Password`? Maybe it's `keyboard interactive authentication`, please refer to `Remember Answers` below.
 
+### External Password Manager
+
+- For any secret configuration (e.g. `Password`, `Passphrase`, `QuestionAnswer1`, `TotpSecret1`), you can use an external command to retrieve the secret at runtime by adding a `Command` suffix to the key name. The command's stdout (trimmed) is used as the secret value.
+
+- The following tokens are supported in the command and will be expanded before execution:
+
+  | Token | Expansion |
+  | ----- | --------- |
+  | `%n`  | Host alias (the `Host` value in ssh config) |
+  | `%h`  | Remote hostname (`HostName`) |
+  | `%r`  | Remote username (`User`) |
+  | `%p`  | Remote port (`Port`) |
+  | `%%`  | Literal `%` |
+
+- Priority: `enc{Key}` (encrypted) > `{Key}Command` (external command) > `{Key}` (plain text).
+
+- Examples with various password managers:
+
+  ```
+  # gopass (https://github.com/gopass-io/gopass)
+  Host server1
+      #!! PasswordCommand gopass show -o ssh/%n
+      #!! PassphraseCommand gopass show -o ssh/%n/passphrase
+
+  # pass (https://www.passwordstore.org)
+  Host server2
+      #!! PasswordCommand pass show ssh/%n
+
+  # 1Password CLI
+  Host server3
+      #!! PasswordCommand op read "op://Vault/ssh-%n/password"
+
+  # macOS Keychain
+  Host server4
+      #!! PasswordCommand security find-generic-password -a %r -s %n -w
+
+  # Bitwarden CLI
+  Host server5
+      #!! PasswordCommand bw get password ssh-%n
+
+  # HashiCorp Vault
+  Host server6
+      #!! PasswordCommand vault kv get -field=password secret/ssh/%n
+
+  # Use for all hosts with a single command
+  Host *
+      #!! PasswordCommand gopass show -o ssh/%n
+  ```
+
 ### Remember Answers
 
 - In addition, there is a keyboard interactive authentication. The server returns some questions, and log in by providing the correct answers. Many custom one-time passwords are implemented by it.
@@ -717,6 +781,9 @@ trzsz-ssh ( tssh ) with [tsshd](https://github.com/trzsz/tsshd) also supports in
 
   # Auto set terminal title after login. It will not be reset after exiting. Please set PROMPT_COMMAND in local shell.
   SetTerminalTitle = Yes
+
+  # Use `ssh -G` to evaluate OpenSSH config, including `Match` blocks.
+  UseOpenSSHConfig = Yes
   ```
 
 ### Comments of Config
@@ -798,8 +865,6 @@ trzsz-ssh ( tssh ) with [tsshd](https://github.com/trzsz/tsshd) also supports in
 
 ### Other Features
 
-- Use `-f` to run in the background, you can add `--reconnect`, it will automatically reconnect when the background process exits.
-
 - Run `tssh --enc-secret`, enter the password or answer, and you can get the ciphertext for configuration (the encryption result for the same password is different each time):
 
   - The `remember password` and `remember answer` mentioned above can be configured as ciphertext by adding `enc` prefix to prevent screen snooping.
@@ -855,20 +920,28 @@ trzsz-ssh ( tssh ) with [tsshd](https://github.com/trzsz/tsshd) also supports in
     #!! DnsSrvName myhost.mydomain.com
   ```
 
+### Reconnect Mode
+
+- In foreground mode (not `-f`), use `--reconnect` to be prompted to restart the tssh process and log in to the remote server when it exits.
+
+- In background mode (use `-f`), use `--reconnect` to automatically restart the tssh process and log in to the remote server when it exits.
+
+- **Note:** `--reconnect` only restarts the tssh process and logs in; it does **not** resume the previous SSH session. To resume an existing session, please use UDP mode described below.
+
 ### UDP Mode
 
 - Install [tsshd](https://github.com/trzsz/tsshd?tab=readme-ov-file#installation) on the server, use `tssh --udp xxx` to log in (latency-sensitive users can specify `--kcp` option), or configure as follows in `~/.ssh/config` to omit `--udp` or `--kcp` option:
 
   ```
   Host xxx
-      #!! UdpMode Yes/QUIC/KCP
+      #!! UdpMode  ( Yes | QUIC | KCP )
   ```
 
-- The `tssh` plays the role of `ssh` on the client side, and the `tsshd` plays the role of `sshd` on the server side.
+- The `tssh` plays the role of `ssh` on the client side, while the `tsshd` acts as `sshd` on the server side.
 
-- The `tssh` will first login to the server normally as an ssh client, and then run a new `tsshd` process on the server.
+- The `tssh` first logs in to the server normally as an ssh client, and then starts a new `tsshd` process on the server, where each session has its own `tsshd` process.
 
-- The `tsshd` process listens on a random udp port between 61001 and 61999 (can be customized by `TsshdPort`), and sends its port number and some secret keys back to the `tssh` process over the ssh channel. The ssh connection is then shut down, and the `tssh` process communicates with the `tsshd` process over udp.
+- The `tsshd` process listens on a random UDP port in the range 61001–61999 (configurable via `TsshdPort`), and sends the port number and session secret keys back to the `tssh` process through the SSH channel. The SSH connection is then closed, and `tssh` communicates with `tsshd` over UDP.
 
 ### UDP Configurations
 
@@ -883,6 +956,7 @@ Host xxx
     #!! ShowNotificationOnTop yes
     #!! ShowFullNotifications yes
     #!! UdpProxyMode UDP
+    #!! UdpMTU 1400
 ```
 
 - `UdpMode`: `No` (the default: tssh works in TCP mode), `Yes` (default protocol: `QUIC`), `QUIC` ([QUIC](https://github.com/quic-go/quic-go) protocol: faster speed), `KCP` ([KCP](https://github.com/xtaci/kcp-go) protocol: lower latency).
@@ -902,6 +976,42 @@ Host xxx
 - `ShowFullNotifications`: Whether to display the full notifications or a brief notification. The default is yes, which may output several lines to the screen. Set it to `No` will output only one line.
 
 - `UdpProxyMode`: The default transport protocol is `UDP`. If `UDP` traffic is blocked by firewalls in your network environment, you can set it to `TCP` to work around the restriction, though this may introduce additional latency.
+
+- `UdpMTU`: Sets the maximum transmission unit (MTU) for UDP packets. Default is 1400.
+
+### UDP Port Forwarding
+
+When running in UDP mode, UDP port forwarding is supported.
+
+- Command-line `-L` / `-R` options are extended with a `udp/` prefix (the `/` can also be replaced with `:`, `_`, or `-`):
+
+  ```
+  -L udp/[bind_address:]port:host:hostport
+  -L udp:[bind_address:]port:/remote_socket
+  -L udp_/local_socket:host:hostport
+  -L udp-/local_socket:/remote_socket
+
+  -R udp/[bind_address:]port:host:hostport
+  -R udp:[bind_address:]port:/local_socket
+  -R udp_/remote_socket:host:hostport
+  -R udp-/remote_socket:/local_socket
+  ```
+
+- Configuration is similar to `LocalForward` and `RemoteForward`, with an added `UDP` prefix (case-insensitive):
+
+  ```
+  UdpLocalForward [bind_address:]port host:hostport
+  UdpLocalForward [bind_address:]port /remote_socket
+  UdpLocalForward /local_socket host:hostport
+  UdpLocalForward /local_socket /remote_socket
+
+  UdpRemoteForward [bind_address:]port host:hostport
+  UdpRemoteForward [bind_address:]port /local_socket
+  UdpRemoteForward /remote_socket host:hostport
+  UdpRemoteForward /remote_socket /local_socket
+  ```
+
+- `ForwardUdpTimeout`: Sets the idle timeout for UDP forwarding sessions; the corresponding forwarding session will be cleared automatically if no data is sent or received within this period to free resources. Default is 5 minutes.
 
 ### Trouble shooting
 
