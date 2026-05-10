@@ -97,7 +97,7 @@ tssh and tsshd works exactly like ssh, there are no plans to support local echo 
   <details><summary><code>sudo dnf install tsshd</code></summary>
 
   ```sh
-  sudo dnf copr enable @trzsz/tsshd
+  sudo dnf copr enable @trzsz/trzsz
   sudo dnf install tsshd
   ```
 
@@ -160,6 +160,24 @@ tssh and tsshd works exactly like ssh, there are no plans to support local echo 
   ```
 
   Need to allow `C:\Users\<user>\scoop\apps\tsshd\<version>\tsshd.exe` through the firewall for it to work properly.
+
+  </details>
+
+- Install with pixi / conda / mamba from [conda-forge](https://github.com/conda-forge/tsshd-feedstock)
+
+  <details><summary><code>pixi global install tsshd</code> / <code>conda install tsshd</code> / <code>mamba install tsshd</code></summary>
+
+  ```sh
+  pixi global install tsshd
+  ```
+
+  ```sh
+  conda install -c conda-forge tsshd
+  ```
+
+  ```sh
+  mamba install -c conda-forge tsshd
+  ```
 
   </details>
 

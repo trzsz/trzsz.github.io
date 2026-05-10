@@ -30,7 +30,7 @@ trzsz-ssh ( tssh ) 与 [tsshd](https://github.com/trzsz/tsshd) 一起，适用�
 
 ### 安装方法
 
-**_客户端安装 `trzsz-ssh ( tssh )` 的方法如下（ 任选其一 ）：_**
+> 💡 **注意**：Homebrew 中命名为 `trzsz-ssh`，其他地方通常命名为 `tssh`。
 
 - Windows 可用 scoop / winget / choco 安装
 
@@ -95,7 +95,7 @@ trzsz-ssh ( tssh ) 与 [tsshd](https://github.com/trzsz/tsshd) 一起，适用�
   <details><summary><code>sudo dnf install tssh</code></summary>
 
   ```sh
-  sudo dnf copr enable @trzsz/tssh
+  sudo dnf copr enable @trzsz/trzsz
   sudo dnf install tssh
   ```
 
@@ -144,6 +144,24 @@ trzsz-ssh ( tssh ) 与 [tsshd](https://github.com/trzsz/tsshd) 一起，适用�
 
   ```sh
   crew install tssh
+  ```
+
+  </details>
+
+- 用 pixi / conda / mamba 从 [conda-forge](https://github.com/conda-forge/tssh-feedstock) 安装
+
+  <details><summary><code>pixi global install tssh</code> / <code>conda install tssh</code> / <code>mamba install tssh</code></summary>
+
+  ```sh
+  pixi global install tssh
+  ```
+
+  ```sh
+  conda install -c conda-forge tssh
+  ```
+
+  ```sh
+  mamba install -c conda-forge tssh
   ```
 
   </details>
