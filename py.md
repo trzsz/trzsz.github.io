@@ -1,15 +1,18 @@
 ---
 layout: default
+permalink: /py
+title: trzsz ( trz / tsz ) – Modern rz / sz Alternative with tmux Support
+description: "trzsz is a tmux-compatible rz / sz alternative for SSH file transfer. Supports directories, resume, drag-and-drop upload, Windows servers, web terminals, iTerm2, Tabby, and tssh."
 ---
 
-# Trzsz Document
+# trzsz ( trz / tsz ) – Modern rz / sz Alternative with tmux Support
 
 [![MIT License](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://choosealicense.com/licenses/mit/)
 [![PyPI trzsz](https://img.shields.io/pypi/v/trzsz?style=flat)](https://pypi.python.org/pypi/trzsz/)
 [![GitHub trzsz](https://img.shields.io/badge/GitHub-https%3A%2F%2Fgithub.com%2Ftrzsz%2Ftrzsz-blue?style=flat)](https://github.com/trzsz/trzsz)
 [![中文文档](https://img.shields.io/badge/%E4%B8%AD%E6%96%87%E6%96%87%E6%A1%A3-https%3A%2F%2Ftrzsz.github.io%2Fcn%2F-blue?style=flat)](https://trzsz.github.io/cn/)
 
-`trzsz` ( trz / tsz ) is a simple file transfer tools, similar to `lrzsz` ( rz / sz ), and compatible with `tmux`.
+**trzsz** ( trz / tsz ) is a simple file transfer tool for SSH terminals, similar to `lrzsz` ( rz / sz ) but compatible with `tmux`.
 
 ## How to use
 

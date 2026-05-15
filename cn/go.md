@@ -1,20 +1,22 @@
 ---
 layout: default
-description: trzsz ( trz / tsz ) 是一个兼容 tmux 的文件传输工具，和 lrzsz ( rz / sz ) 类似，并且有进度条和支持目录传输。
+permalink: /cn/go
+title: trzsz-go – 在本地 shell 终端与 Go 应用中启用原生 trzsz 支持
+description: "trzsz-go 既是 CLI 工具，也是 Go 库，可在具有本地 shell 支持的终端中启用原生 trzsz（trz / tsz）文件传输能力。也可以嵌入到基于 Go 的终端应用中，实现类似 lrzsz（rz / sz）的 tmux 兼容文件传输能力。"
 ---
 
-# Trzsz ( go ) 中文文档
+# trzsz-go – 在本地 shell 终端与 Go 应用中启用原生 trzsz 支持
 
 [![MIT License](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://choosealicense.com/licenses/mit/)
 [![GitHub Release](https://img.shields.io/github/v/release/trzsz/trzsz-go)](https://github.com/trzsz/trzsz-go/releases)
 [![GitHub trzsz-go](https://img.shields.io/badge/GitHub-https%3A%2F%2Fgithub.com%2Ftrzsz%2Ftrzsz--go-blue?style=flat)](https://github.com/trzsz/trzsz-go)
 [![中文文档](https://img.shields.io/badge/%E4%B8%AD%E6%96%87%E6%96%87%E6%A1%A3-https%3A%2F%2Ftrzsz.github.io%2Fcn%2Fgo-blue?style=flat)](https://trzsz.github.io/cn/go)
 
-`trzsz-go` 使所有支持本地 shell 的终端都支持 [trzsz](https://trzsz.github.io/cn/) ( trz / tsz —— 和 rz / sz 类似、兼容 tmux )。
+**trzsz-go** 是一个 CLI 工具，同时也是一个 Go 库，可在具有本地 shell 支持的终端中启用原生 trzsz（trz / tsz）文件传输能力。它也可以嵌入到基于 Go 的终端应用中，实现原生 trzsz 集成能力。
 
-⭐ 推荐在服务器上使用 go 版 `trzsz`，在本地电脑使用 [trzsz-ssh ( tssh )](https://trzsz.github.io/cn/ssh)。
+⭐ 推荐在服务器上使用 go 版 `trzsz`，在本地电脑使用 [trzsz-ssh ( tssh )](https://trzsz.github.io/cn/tssh)。
 
-_有关 `trzsz ( trz / tsz )` 更详细的文档，请查看 [https://trzsz.github.io/cn](https://trzsz.github.io/cn/)。_
+_有关 `trzsz ( trz / tsz )` 更详细的文档，请查看 [https://trzsz.github.io/cn/py](https://trzsz.github.io/cn/py)。_
 
 ## 安装方法
 
@@ -238,7 +240,7 @@ _有关 `trzsz ( trz / tsz )` 更详细的文档，请查看 [https://trzsz.gith
 
 - 与 lrzsz ( rz / sz ) 类似，使用 `trz` 命令上传文件，使用 `tsz /path/to/file` 命令下载文件。
 
-- 有关 `trzsz` 更详细的文档，请查看 [https://trzsz.github.io/cn/](https://trzsz.github.io/cn/)。
+- 有关 `trzsz` 更详细的文档，请查看 [https://trzsz.github.io/cn/py](https://trzsz.github.io/cn/py)。
 
 ## 使用建议
 
@@ -252,7 +254,7 @@ _有关 `trzsz ( trz / tsz )` 更详细的文档，请查看 [https://trzsz.gith
 
 - 需要在客户端（ 本地电脑 ）上安装 `lrzsz`，例如 `brew install lrzsz`、`apt install lrzsz` 等。
 
-- `trzsz --zmodem ssh xxx` 不兼容 Windows，你可以使用 [trzsz-ssh ( tssh )](https://trzsz.github.io/cn/ssh) 代替，如 `tssh --zmodem xxx`。
+- `trzsz --zmodem ssh xxx` 不兼容 Windows，你可以使用 [trzsz-ssh ( tssh )](https://trzsz.github.io/cn/tssh) 代替，如 `tssh --zmodem xxx`。
 
 - 关于进度条，己传文件大小和传输速度不是精确值，会有一些偏差，它的主要作用只是指示传输正在进行中。
 
@@ -294,12 +296,12 @@ ProgressColorPair = B14FFF 00FFA3
 
   - `MSYS2` 中用法 `winpty trzsz /c/Windows/System32/OpenSSH/ssh.exe x.x.x.x`。
   - `Cygwin` 中用法 `trzsz "C:\Windows\System32\OpenSSH\ssh.exe" x.x.x.x`。
-  - ⭐ 推荐使用 [trzsz-ssh](https://trzsz.github.io/cn/ssh) ( tssh )，`tssh` 等同于 `trzsz ssh`。
+  - ⭐ 推荐使用 [trzsz-ssh](https://trzsz.github.io/cn/tssh) ( tssh )，`tssh` 等同于 `trzsz ssh`。
 
 - 拖文件或目录到终端后，没有自动上传？
 
   - 检查 `ssh` 登录时有没有加上 `--dragfile` 选项，如 `trzsz --dragfile ssh x.x.x.x` 。
-  - 检查服务器上有没有安装 [trzsz](https://trzsz.github.io/)，`trz` 应在某个 `PATH` 路径下。
+  - 检查服务器上有没有安装 [trzsz](https://trzsz.github.io/cn/go)，`trz` 应在某个 `PATH` 路径下。
   - 在 Windows 中，检查标题有没有`管理员`三个字，`以管理员运行` 时可能会由于 UAC 设置的原因导致拖不了文件。
   - 在 Windows Terminal 中，需要将文件或目录拖到左上角，显示`粘贴文件路径` 时再放开。
   - 在 Windows 的 `cmd` 和 `PowerShell` 中，一次只能拖一个文件或目录，拖多个也只有鼠标正对着的那个是生效的。

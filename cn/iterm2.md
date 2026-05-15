@@ -1,11 +1,13 @@
 ---
 layout: default
-description: trzsz ( trz / tsz ) 是一个兼容 tmux 的文件传输工具，和 lrzsz ( rz / sz ) 类似，并且有进度条和支持目录传输。
+permalink: /cn/iterm2
+title: trzsz-iterm2 – 在 iTerm2 中启用原生 trzsz 文件传输集成
+description: "trzsz-iTerm2 是一个客户端集成工具，通过 iTerm2 Trigger 和 Python API 在 iTerm2 中启用原生 trzsz（trz / tsz）文件传输能力，作为 iTerm2 与 trzsz 之间的桥接层，提供无缝的 tmux 兼容文件传输体验。"
 ---
 
-# Trzsz-iTerm2 安装文档
+# trzsz-iterm2 – 在 iTerm2 中启用原生 trzsz 文件传输集成
 
-`trzsz-iterm2` 是 [trzsz](https://trzsz.github.io/) 在 [iTerm2](https://iterm2.com/) 上使用的客户端。
+**trzsz-iTerm2** 是一个客户端集成工具，用于在 iTerm2 中启用原生 trzsz（trz / tsz）文件传输能力。
 
 [![MIT License](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://choosealicense.com/licenses/mit/)
 [![PyPI trzsz-iterm2](https://img.shields.io/pypi/v/trzsz-iterm2?style=flat)](https://pypi.python.org/pypi/trzsz-iterm2/)

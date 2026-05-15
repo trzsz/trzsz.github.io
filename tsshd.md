@@ -1,8 +1,11 @@
 ---
 layout: default
+permalink: /tsshd
+title: tsshd - UDP-based SSH Server with Seamless Roaming and Auto-Reconnect
+description: "tsshd is a UDP-based SSH server designed for unreliable and high-latency networks. It provides seamless session roaming, automatic reconnection, and OpenSSH compatibility, working with tssh as a modern alternative to mosh."
 ---
 
-## tsshd: UDP-based SSH Server with Roaming Support
+## tsshd: UDP-based SSH Server with Seamless Roaming and Auto-Reconnect
 
 [![MIT License](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://choosealicense.com/licenses/mit/)
 [![GitHub Release](https://img.shields.io/github/v/release/trzsz/tsshd)](https://github.com/trzsz/tsshd/releases)
@@ -442,6 +445,10 @@ To help you get started quickly, we provide fully working sample code in the [`e
   A complete showcase of the **Hybrid Architecture** mentioned above. It implements the adapter pattern to unify the `Session` interface, allowing the same business logic to run seamlessly across a traditional TCP SSH server (Wish) and the low-latency UDP `tsshd` server, complete with the process handoff mechanism.
 
 > **Tip**: You can run these examples locally and test them using the `tssh` client to experience the low-latency and roaming features firsthand!
+
+### Screenshot
+
+![tsshd auto reconnect](https://trzsz.github.io/images/tsshd_conn.gif)
 
 ### Contact
 

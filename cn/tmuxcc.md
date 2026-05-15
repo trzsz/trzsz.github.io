@@ -1,11 +1,13 @@
 ---
 layout: default
-description: trzsz ( trz / tsz ) 是一个兼容 tmux 的文件传输工具，和 lrzsz ( rz / sz ) 类似，并且有进度条和支持目录传输。
+permalink: /cn/tmuxcc
+title: iTerm2 tmux 集成模式 – 无缝 tmux 会话控制与工作流优化
+description: "iTerm2 tmux -CC 集成模式使用指南，介绍如何在 iTerm2 中实现无感 tmux 会话管理、窗口分屏控制以及断线自动恢复，简化 tmux 使用流程，无需记忆复杂命令。"
 ---
 
-# iTerm2 与 tmux -CC 集成
+# iTerm2 tmux 集成模式 – 无缝 tmux 会话控制与工作流优化
 
-用 `iTerm2` 无须记住 `tmux` 的命令和快捷键，即可方便地新开窗口和分屏，断开后又能恢复所有。
+使用 `iTerm2` tmux 集成模式，你无需记忆 `tmux` 命令或快捷键。可以轻松创建新标签页、分割窗口，并在重新连接后自动恢复会话状态。
 
 使用方法超级简单，只要在 `iTerm2` 中使用 `tmux` 时加上 `-CC` 参数即可：
 

@@ -1,8 +1,16 @@
 <nav class="menu">
-  <h2><a href="{{ site.data.menu.url }}"><span>{{ site.data.menu.title }}</span></a></h2>
   <div class="icon-list">
-  {% for item in site.data.menu.menus %}
-    <a href="{{ item.url }}"><span>{{ item.name }}</span></a>
-  {% endfor %}
+    {% for group in site.data.menu.menus %}
+      <div class="menu-group menu-group-{{ group.key }}{% if group.key == 'en' %} expanded{% endif %}">
+        <div class="menu-group-title">{{ group.name }}</div>
+        <div class="menu-group-items">
+          {% for item in group.items %}
+            <a href="{{ item.url }}">
+              <span>{{ item.name }}</span>
+            </a>
+          {% endfor %}
+        </div>
+      </div>
+    {% endfor %}
   </div>
 </nav>

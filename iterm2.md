@@ -1,17 +1,20 @@
 ---
 layout: default
+permalink: /iterm2
+title: trzsz-iterm2 – Enable Native trzsz File Transfer Integration in iTerm2
+description: "trzsz-iterm2 is a client integration tool that enables native trzsz (trz / tsz) file transfer support in iTerm2 via triggers and Python API. It acts as a bridge between iTerm2 and trzsz, providing seamless tmux-compatible file transfer."
 ---
 
-# Trzsz-iTerm2 Document
+## trzsz-iterm2 – Enable Native trzsz File Transfer Integration in iTerm2
 
-`trzsz-iterm2` is a client tool for [trzsz](https://trzsz.github.io/) used with [iTerm2](https://iterm2.com/).
+**trzsz-iterm2** is a client integration tool that enables native trzsz (trz / tsz) file transfer support in iTerm2.
 
 [![MIT License](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://choosealicense.com/licenses/mit/)
 [![PyPI trzsz-iterm2](https://img.shields.io/pypi/v/trzsz-iterm2?style=flat)](https://pypi.python.org/pypi/trzsz-iterm2/)
 [![GitHub trzsz](https://img.shields.io/badge/GitHub-https%3A%2F%2Fgithub.com%2Ftrzsz%2Ftrzsz-blue?style=flat)](https://github.com/trzsz/trzsz)
 [![中文文档](https://img.shields.io/badge/%E4%B8%AD%E6%96%87%E6%96%87%E6%A1%A3-https%3A%2F%2Ftrzsz.github.io%2Fcn%2Fiterm2-blue?style=flat)](https://trzsz.github.io/cn/iterm2)
 
-## Installation
+### Installation
 
 - Install with Python3
 
@@ -25,7 +28,7 @@ layout: default
   brew install trzsz
   ```
 
-## Configuration
+### Configuration
 
 - Find out the absolute path where `trzsz-iterm2` is installed.
 
@@ -64,9 +67,9 @@ layout: default
 
   ![iTerm2 Enable ITERM2_COOKIE](https://trzsz.github.io/images/iterm2_cookie.png)
 
-## Progress Bar
+### Progress Bar
 
-### Option 1: The cooler text progress bar
+#### Option 1: The cooler text progress bar
 
 - Screenshot of text progress bar
   ![using trzsz in iTerm2 with text progress bar](https://trzsz.github.io/images/iterm2_text.gif)
@@ -79,7 +82,7 @@ layout: default
   ```
   Don't forget to change `/usr/local/bin/trzsz-iterm2` to the real absolute path of `trzsz-iterm2`.
 
-### Option 2: The [zenity](https://github.com/ncruces/zenity) progress bar
+#### Option 2: The [zenity](https://github.com/ncruces/zenity) progress bar
 
 - Screenshot of zenity progress bar
   ![using trzsz in iTerm2 with zenity progress bar](https://trzsz.github.io/images/iterm2_zenity.gif)
@@ -106,7 +109,7 @@ layout: default
 
 - If the progress dialog doesn't pop up in front, try upgrade [zenity](https://github.com/ncruces/zenity), and don't check `iTerm2 -> Secure Keyboard Entry`.
 
-## Default save path
+### Default save path
 
 If you want to automatically download files to the specified directory instead of asking each time.
 
@@ -125,7 +128,7 @@ e.g.: Automatically download files to `/Users/xxxxx/Downloads`
 
 Don't forget to change `/usr/local/bin/trzsz-iterm2` to the real absolute path of `trzsz-iterm2`.
 
-## Dragging files and directories to upload
+### Dragging files and directories to upload
 
 - Upgrade iTerm2 to `Build 3.5.20220806-nightly` or higher.
 

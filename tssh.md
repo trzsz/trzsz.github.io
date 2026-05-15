@@ -1,8 +1,11 @@
 ---
 layout: default
+permalink: /tssh
+title: trzsz-ssh(tssh) - Highly OpenSSH-compatible SSH client with extended features
+description: "tssh is a highly OpenSSH-compatible SSH client with enhanced features including built-in trzsz file transfer (trz/tsz), interactive server search, batch login, saved passwords, automated interaction, and proxy-friendly connectivity. With tsshd, it supports UDP-based reconnectable sessions for unstable or high-latency networks, similar to mosh, while remaining compatible with OpenSSH."
 ---
 
-## trzsz-ssh(tssh): Highly OpenSSH-compatible client with extended features
+## trzsz-ssh(tssh): Highly OpenSSH-compatible SSH client with extended features
 
 [![MIT License](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://choosealicense.com/licenses/mit/)
 [![GitHub Release](https://img.shields.io/github/v/release/trzsz/trzsz-ssh)](https://github.com/trzsz/trzsz-ssh/releases)

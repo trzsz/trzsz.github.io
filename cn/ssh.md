@@ -1,1 +1,4 @@
-tssh.md
+---
+redirect_to: /cn/tssh
+sitemap: false
+---

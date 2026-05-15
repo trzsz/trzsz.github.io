@@ -1,6 +1,8 @@
 ---
 layout: default
-description: trzsz ( trz / tsz ) 是一个兼容 tmux 的文件传输工具，和 lrzsz ( rz / sz ) 类似，并且有进度条和支持目录传输。
+permalink: /cn/tssh
+title: trzsz-ssh(tssh) - 高度兼容 OpenSSH 并提供丰富扩展功能的 SSH 客户端
+description: "tssh 是一款高度兼容 OpenSSH 的 SSH 客户端，提供增强功能，包括内置 trzsz 文件传输（trz/tsz）、交互式服务器搜索、批量登录、密码记忆与自动化交互，以及更适合网络代理环境的连接能力。配合 tsshd，可支持基于 UDP 的可恢复 SSH 会话，适用于高延迟或不稳定网络环境，类似 mosh 同时兼容 OpenSSH。"
 ---
 
 ## trzsz-ssh(tssh): 高度兼容 OpenSSH 并提供丰富扩展功能的 SSH 客户端

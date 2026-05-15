@@ -1,9 +1,11 @@
 ---
 layout: default
-description: trzsz ( trz / tsz ) 是一个兼容 tmux 的文件传输工具，和 lrzsz ( rz / sz ) 类似，并且有进度条和支持目录传输。
+permalink: /cn/tsshd
+title: tsshd - 基于 UDP、支持漫游与断线重连的 SSH 服务端
+description: "tsshd 是基于 UDP 的 SSH 服务器，专为高延迟与不稳定网络设计，支持会话漫游与断线自动重连，与 tssh 配合使用，可作为 mosh 的现代替代方案。"
 ---
 
-# tsshd: 基于 UDP 支持漫游的 SSH 服务器
+# tsshd: 基于 UDP、支持漫游与断线重连的 SSH 服务端
 
 [![MIT License](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://choosealicense.com/licenses/mit/)
 [![GitHub Release](https://img.shields.io/github/v/release/trzsz/tsshd)](https://github.com/trzsz/tsshd/releases)
@@ -443,6 +445,10 @@ func handleBusiness(sess Session) {
   上述**混合架构**的完整展示。它实现了适配器模式以统一 `Session` 接口，允许相同的业务逻辑在传统的 TCP SSH 服务器（Wish）和低延迟的 UDP `tsshd` 服务器之间无缝运行，并包含完整的进程切换（Handoff）机制。
 
 > **提示**：您可以在本地运行这些示例，并使用 `tssh` 客户端进行测试，以亲身体验低延迟和漫游功能！
+
+## 屏幕截图
+
+![tsshd auto reconnect](https://trzsz.github.io/images/tsshd_conn.gif)
 
 ## 联系方式
 

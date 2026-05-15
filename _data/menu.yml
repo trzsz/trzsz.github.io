@@ -1,31 +1,35 @@
-title: Trzsz
-url: https://github.com/trzsz/trzsz
 menus:
-  - name: Trzsz-ssh ( tssh )
-    url: /tssh
-  - name: Tsshd ( UDP SSH )
-    url: /tsshd
-  - name: Trzsz ( py )
-    url: /py
-  - name: Trzsz ( go )
-    url: /go
-  - name: Trzsz ( js )
-    url: /js
-  - name: Trzsz ( iTerm2 )
-    url: /iterm2
-  - name: iTerm2 tmux Integration
-    url: /tmuxcc
-  - name: Trzsz-ssh ( tssh ) 中文
-    url: /cn/tssh
-  - name: Tsshd ( UDP SSH ) 中文
-    url: /cn/tsshd
-  - name: Trzsz ( py ) 中文
-    url: /cn/py
-  - name: Trzsz ( go ) 中文
-    url: /cn/go
-  - name: Trzsz ( js ) 中文
-    url: /cn/js
-  - name: Trzsz ( iTerm2 ) 中文
-    url: /cn/iterm2
-  - name: iTerm2 与 tmux -CC 集成
-    url: /cn/tmuxcc
+  - name: English
+    key: en
+    items:
+      - name: Trzsz-ssh ( tssh )
+        url: /tssh
+      - name: Tsshd ( UDP SSH )
+        url: /tsshd
+      - name: Trzsz ( trz / tsz ) ( py )
+        url: /py
+      - name: Trzsz ( trz / tsz ) ( go )
+        url: /go
+      - name: Trzsz ( trz / tsz ) ( js )
+        url: /js
+      - name: Trzsz ( trz / tsz ) ( iTerm2 )
+        url: /iterm2
+      - name: iTerm2 tmux Integration
+        url: /tmuxcc
+  - name: 中文文档
+    key: cn
+    items:
+      - name: Trzsz-ssh ( tssh )
+        url: /cn/tssh
+      - name: Tsshd ( UDP SSH )
+        url: /cn/tsshd
+      - name: Trzsz ( trz / tsz ) ( py )
+        url: /cn/py
+      - name: Trzsz ( trz / tsz ) ( go )
+        url: /cn/go
+      - name: Trzsz ( trz / tsz ) ( js )
+        url: /cn/js
+      - name: Trzsz ( trz / tsz ) ( iTerm2 )
+        url: /cn/iterm2
+      - name: iTerm2 与 tmux -CC 集成
+        url: /cn/tmuxcc
