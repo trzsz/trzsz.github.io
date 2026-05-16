@@ -5,9 +5,9 @@
 
 .main-content {
   @include large {
-    max-width: 80rem;
+    max-width: 70rem;
   }
-  padding: 0 6rem;
+  padding: 0 1rem;
 }
 
 body {
