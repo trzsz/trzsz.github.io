@@ -80,3 +80,15 @@ By default, `iTerm2` will dimming the whole inactive windows, which looks ugly.
 The dimming style can be changed by setting `iTerm2 -> Preferences... / Settings... -> Appearance -> Dimming`:
 
 Checked `Dimming affects only text, not background`.
+
+### Slow Re-attach / Lag
+
+When using tmux integration in iTerm2 (`tmux -CC`), you may experience noticeable lag or a delay when re-attaching to a session. This is usually caused by syncing a massive amount of scrollback history. You can resolve this by adjusting your `~/.tmux.conf` on the server:
+
+```
+set -g history-limit 1000
+```
+
+- **Balancing History**: Setting `history-limit` too high (especially with multiple open windows) causes a massive data sync during the attach process, leading to lag. Conversely, setting it too low might cause you to lose important terminal history. A value between `1000` and `5000` is recommended.
+
+- **Applying Changes**: After modifying the configuration, you must completely restart the tmux server for the changes to take effect. Please save your work in all active windows, and then run `tmux kill-server` in your terminal.

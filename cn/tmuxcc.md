@@ -82,3 +82,15 @@ esc    Detach cleanly.
 可以通过设置优化不活动窗口的样式，`iTerm2 -> Preferences... / Settings... -> Appearance -> Dimming`：
 
 选中 `Dimming affects only text, not background.` 即可。
+
+## 重新打开速度慢
+
+在 iTerm2 中使用 tmux 集成模式（`tmux -CC`）时，如果重新 attach 会话出现明显卡顿或响应缓慢，通常是因为同步的历史数据量过大。可以通过修改服务器 `~/.tmux.conf` 来解决：
+
+```
+set -g history-limit 1000
+```
+
+- **权衡历史**：`history-limit` 设置过大（且开启的窗口过多）会导致 attach 时同步瞬间吞吐量巨大，从而引发卡顿；设置过小则可能会丢失你关心的终端历史输出。建议将其设置在 `1000` 到 `5000` 之间。
+
+- **生效方法**：修改配置后，必须彻底重启 tmux 服务才会完全生效。请先保存好各窗口的工作，然后在终端执行 `tmux kill-server`。
