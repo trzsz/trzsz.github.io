@@ -48,7 +48,7 @@ description: "trzsz 提供兼容 tmux 的 SSH 文件传输能力，tssh 是增�
 在网络切换、断线再重新联网后，SSH 会话可以自动恢复，提供类似 `mosh` 的不断线远程终端体验，同时保持对 OpenSSH 的高度兼容。
 
 <div class="img-crop-container">
-  <img src="https://trzsz.github.io/images/tsshd_conn.gif" width="800px" alt="tsshd">
+  <img src="https://trzsz.github.io/images/tsshd_attach.gif" width="800px" alt="tsshd">
 </div>
 
 - [tsshd](/cn/tsshd)：基于 UDP、支持漫游与断线重连的 SSH 服务端。

@@ -50,7 +50,7 @@ It includes built-in trzsz file transfer, interactive server selection, batch lo
 SSH sessions can automatically recover after network switching, Wi-Fi interruptions, or IP changes, providing a roaming experience similar to `mosh` while remaining highly compatible with OpenSSH.
 
 <div class="img-crop-container">
-  <img src="https://trzsz.github.io/images/tsshd_conn.gif" width="800px" alt="tsshd">
+  <img src="https://trzsz.github.io/images/tsshd_attach.gif" width="800px" alt="tsshd">
 </div>
 
 - [tsshd](/tsshd): UDP-based SSH server with roaming and reconnect support.
