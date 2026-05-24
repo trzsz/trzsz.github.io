@@ -197,7 +197,7 @@ trzsz-ssh ( tssh ) 与 [tsshd](https://github.com/trzsz/tsshd) 一起，适用�
 
   </details>
 
-- 可从 [GitHub Releases](https://github.com/trzsz/trzsz-ssh/releases) 中下载，国内可从 [Gitee 发行版](https://gitee.com/trzsz/tssh/releases) 中下载，然后本地安装。
+- 可从 [GitHub Releases](https://github.com/trzsz/trzsz-ssh/releases) 或 [Pre-Release](https://github.com/trzsz/trzsz-ssh/releases/tag/dev) 中下载，国内可从 [Gitee 发行版](https://gitee.com/trzsz/tssh/releases) 中下载，然后本地安装。
 
   <details><summary><code>下载并本地安装</code></summary>
 
