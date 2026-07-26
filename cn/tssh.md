@@ -800,10 +800,15 @@ trzsz-ssh ( tssh ) 与 [tsshd](https://github.com/trzsz/tsshd) 一起，适用�
   PromptSelectedIcon = 🍺
 
   # 登录后自动设置终端标题，退出后不会重置，你需要参考下文在本地 shell 中设置 PROMPT_COMMAND
+  # 设置为 rtt 时会在标题中显示当前连接 RTT（例如：server 12ms）。
   SetTerminalTitle = yes
 
   # 使用 `ssh -G` 解析 OpenSSH 配置，包括 `Match` 规则
   UseOpenSSHConfig = yes
+
+  # 启用目标主机部分匹配时的模糊选择功能。
+  # 默认情况下此选项开启，当输入的目标主机存在模糊匹配项时，tssh 会显示候选主机选择菜单。
+  FuzzyHostSelection = yes
   ```
 
 ### 配置注释
@@ -914,6 +919,8 @@ trzsz-ssh ( tssh ) 与 [tsshd](https://github.com/trzsz/tsshd) 一起，适用�
   - 若下载 `tsshd` 的安装包失败，可以自行下载并通过 `--tsshd-bin-path /path/to/tsshd.tar.gz` 参数指定。
   - 注意：`--install-tsshd` 不支持 Windows 服务器，不支持跳板机（ 除非以 `ProxyJump` 跳过 ）。
 
+- 如果在 `$XDG_CONFIG_HOME/tssh/tssh.conf` ( 或 `~/.tssh.conf` ) 中设置了 `SetTerminalTitle = rtt`，则会在终端标题中显示当前连接的 RTT（往返延迟），例如：server 12ms。非 UDP 模式要求设置 `ServerAliveInterval` 才会生效。
+
 - 关于修改终端标题，其实无需 `tssh` 就能实现，只要在服务器的 shell 配置文件中（如`~/.bashrc`）配置：
 
   ```sh
@@ -938,6 +945,32 @@ trzsz-ssh ( tssh ) 与 [tsshd](https://github.com/trzsz/tsshd) 一起，适用�
   Host xxx
     #!! DnsSrvName myhost.mydomain.com
   ```
+
+- 自定义 DNS 服务器，`tssh` 支持使用自定义 DNS 服务器，而不是系统默认解析器。这对于使用 VPN、访问内网 DNS 或测试公共 DNS 服务都很有帮助。
+
+  - 可以在 `$XDG_CONFIG_HOME/tssh/tssh.conf`（或 `~/.tssh.conf`）中配置默认 DNS：
+
+    ```
+    CustomDnsServer = 1.1.1.1
+    ```
+
+  - 也可以仅针对当前连接指定：
+
+    ```sh
+    tssh --dns 8.8.8.8 server
+    ```
+
+  - 也支持指定自定义端口，或通过 TCP 进行 DNS 查询：
+
+    ```
+    CustomDnsServer = tcp://1.1.1.1:5353
+    ```
+
+    ```sh
+    tssh --dns tcp://1.1.1.1:5353 server
+    ```
+
+  - 如果未指定端口，则默认使用 `53`。命令行参数 `--dns` 的优先级高于 `CustomDnsServer`。
 
 ### 重连模式
 
@@ -971,9 +1004,10 @@ Host xxx
     #!! UdpMode yes
     #!! TsshdPort 61001-61999
     #!! TsshdPath ~/go/bin/tsshd
-    #!! UdpAliveTimeout 86400
+    #!! UdpAliveTimeout 1w3d
     #!! UdpHeartbeatTimeout 3
     #!! UdpReconnectTimeout 15
+    #!! UdpReconnectExitKey ^d
     #!! ShowNotificationOnTop yes
     #!! ShowFullNotifications yes
     #!! UdpProxyMode UDP
@@ -988,11 +1022,13 @@ Host xxx
 
 - `TsshdPath`: 指定服务器上 tsshd 二进制程序的路径，如果未配置，则在 $PATH 中查找。也可在命令行中使用 `--tsshd-path` 指定路径。
 
-- `UdpAliveTimeout`: 如果断开连接的时间超过 `UdpAliveTimeout` 秒，tssh 和 tsshd 都会退出，不再支持重连。默认值为 86400 秒。
+- `UdpAliveTimeout`: 如果断开连接的时间超过 `UdpAliveTimeout` 设置的时间，tssh 和 tsshd 都会退出，不再支持重连。支持的单位：`w` 周， `d` 天，`h` 时，`m` 分，`s` 秒。默认值为 `1w3d` (10天)。
 
-- `UdpHeartbeatTimeout`: 如果断开连接的时间超过 `UdpHeartbeatTimeout` 秒，tssh 将会尝试换条路重新连到服务器。默认值为 3 秒。
+- `UdpHeartbeatTimeout`: 如果断开连接的时间超过 `UdpHeartbeatTimeout` 设置的时间，tssh 将会尝试换条路重新连到服务器。默认值为 3 秒。
 
-- `UdpReconnectTimeout`: 如果断开连接的时间超过 `UdpReconnectTimeout` 秒，tssh 将会显示失去连接的通知公告。默认值为 15 秒。
+- `UdpReconnectTimeout`: 如果断开连接的时间超过 `UdpReconnectTimeout` 设置的时间，tssh 将会显示失去连接的通知公告。默认值为 15 秒。
+
+- `UdpReconnectExitKey`: 指定在断开连接并尝试重连时，用于退出（或脱离）等待状态的快捷键。支持的值包括 `none`、`ctrl+<字母>` 和 `^<字母>`。默认值为 `^d`（即 Ctrl+D）。
 
 - `ShowNotificationOnTop`: 是否在屏幕顶部显示失去连接的通知。默认为 yes，这可能会覆盖之前的一些输出。设置为 `no` 在光标当前行显示通知。
 

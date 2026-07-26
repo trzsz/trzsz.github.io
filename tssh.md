@@ -801,10 +801,15 @@ trzsz-ssh ( tssh ) with [tsshd](https://github.com/trzsz/tsshd) also supports in
   PromptSelectedIcon = 🍺
 
   # Auto set terminal title after login. It will not be reset after exiting. Please set PROMPT_COMMAND in local shell.
+  # Set this to rtt to display the current connection RTT in the title (e.g. server 12ms).
   SetTerminalTitle = yes
 
   # Use `ssh -G` to evaluate OpenSSH config, including `Match` blocks.
   UseOpenSSHConfig = yes
+
+  # Enable fuzzy host selection for partially matched destinations.
+  # This option is enabled by default. When enabled, tssh displays a selection menu for possible matching hosts.
+  FuzzyHostSelection = yes
   ```
 
 ### Comments of Config
@@ -916,6 +921,8 @@ trzsz-ssh ( tssh ) with [tsshd](https://github.com/trzsz/tsshd) also supports in
   - If downloading the `tsshd` installation package fails, you can download and specify it through `--tsshd-bin-path /path/to/tsshd.tar.gz`.
   - Note: `--install-tsshd` does not support Windows server, and does not support jump server (unless using `ProxyJump`).
 
+- If `SetTerminalTitle = rtt` is set in `$XDG_CONFIG_HOME/tssh/tssh.conf` ( or `~/.tssh.conf` ), the terminal title will display the current connection RTT (round-trip time), for example: server 12ms. For non-UDP mode, `ServerAliveInterval` must also be configured for RTT to be displayed.
+
 - About changing the terminal title, it can be achieved without `tssh`. It only needs to be configured in the server's shell configuration file (such as `~/.bashrc`):
 
   ```sh
@@ -940,6 +947,32 @@ trzsz-ssh ( tssh ) with [tsshd](https://github.com/trzsz/tsshd) also supports in
   Host xxx
     #!! DnsSrvName myhost.mydomain.com
   ```
+
+- Custom DNS Server: `tssh` can use a custom DNS server instead of the system resolver. This is useful when connecting through a VPN, testing internal DNS, or using public DNS services.
+
+  - Configure a default DNS server in `$XDG_CONFIG_HOME/tssh/tssh.conf` (or `~/.tssh.conf`):
+
+    ```
+    CustomDnsServer = 1.1.1.1
+    ```
+
+  - You can also specify it for a single connection:
+
+    ```sh
+    tssh --dns 8.8.8.8 server
+    ```
+
+  - You can also specify a custom port or use DNS over TCP:
+
+    ```
+    CustomDnsServer = tcp://1.1.1.1:5353
+    ```
+
+    ```sh
+    tssh --dns tcp://1.1.1.1:5353 server
+    ```
+
+  - If no port is specified, port `53` is used by default. The `--dns` option overrides `CustomDnsServer`.
 
 ### Reconnect Mode
 
@@ -973,9 +1006,10 @@ Host xxx
     #!! UdpMode yes
     #!! TsshdPort 61001-61999
     #!! TsshdPath ~/go/bin/tsshd
-    #!! UdpAliveTimeout 86400
+    #!! UdpAliveTimeout 1w3d
     #!! UdpHeartbeatTimeout 3
     #!! UdpReconnectTimeout 15
+    #!! UdpReconnectExitKey ^d
     #!! ShowNotificationOnTop yes
     #!! ShowFullNotifications yes
     #!! UdpProxyMode UDP
@@ -990,11 +1024,13 @@ Host xxx
 
 - `TsshdPath`: Specifies the path to the tsshd binary on the server, lookup in $PATH if not configured. You can also specify the path on the command line using `--tsshd-path`.
 
-- `UdpAliveTimeout`: If the disconnection lasts longer than `UdpAliveTimeout` in seconds, tssh and tsshd will both exit, and no longer support reconnection. The default is 86400 seconds.
+- `UdpAliveTimeout`: If the disconnection lasts longer than the time specified by `UdpAliveTimeout`, tssh and tsshd will both exit, and no longer support reconnection. Supported units: `w` for weeks, `d` for days, `h` for hours, `m` for minutes, `s` for seconds. The default is `1w3d` (10 days).
 
-- `UdpHeartbeatTimeout`: If the disconnection lasts longer than `UdpHeartbeatTimeout` in seconds, tssh will try to reconnect to the server by a new path. The default is 3 seconds.
+- `UdpHeartbeatTimeout`: If the disconnection lasts longer than the time specified by `UdpHeartbeatTimeout`, tssh will try to reconnect to the server by a new path. The default is 3 seconds.
 
-- `UdpReconnectTimeout`: If the disconnection lasts longer than `UdpReconnectTimeout` in seconds, tssh will display a notification indicating that the connection has been lost. The default is 15 seconds.
+- `UdpReconnectTimeout`: If the disconnection lasts longer than the time specified by `UdpReconnectTimeout`, tssh will display a notification indicating that the connection has been lost. The default is 15 seconds.
+
+- `UdpReconnectExitKey`: Specifies the shortcut key to exit (or detach) while waiting for reconnection. It accepts `none`, `ctrl+<letter>`, and `^<letter>`. The default is `^d` (Ctrl+D).
 
 - `ShowNotificationOnTop`: Whether the connection loss notification is displayed on the top. The default is yes, which may overwrite some of the previous output. Set it to `no` to display notifications on the current line of the cursor.
 
